@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultórios — Grupo Ocupacional</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b3e;--navy2:#162952;--lime:#c6e432;--lime2:#a3c200;
+  --blue:#1c5baa;--blue2:#2a7de1;
+  --green:#22c55e;--orange:#f97316;--red:#ef4444;--yellow:#f59e0b;
+  --purple:#8b5cf6;--cyan:#06b6d4;
+  --manha-b:#0ea5e9;--manha-d:#0369a1;--manha-bg:#f0f9ff;
+  --tarde-b:#a855f7;--tarde-d:#7e22ce;--tarde-bg:#fdf4ff;
+  --bg:#f0f4fa;--card:#fff;--text:#1a2540;--muted:#607090;--border:#dde4f0;
+  --r:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,#1e3a6e 100%);padding:26px 36px 22px;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-80px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(198,228,50,.12),transparent 70%);border-radius:50%}
+.hdr-inner{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.hdr-tag{display:inline-block;background:rgba(198,228,50,.18);border:1px solid rgba(198,228,50,.35);color:var(--lime);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px}
+.hdr h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.hdr p{color:rgba(255,255,255,.5);font-size:11px}
+.hdr-pills{display:flex;gap:8px;flex-wrap:wrap;align-self:center}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:7px 14px;text-align:center;min-width:90px}
+.pill .v{font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:#fff}
+.pill .l{font-size:9px;color:rgba(255,255,255,.45);margin-top:1px;text-transform:uppercase;letter-spacing:.5px}
+.pill.lime .v{color:var(--lime)}
+.pill.g .v{color:#86efac}
+.pill.o .v{color:#fdba74}
+
+/* TABS */
+.tabs-wrap{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
+.tabs{display:flex;padding:0 32px}
+.tab{padding:13px 22px;border:none;background:none;color:var(--muted);font-family:'Sora',sans-serif;font-size:12px;font-weight:500;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--navy)}
+.tab.act{color:var(--navy);font-weight:700;border-bottom-color:var(--lime2)}
+.tab-icon{font-size:14px}
+
+/* PANEL */
+.panel{display:none}.panel.act{display:block}
+.wrap{padding:24px 32px;max-width:1440px;margin:0 auto}
+.sec-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ═══════════════════════════════════════════
+   VISÃO GERAL — estilos
+═══════════════════════════════════════════ */
+.legend-strip{background:var(--card);border-bottom:1px solid var(--border);padding:10px 36px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ls-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.ls-box{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+
+.rooms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+@media(max-width:1000px){.rooms-grid{grid-template-columns:repeat(2,1fr)}}
+
+.room-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:box-shadow .2s,transform .15s;cursor:default}
+.room-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-2px)}
+.room-card.high-avail{border-color:rgba(34,197,94,.3);background:linear-gradient(135deg,#fff,#f0fdf4)}
+.room-card.low-avail{border-color:rgba(239,68,68,.25);background:linear-gradient(135deg,#fff,#fff5f5)}
+
+.room-hdr{padding:14px 16px 10px;border-bottom:1px solid var(--border)}
+.room-num-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.room-num{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:700;color:var(--navy);line-height:1}
+.room-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.rb-free{background:#dcfce7;color:#166534}.rb-partial{background:#ffedd5;color:#9a3412}.rb-busy{background:#fee2e2;color:#991b1b}
+.room-esp{font-size:10px;color:var(--muted);line-height:1.4}
+
+.ring-row{display:flex;align-items:center;gap:12px;padding:12px 16px 0}
+.ring-wrap{position:relative;width:68px;height:68px;flex-shrink:0}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-pct{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;line-height:1}
+.ring-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.ring-stats{flex:1}
+.stat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted)}
+.stat-val{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500}
+.sbar{height:4px;border-radius:2px;background:var(--border);margin-top:2px;overflow:hidden}
+.sbar-fill{height:100%;border-radius:2px}
+
+.dias-row{padding:10px 16px 12px;display:flex;gap:5px}
+.dia-dot{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.dia-dot .dd-lbl{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase}
+.dia-dot .dd-circ{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.dia-dot .dd-sub{font-size:9px;color:var(--muted)}
+
+/* heatmap */
+.hm-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;margin-bottom:24px}
+.hm-grid{display:grid;grid-template-columns:90px repeat(5,1fr);gap:5px;align-items:center}
+.hm-head{font-size:11px;font-weight:700;color:var(--navy);text-align:center;padding-bottom:3px}
+.hm-dlbl{font-size:11px;font-weight:600;color:var(--muted);text-align:right;padding-right:8px;font-family:'IBM Plex Mono',monospace}
+.hm-cell{border-radius:8px;padding:7px 3px;text-align:center;cursor:default;transition:transform .15s}
+.hm-cell:hover{transform:scale(1.1);z-index:2;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.hm-cell .hv{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700}
+.hm-cell .hl{font-size:9px;margin-top:1px;opacity:.75}
+.hm-empty{background:var(--bg);border:1px dashed var(--border);border-radius:8px;padding:7px 3px;text-align:center}
+.hm-empty .hv{font-size:9px;color:var(--muted)}
+
+/* avail table */
+.avail-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;margin-bottom:24px}
+
+/* rep */
+.rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.rep-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px}
+.rep-title{font-size:12px;font-weight:600;margin-bottom:12px}
+.funnel-row{display:flex;margin-bottom:14px;border-radius:10px;overflow:hidden}
+.f-seg{flex:1;padding:10px 6px;text-align:center}
+.f-seg .fv{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:#fff}
+.f-seg .fl{font-size:9px;color:rgba(255,255,255,.75);text-transform:uppercase;margin-top:2px}
+.rep-bar-row{display:flex;flex-direction:column;gap:7px}
+.rbi{display:flex;align-items:center;gap:8px}
+.rbi-lbl{font-size:10px;color:var(--muted);width:130px;flex-shrink:0;text-align:right}
+.rbi-track{flex:1;height:16px;background:var(--bg);border-radius:5px;overflow:hidden}
+.rbi-fill{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:6px}
+.rbi-fill span{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#fff;white-space:nowrap}
+.rbi-val{font-family:'IBM Plex Mono',monospace;font-size:10px;width:32px;text-align:right;color:var(--muted)}
+
+/* ═══════════════════════════════════════════
+   POR PERÍODO — estilos
+═══════════════════════════════════════════ */
+.per-legend{background:#fff;border-bottom:1px solid var(--border);padding:10px 36px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.per-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500}
+.per-dot{width:12px;height:12px;border-radius:3px}
+
+.cons-block{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.cons-hdr{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,#f8faff,#fff)}
+.cons-num{font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;color:var(--navy);width:34px;flex-shrink:0}
+.cons-title{flex:1}
+.cons-esp-sm{font-size:10px;color:var(--muted);margin-top:1px}
+.cons-kpis{display:flex;gap:14px;flex-wrap:wrap}
+.ck .v{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--text)}
+.ck .l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+
+.periods-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.per-col{padding:14px 18px}
+.per-col.manha{background:linear-gradient(135deg,var(--manha-bg),#fff);border-right:1px solid var(--border)}
+.per-col.tarde{background:linear-gradient(135deg,var(--tarde-bg),#fff)}
+.per-col.empty{background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:var(--muted);font-size:11px;border-right:1px solid var(--border);padding:16px}
+.per-col.empty-tarde{background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:var(--muted);font-size:11px;padding:16px}
+
+.per-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.per-title-row{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+.per-icon{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px}
+.per-icon.m{background:#e0f2fe}.per-icon.t{background:#f3e8ff}
+.per-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px}
+.pb-high{background:#dcfce7;color:#166534}.pb-mid{background:#fef9c3;color:#713f12}
+.pb-low{background:#ffedd5;color:#9a3412}.pb-empty{background:var(--border);color:var(--muted)}
+
+.per-kpis{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.pk{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:8px;padding:5px 9px;flex:1;min-width:64px}
+.pk .v{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600}
+.pk .l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-top:1px}
+
+.dias-g{display:flex;gap:3px}
+.di{flex:1;border-radius:7px;padding:5px 3px;text-align:center;cursor:default;transition:transform .15s}
+.di:hover{transform:scale(1.1)}
+.di .dn{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;margin-bottom:2px}
+.di .dv{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:#fff;line-height:1}
+.di .ds{font-size:8px;color:rgba(255,255,255,.65);margin-top:1px}
+.di .dl{font-size:8px;color:rgba(255,255,255,.55)}
+.di-empty{background:var(--border);border:1px dashed #ccc;border-radius:7px;padding:5px 3px;text-align:center;flex:1}
+.di-empty .dn{color:var(--muted);font-size:8px;text-transform:uppercase;font-weight:600}
+.di-empty .dv{color:var(--muted);font-size:9px}
+
+.ag-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.ag-tag{font-size:9px;padding:2px 7px;border-radius:20px;background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.07)}
+
+/* SHARED */
+.card-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;margin-bottom:22px}
+.card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.card-sub{font-size:11px;color:var(--muted);margin-bottom:14px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--bg);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--border)}
+.tbl tr:last-child td{border:none}
+.tbl tr:hover td{background:#f8faff}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
+.bg{background:#dcfce7;color:#166534}.bo{background:#ffedd5;color:#9a3412}.br{background:#fee2e2;color:#991b1b}.bb{background:#dbeafe;color:#1e40af}
+.per-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px}
+.pt-m{background:#e0f2fe;color:#0369a1}.pt-t{background:#f3e8ff;color:#7e22ce}
+
+.opp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.opp-card{border-radius:var(--r);padding:16px 18px;border:1px solid}
+.opp-card.green{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border-color:#bbf7d0}
+.opp-card.orange{background:linear-gradient(135deg,#fff7ed,#fef3c7);border-color:#fed7aa}
+.opp-card h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.opp-card.green h4{color:#166534}.opp-card.orange h4{color:#92400e}
+.opp-card ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.opp-card li{font-size:11px;display:flex;gap:6px;align-items:flex-start}
+.opp-card.green li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.opp-card.orange li::before{content:'⚠';font-size:10px;flex-shrink:0}
+
+.tip{position:fixed;background:rgba(13,27,62,.92);color:#fff;font-size:11px;padding:8px 12px;border-radius:8px;pointer-events:none;z-index:1000;display:none;max-width:220px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="tip" id="tip"></div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-inner">
+    <div>
+      <div class="hdr-tag">Grupo Ocupacional · Jan–Abr 2026</div>
+      <h1>Painel de Consultórios</h1>
+      <p>Visão geral · Análise por período (Manhã / Tarde) · 84 dias úteis · 168 turnos possíveis</p>
+    </div>
+    <div class="hdr-pills">
+      <div class="pill lime"><div class="v">55,6%</div><div class="l">Ocup. Média</div></div>
+      <div class="pill g"><div class="v">84,1%</div><div class="l">Taxa Atend.</div></div>
+      <div class="pill o"><div class="v">15,9%</div><div class="l">No Show</div></div>
+      <div class="pill"><div class="v">445</div><div class="l">Reposições</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab act" onclick="showTab('geral',this)"><span class="tab-icon">📊</span>Visão Geral</button>
+    <button class="tab" onclick="showTab('periodo',this)"><span class="tab-icon">🌅</span>Por Período (Manhã / Tarde)</button>
+  </div>
+</div>
+
+<!-- ═══════════ VISÃO GERAL ═══════════ -->
+<div id="pan-geral" class="panel act">
+  <div class="legend-strip">
+    <div class="ls-item"><div class="ls-box" style="background:#22c55e"></div>Alta ocupação (>80%)</div>
+    <div class="ls-item"><div class="ls-box" style="background:#f59e0b"></div>Média ocupação</div>
+    <div class="ls-item"><div class="ls-box" style="background:#86efac"></div>Disponível (&lt;40%)</div>
+    <div class="ls-item"><div class="ls-box" style="background:var(--border);border:1px dashed #aaa"></div>Livre para nova operação</div>
+    <span style="font-size:10px;color:var(--muted);margin-left:auto">Círculos = dias ativos · "L" = dias livres</span>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-label">🏥 Visão por Consultório — Dia Completo</div>
+    <div class="rooms-grid" id="rooms-grid"></div>
+
+    <div class="sec-label">🔥 Mapa de Calor — Dias Ativos por Consultório × Dia da Semana</div>
+    <div class="hm-wrap">
+      <div class="card-title">Concentração de Atendimentos</div>
+      <div class="card-sub" style="margin-bottom:14px">Número de dias com atendimento · Gradiente azul = maior intensidade · "L" = dias livres</div>
+      <div class="hm-grid" id="heatmap"></div>
+    </div>
+
+    <div class="sec-label">📅 Dias Livres por Consultório e Dia da Semana</div>
+    <div class="avail-wrap">
+      <div class="card-title">Disponibilidade para Nova Operação</div>
+      <div class="card-sub" style="margin-bottom:14px">Verde = disponível · Vermelho = saturado · Número = dias livres no período</div>
+      <div id="avail-table"></div>
+    </div>
+
+    <div class="sec-label">🔄 Reposição de Cancelamentos</div>
+    <div class="rep-grid">
+      <div class="rep-card">
+        <div class="rep-title">Funil — O que acontece com cada cancelamento?</div>
+        <div class="funnel-row">
+          <div class="f-seg" style="background:#ef4444"><div class="fv">1.110</div><div class="fl">Slots cancelados</div></div>
+          <div class="f-seg" style="background:#f59e0b"><div class="fv">445</div><div class="fl">Repostos</div></div>
+          <div class="f-seg" style="background:#22c55e"><div class="fv">665</div><div class="fl">Perda real</div></div>
+        </div>
+        <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:700;color:#92400e;margin-bottom:4px">⚠ 665 slots sem reposição = receita perdida</div>
+          <div style="font-size:11px;color:#78350f">59,9% dos cancelamentos resultam em sala vazia com custo fixo mantido.</div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 12px">
+          <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:4px">✓ Reposição corrige overbooking</div>
+          <div style="font-size:11px;color:#14532d">Os 445 slots duplicados na planilha são reposições reais — 1 cancelado + 1 atendido no mesmo horário.</div>
+        </div>
+      </div>
+      <div class="rep-card">
+        <div class="rep-title">Taxa de Reposição por Especialidade</div>
+        <div class="rep-bar-row" id="rep-bars"></div>
+      </div>
+    </div>
+
+    <div class="sec-label">📋 Tabela Resumo</div>
+    <div class="card-box">
+      <table class="tbl" id="ovtbl"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ POR PERÍODO ═══════════ -->
+<div id="pan-periodo" class="panel">
+  <div class="per-legend">
+    <div class="per-item"><div class="per-dot" style="background:#0ea5e9"></div>Manhã (até 11:59)</div>
+    <div class="per-item"><div class="per-dot" style="background:#a855f7"></div>Tarde (12:00+)</div>
+    <div class="per-item"><div class="per-dot" style="background:var(--border);border:1px dashed #aaa"></div>Turno livre</div>
+    <span style="font-size:10px;color:var(--muted);margin-left:auto">Círculo = dias ativos no turno · "L" = livres · "sl" = slots</span>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-label">🎯 Oportunidades por Turno</div>
+    <div class="opp-grid">
+      <div class="opp-card green">
+        <h4>✅ Turnos com alta disponibilidade</h4>
+        <ul>
+          <li><strong>Cons. 4 — Manhã:</strong> ZERO turnos registrados em 4 meses. 100% livre de manhã todos os dias.</li>
+          <li><strong>Cons. 8 — Manhã:</strong> apenas 2 turnos no período inteiro (97,6% vazio).</li>
+          <li><strong>Cons. 1 — Tarde:</strong> 13,1% de ocupação. Livre principalmente Ter, Qua e Qui à tarde.</li>
+          <li><strong>Cons. 2 — Manhã:</strong> 31% de ocupação. Segunda, Terça e Quarta pela manhã disponíveis.</li>
+        </ul>
+      </div>
+      <div class="opp-card orange">
+        <h4>⚠ Turnos saturados ou com anomalias</h4>
+        <ul>
+          <li><strong>Cons. 7 — Manhã Quinta:</strong> 17/17 Quintas ocupadas, 391 slots — Endocrinologia concentrada.</li>
+          <li><strong>Cons. 3 — Manhã:</strong> 79,8% dos dias. Menos de 10 turnos livres na semana toda.</li>
+          <li><strong>Cons. 5 — Qua e Qui:</strong> praticamente sem turno livre (Psicologia lotada).</li>
+          <li><strong>Cons. 2 — Tarde Ter/Qua/Qui:</strong> Ginecologia ocupa 13+ dias por dia da semana.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">🏥 Detalhamento por Consultório e Período</div>
+    <div id="cons-blocks"></div>
+
+    <div class="sec-label" style="margin-top:6px">📋 Tabela Comparativa — Todos os Turnos</div>
+    <div class="card-box" style="overflow-x:auto">
+      <table class="tbl" id="cmp-table"></table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const CONS_G = [
+  {c:'1',ocup:42.9,atd:355,ns:66,canc:57,rep:45,slots:478,ef:421,taxaAtd:84.3,taxaNS:15.7,taxaRep:44.1,avgSlots:13.3,
+   livres:{Segunda:13,Terça:17,Quarta:8,Quinta:7,Sexta:3},
+   ativos:{Segunda:4,Terça:0,Quarta:9,Quinta:10,Sexta:13},
+   esp:['ORTOPEDIA','GASTROENTEROLOGIA','CG - MARIA ELIZA'],flag:'high-avail'},
+  {c:'2',ocup:67.9,atd:438,ns:130,canc:107,rep:59,slots:675,ef:568,taxaAtd:77.1,taxaNS:22.9,taxaRep:40.5,avgSlots:11.8,
+   livres:{Segunda:10,Terça:4,Quarta:4,Quinta:2,Sexta:7},
+   ativos:{Segunda:7,Terça:13,Quarta:13,Quinta:15,Sexta:9},
+   esp:['GINECOLOGIA','UROLOGIA'],flag:'med-avail'},
+  {c:'3',ocup:88.1,atd:754,ns:130,canc:91,rep:99,slots:975,ef:884,taxaAtd:85.3,taxaNS:14.7,taxaRep:52.1,avgSlots:13.2,
+   livres:{Segunda:1,Terça:2,Quarta:4,Quinta:2,Sexta:1},
+   ativos:{Segunda:16,Terça:15,Quarta:13,Quinta:15,Sexta:15},
+   esp:['CG - DANIELA','DERMA - DANIELA','CG - MANUELA'],flag:'low-avail'},
+  {c:'4',ocup:10.7,atd:99,ns:17,canc:13,rep:12,slots:129,ef:116,taxaAtd:85.3,taxaNS:14.7,taxaRep:48.0,avgSlots:14.3,
+   livres:{Segunda:8,Terça:17,Quarta:17,Quinta:17,Sexta:16},
+   ativos:{Segunda:9,Terça:0,Quarta:0,Quinta:0,Sexta:0},
+   esp:['OFTALMOLOGIA (só tarde/Segunda)'],flag:'high-avail'},
+  {c:'5',ocup:67.9,atd:354,ns:63,canc:92,rep:30,slots:509,ef:417,taxaAtd:84.9,taxaNS:15.1,taxaRep:24.6,avgSlots:8.9,
+   livres:{Segunda:12,Terça:2,Quarta:1,Quinta:0,Sexta:12},
+   ativos:{Segunda:5,Terça:15,Quarta:16,Quinta:17,Sexta:4},
+   esp:['PSICOLOGIA - JACQUELINE','PSICANALISTA - VIVIAN','PEDIATRIA'],flag:'med-avail'},
+  {c:'6',ocup:64.3,atd:530,ns:87,canc:121,rep:84,slots:738,ef:617,taxaAtd:85.9,taxaNS:14.1,taxaRep:47.5,avgSlots:13.7,
+   livres:{Segunda:13,Terça:7,Quarta:7,Quinta:2,Sexta:1},
+   ativos:{Segunda:4,Terça:10,Quarta:10,Quinta:15,Sexta:15},
+   esp:['PSI - ANA FROIS','PSIQ - DRA. DEBORA','NUTRIÇÃO'],flag:'med-avail'},
+  {c:'7',ocup:69.0,atd:633,ns:109,canc:96,rep:115,slots:838,ef:742,taxaAtd:85.3,taxaNS:14.7,taxaRep:54.5,avgSlots:14.4,
+   livres:{Segunda:10,Terça:2,Quarta:11,Quinta:0,Sexta:3},
+   ativos:{Segunda:7,Terça:15,Quarta:6,Quinta:17,Sexta:13},
+   esp:['ENDOCRINOLOGIA','PSIQUIATRIA - ALOISIO'],flag:'med-avail'},
+  {c:'8',ocup:14.3,atd:50,ns:7,canc:16,rep:1,slots:73,ef:57,taxaAtd:87.7,taxaNS:12.3,taxaRep:5.9,avgSlots:6.1,
+   livres:{Segunda:17,Terça:17,Quarta:11,Quinta:11,Sexta:16},
+   ativos:{Segunda:0,Terça:0,Quarta:6,Quinta:6,Sexta:0},
+   esp:['PSICOLOGIA - JACQUELINE (overflow)'],flag:'high-avail'},
+];
+
+const REP_ESP=[
+  {esp:'GERIATRIA',rep:12,canc:20,taxa:60.0},{esp:'OTORRINO',rep:15,canc:29,taxa:51.7},
+  {esp:'CG',rep:49,canc:91,taxa:53.8},{esp:'PSIQUIATRIA',rep:64,canc:129,taxa:49.6},
+  {esp:'ENDOCRINOLOGIA',rep:56,canc:123,taxa:45.5},{esp:'ORTOPEDIA',rep:31,canc:74,taxa:41.9},
+  {esp:'DERMATOLOGIA',rep:43,canc:111,taxa:38.7},{esp:'GINECOLOGIA',rep:58,canc:193,taxa:30.1},
+  {esp:'CARDIOLOGIA',rep:13,canc:43,taxa:30.2},{esp:'NUTRIÇÃO',rep:12,canc:49,taxa:24.5},
+  {esp:'PSICOLOGIA',rep:37,canc:160,taxa:23.1},{esp:'UROLOGIA',rep:3,canc:13,taxa:23.1},
+  {esp:'PEDIATRIA',rep:2,canc:12,taxa:16.7},{esp:'PSICANALISTA',rep:4,canc:39,taxa:10.3},
+].sort((a,b)=>b.taxa-a.taxa);
+
+const CONS_P=[
+  {c:'1',per:'Manhã',turnos:33,taxaOcup:39.3,atd:296,ns:58,canc:48,ef:354,taxaAtd:83.6,taxaNS:16.4,avgSlots:10.7,
+   dias:{Segunda:{at:3,sl:25,li:14},Quarta:{at:9,sl:98,li:8},Quinta:{at:10,sl:94,li:7},Sexta:{at:11,sl:137,li:5}},
+   agendas:['ORTOPEDIA','GASTROENTEROLOGIA','CG-MARIA ELIZA']},
+  {c:'1',per:'Tarde',turnos:11,taxaOcup:13.1,atd:59,ns:8,ef:67,taxaAtd:88.1,taxaNS:11.9,avgSlots:6.9,
+   dias:{Segunda:{at:2,sl:22,li:15},Quinta:{at:2,sl:19,li:15},Sexta:{at:7,sl:83,li:9}},
+   agendas:['ORTOPEDIA','CG-DANIELA']},
+  {c:'2',per:'Manhã',turnos:26,taxaOcup:31.0,atd:208,ns:65,ef:273,taxaAtd:76.2,taxaNS:23.8,avgSlots:10.5,
+   dias:{Segunda:{at:6,sl:72,li:11},Terça:{at:2,sl:17,li:15},Quarta:{at:3,sl:25,li:14},Quinta:{at:7,sl:82,li:10},Sexta:{at:8,sl:78,li:8}},
+   agendas:['GINECOLOGIA','UROLOGIA']},
+  {c:'2',per:'Tarde',turnos:45,taxaOcup:53.6,atd:230,ns:65,ef:295,taxaAtd:78.0,taxaNS:22.0,avgSlots:8.1,
+   dias:{Segunda:{at:1,sl:10,li:16},Terça:{at:13,sl:128,li:4},Quarta:{at:13,sl:115,li:4},Quinta:{at:13,sl:116,li:4},Sexta:{at:5,sl:32,li:11}},
+   agendas:['GINECOLOGIA']},
+  {c:'3',per:'Manhã',turnos:67,taxaOcup:79.8,atd:461,ns:76,ef:537,taxaAtd:85.8,taxaNS:14.2,avgSlots:8.1,
+   dias:{Segunda:{at:15,sl:109,li:2},Terça:{at:14,sl:119,li:3},Quarta:{at:10,sl:83,li:7},Quinta:{at:14,sl:89,li:3},Sexta:{at:14,sl:144,li:2}},
+   agendas:['CG-DANIELA','DERMA-DANIELA','CG-MANUELA','DERMA-MANUELA']},
+  {c:'3',per:'Tarde',turnos:53,taxaOcup:63.1,atd:293,ns:54,ef:347,taxaAtd:84.4,taxaNS:15.6,avgSlots:8.1,
+   dias:{Segunda:{at:9,sl:90,li:8},Terça:{at:15,sl:116,li:2},Quarta:{at:12,sl:98,li:5},Quinta:{at:4,sl:19,li:13},Sexta:{at:13,sl:108,li:3}},
+   agendas:['CG-MARIANA','GERIATRIA','HOMEOPATIA']},
+  {c:'4',per:'Manhã',turnos:0,taxaOcup:0,atd:0,ns:0,ef:0,taxaAtd:0,taxaNS:0,avgSlots:0,dias:{},agendas:[]},
+  {c:'4',per:'Tarde',turnos:9,taxaOcup:10.7,atd:99,ns:17,ef:116,taxaAtd:85.3,taxaNS:14.7,avgSlots:14.3,
+   dias:{Segunda:{at:9,sl:129,li:8}},agendas:['OFTALMOLOGIA']},
+  {c:'5',per:'Manhã',turnos:37,taxaOcup:44.0,atd:188,ns:22,ef:210,taxaAtd:89.5,taxaNS:10.5,avgSlots:6.2,
+   dias:{Segunda:{at:5,sl:26,li:12},Quarta:{at:16,sl:95,li:1},Quinta:{at:16,sl:89,li:1}},
+   agendas:['PSICOLOGIA-JACQUELINE','PSICANALISTA-VIVIAN']},
+  {c:'5',per:'Tarde',turnos:51,taxaOcup:60.7,atd:166,ns:41,ef:207,taxaAtd:80.2,taxaNS:19.8,avgSlots:5.5,
+   dias:{Terça:{at:15,sl:84,li:2},Quarta:{at:16,sl:91,li:1},Quinta:{at:16,sl:99,li:1},Sexta:{at:4,sl:25,li:12}},
+   agendas:['PSICOLOGIA-JACQUELINE','PEDIATRIA']},
+  {c:'6',per:'Manhã',turnos:33,taxaOcup:39.3,atd:246,ns:55,ef:301,taxaAtd:81.7,taxaNS:18.3,avgSlots:11.1,
+   dias:{Terça:{at:8,sl:80,li:9},Quarta:{at:3,sl:23,li:14},Quinta:{at:7,sl:62,li:10},Sexta:{at:15,sl:129,li:1}},
+   agendas:['PSI-ANA FROIS','NUTRIÇÃO','OTORRINO']},
+  {c:'6',per:'Tarde',turnos:49,taxaOcup:58.3,atd:284,ns:32,ef:316,taxaAtd:89.9,taxaNS:10.1,avgSlots:7.6,
+   dias:{Segunda:{at:4,sl:67,li:13},Terça:{at:5,sl:35,li:12},Quarta:{at:10,sl:95,li:7},Quinta:{at:15,sl:128,li:2},Sexta:{at:15,sl:119,li:1}},
+   agendas:['PSIQ-DRA.DEBORA','NEUROLOGIA','CARDIO-LAURENA']},
+  {c:'7',per:'Manhã',turnos:55,taxaOcup:65.5,atd:540,ns:94,ef:634,taxaAtd:85.2,taxaNS:14.8,avgSlots:11.8,
+   dias:{Segunda:{at:7,sl:48,li:10},Terça:{at:12,sl:68,li:5},Quarta:{at:6,sl:41,li:11},Quinta:{at:17,sl:391,li:0},Sexta:{at:13,sl:80,li:3}},
+   agendas:['ENDOCRINOLOGIA','PSIQ-ALOISIO']},
+  {c:'7',per:'Tarde',turnos:35,taxaOcup:41.7,atd:93,ns:15,ef:108,taxaAtd:86.1,taxaNS:13.9,avgSlots:5.3,
+   dias:{Terça:{at:15,sl:82,li:2},Quarta:{at:1,sl:11,li:16},Quinta:{at:16,sl:103,li:1},Sexta:{at:3,sl:14,li:13}},
+   agendas:['PSIQ-ALOISIO','PSIQ-DRA.DEBORA']},
+  {c:'8',per:'Manhã',turnos:2,taxaOcup:2.4,atd:5,ns:1,ef:6,taxaAtd:83.3,taxaNS:16.7,avgSlots:4.0,
+   dias:{Quinta:{at:2,sl:8,li:15}},agendas:['PSICOLOGIA-JACQUELINE']},
+  {c:'8',per:'Tarde',turnos:11,taxaOcup:13.1,atd:45,ns:6,ef:51,taxaAtd:88.2,taxaNS:11.8,avgSlots:5.9,
+   dias:{Quarta:{at:6,sl:35,li:11},Quinta:{at:5,sl:30,li:12}},agendas:['PSICOLOGIA-JACQUELINE']},
+];
+
+const DIAS=['Segunda','Terça','Quarta','Quinta','Sexta'];
+const MAX_AT=17;
+
+// ===================== HELPERS =====================
+function occColor(v){return v>=80?'#ef4444':v>=60?'#f97316':v>=40?'#f59e0b':v>=20?'#22c55e':'#86efac'}
+function nsColor(v){return v>20?'#ef4444':v>15?'#f97316':'#22c55e'}
+function atdColor(v){return v>85?'#22c55e':v>78?'#f59e0b':'#ef4444'}
+function heatColor(r){
+  if(!r) return null;
+  const s=[[.01,'#dbeafe'],[.15,'#93c5fd'],[.3,'#3b82f6'],[.5,'#1d4ed8'],[.7,'#1e3a8a'],[.9,'#0f172a']];
+  for(let i=s.length-1;i>=0;i--) if(r>=s[i][0]) return s[i][1];
+  return '#dbeafe';
+}
+function freeColor(v){
+  if(v===0) return {bg:'#fee2e2',c:'#991b1b'};
+  if(v<=5) return {bg:'#ffedd5',c:'#9a3412'};
+  if(v<=10) return {bg:'#fef9c3',c:'#713f12'};
+  return {bg:'#dcfce7',c:'#166534'};
+}
+function diaColor(v,isManha){
+  if(!v) return null;
+  const r=v/MAX_AT;
+  return isManha?
+    (r>=.9?'#0369a1':r>=.6?'#0ea5e9':r>=.3?'#38bdf8':'#7dd3fc'):
+    (r>=.9?'#7e22ce':r>=.6?'#a855f7':r>=.3?'#c084fc':'#d8b4fe');
+}
+function ring(pct,color,r=26){
+  const c=2*Math.PI*r,d=pct/100*c;
+  return `<svg width="68" height="68" viewBox="0 0 68 68"><circle cx="34" cy="34" r="${r}" fill="none" stroke="#f1f5f9" stroke-width="5"/><circle cx="34" cy="34" r="${r}" fill="none" stroke="${color}" stroke-width="5" stroke-dasharray="${d} ${c}" stroke-linecap="round"/></svg>`;
+}
+function addTip(el,html){
+  el.addEventListener('mouseenter',()=>{const t=document.getElementById('tip');t.innerHTML=html;t.style.display='block';});
+  el.addEventListener('mousemove',e=>{const t=document.getElementById('tip');t.style.left=(e.clientX+14)+'px';t.style.top=(e.clientY-10)+'px';});
+  el.addEventListener('mouseleave',()=>{document.getElementById('tip').style.display='none';});
+}
+
+// ===================== VISÃO GERAL =====================
+function renderGeral(){
+  // Cards
+  const grid=document.getElementById('rooms-grid');
+  grid.innerHTML=CONS_G.map(r=>{
+    const oc=occColor(r.ocup);
+    const badge=r.ocup<20?{cls:'rb-free',t:'Alta disponib.'}:r.ocup<60?{cls:'rb-free',t:'Disponível'}:r.ocup<80?{cls:'rb-partial',t:'Parcial'}:{cls:'rb-busy',t:'Alta ocup.'};
+    const dias=DIAS.map(d=>{
+      const at=r.ativos[d]||0,li=r.livres[d]||0;
+      const ratio=at/MAX_AT;
+      const bg=at===0?'#e0e7ff':ratio>.7?'#22c55e':ratio>.4?'#2a7de1':'#f59e0b';
+      const cirTxt=at===0?'–':at;
+      const liCl=li>10?'color:#22c55e':li>5?'color:#f59e0b':'color:#9ca3af';
+      return `<div class="dia-dot"><div class="dd-lbl">${d.substring(0,3)}</div>
+        <div class="dd-circ" style="background:${bg}">${cirTxt}</div>
+        <div class="dd-sub" style="${liCl}">${li>0?li+'L':'—'}</div></div>`;
+    }).join('');
+    return `<div class="room-card ${r.flag}">
+      <div class="room-hdr">
+        <div class="room-num-row"><div class="room-num">#${r.c}</div><span class="room-badge ${badge.cls}">${badge.t}</span></div>
+        <div class="room-esp">${r.esp.slice(0,2).join(' · ')}</div>
+      </div>
+      <div class="ring-row">
+        <div class="ring-wrap">${ring(r.ocup,oc)}<div class="ring-center"><span class="ring-pct" style="color:${oc}">${r.ocup}%</span><span class="ring-lbl">Ocup.</span></div></div>
+        <div class="ring-stats">
+          <div class="stat-row"><span class="stat-lbl">Atendidos</span><span class="stat-val" style="color:#22c55e">${r.taxaAtd}%</span></div>
+          <div class="sbar"><div class="sbar-fill" style="width:${r.taxaAtd}%;background:#22c55e"></div></div>
+          <div class="stat-row" style="margin-top:5px"><span class="stat-lbl">No Show</span><span class="stat-val" style="color:${nsColor(r.taxaNS)}">${r.taxaNS}%</span></div>
+          <div class="sbar"><div class="sbar-fill" style="width:${r.taxaNS*4}%;background:${nsColor(r.taxaNS)}"></div></div>
+          <div class="stat-row" style="margin-top:5px"><span class="stat-lbl">Slots/dia</span><span class="stat-val">${r.avgSlots}</span></div>
+        </div>
+      </div>
+      <div class="dias-row">${dias}</div>
+    </div>`;
+  }).join('');
+
+  // Heatmap
+  const hm=document.getElementById('heatmap');
+  let h='<div></div>'+DIAS.map(d=>`<div class="hm-head">${d.substring(0,3)}</div>`).join('');
+  CONS_G.forEach(r=>{
+    h+=`<div class="hm-dlbl">#${r.c}</div>`;
+    DIAS.forEach(d=>{
+      const at=r.ativos[d]||0,li=r.livres[d]||0,ratio=at/MAX_AT;
+      if(!at){h+=`<div class="hm-empty"><div class="hv">livre</div><div class="hl" style="color:var(--muted);font-size:8px">${li}d</div></div>`;}
+      else{const bg=heatColor(ratio),tc=ratio>.4?'#fff':'#1e3a8a';
+        h+=`<div class="hm-cell" style="background:${bg};color:${tc}"><div class="hv">${at}</div><div class="hl" style="color:${ratio>.4?'rgba(255,255,255,.65)':'#3b82f6'}">${li}L</div></div>`;}
+    });
+  });
+  hm.innerHTML=h;
+
+  // Avail table
+  const av=document.getElementById('avail-table');
+  let at=`<table style="width:100%;border-collapse:collapse"><thead><tr>
+    <th style="font-size:10px;font-weight:700;color:var(--muted);text-align:left;padding:6px 10px;border-bottom:1px solid var(--border)">Consultório</th>
+    ${DIAS.map(d=>`<th style="font-size:10px;font-weight:700;color:var(--muted);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border)">${d.substring(0,3)}</th>`).join('')}
+    <th style="font-size:10px;font-weight:700;color:var(--muted);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border)">Total livres</th>
+    <th style="font-size:10px;font-weight:700;color:var(--muted);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border)">Ocupação</th>
+    <th style="font-size:10px;font-weight:700;color:var(--muted);text-align:left;padding:6px 10px;border-bottom:1px solid var(--border)">Uso principal</th>
+  </tr></thead><tbody>`;
+  CONS_G.forEach(r=>{
+    const total=Object.values(r.livres).reduce((a,b)=>a+b,0);
+    const oc=occColor(r.ocup);
+    at+=`<tr><td style="padding:9px 10px;border-bottom:1px solid var(--border);font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:13px">#${r.c}</td>`;
+    DIAS.forEach(d=>{const v=r.livres[d]||0;const {bg,c}=freeColor(v);
+      at+=`<td style="text-align:center;padding:7px 5px;border-bottom:1px solid var(--border)"><span style="background:${bg};color:${c};font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block">${v}</span></td>`;
+    });
+    at+=`<td style="text-align:center;padding:9px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700">${total}</td>
+    <td style="padding:9px;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:5px">
+        <div style="width:70px;height:7px;background:var(--border);border-radius:4px;overflow:hidden"><div style="width:${r.ocup}%;height:100%;background:${oc};border-radius:4px"></div></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:${oc}">${r.ocup}%</span>
+      </div></td>
+    <td style="padding:9px 10px;border-bottom:1px solid var(--border);font-size:10px;color:var(--muted)">${r.esp[0]}</td></tr>`;
+  });
+  // Total row
+  const totPorDia=DIAS.map(d=>CONS_G.reduce((s,r)=>s+(r.livres[d]||0),0));
+  at+=`</tbody></table><div style="margin-top:12px;padding:10px 14px;background:linear-gradient(135deg,#eff6ff,#f0fdf4);border-radius:10px;border:1px solid #bfdbfe;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <span style="font-size:11px;font-weight:700;color:var(--blue);flex-shrink:0">Total livres por dia (todos consultórios):</span>
+    ${DIAS.map((d,i)=>`<span style="font-size:12px;font-weight:600;background:#fff;padding:3px 10px;border-radius:20px;border:1px solid var(--border)">${d.substring(0,3)}: <strong>${totPorDia[i]}</strong></span>`).join('')}
+  </div>`;
+  av.innerHTML=at;
+
+  // Rep bars
+  document.getElementById('rep-bars').innerHTML=REP_ESP.map(r=>{
+    const bg=r.taxa>50?'#22c55e':r.taxa>35?'#f59e0b':'#ef4444';
+    return `<div class="rbi"><div class="rbi-lbl">${r.esp}</div>
+      <div class="rbi-track"><div class="rbi-fill" style="width:${Math.max(r.taxa,4)}%;background:${bg}"><span>${r.taxa}%</span></div></div>
+      <div class="rbi-val">${r.rep}/${r.canc}</div></div>`;
+  }).join('');
+
+  // Overview table
+  document.getElementById('ovtbl').innerHTML=`<thead><tr><th>Cons.</th><th>Ocup.</th><th>Dias Ativos</th><th>Dias Livres</th><th>Atendidos</th><th>No Show</th><th>% Atend.</th><th>% NS</th><th>Repos.</th><th>Slots/dia</th><th>Agenda principal</th><th>Status</th></tr></thead><tbody>
+  ${CONS_G.map(r=>{
+    const tl=Object.values(r.livres).reduce((a,b)=>a+b,0);
+    const st=r.ocup<20?{c:'bg',t:'ALTAMENTE LIVRE'}:r.ocup<50?{c:'bg',t:'DISPONÍVEL'}:r.ocup<80?{c:'bo',t:'PARCIAL'}:{c:'br',t:'ALTA OCUP.'};
+    const oc=occColor(r.ocup);
+    return `<tr><td style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700">#${r.c}</td>
+    <td><div style="display:flex;align-items:center;gap:4px"><div style="width:45px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${r.ocup}%;height:100%;background:${oc};border-radius:3px"></div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:${oc}">${r.ocup}%</span></div></td>
+    <td>${84-tl}</td><td style="color:${tl>30?'#22c55e':'#f97316'};font-weight:600">${tl}</td>
+    <td><span class="badge bg">${r.atd}</span></td><td><span class="badge ${r.taxaNS>18?'br':'bo'}">${r.ns}</span></td>
+    <td style="color:${atdColor(r.taxaAtd)};font-weight:600">${r.taxaAtd}%</td>
+    <td style="color:${nsColor(r.taxaNS)};font-weight:600">${r.taxaNS}%</td>
+    <td><span class="badge bb">${r.rep}</span></td>
+    <td style="font-family:'IBM Plex Mono',monospace">${r.avgSlots}</td>
+    <td style="font-size:10px;color:var(--muted)">${r.esp[0]}</td>
+    <td><span class="badge ${st.c}">${st.t}</span></td></tr>`;
+  }).join('')}</tbody>`;
+}
+
+// ===================== POR PERÍODO =====================
+function renderPeriodo(){
+  const byCons={};
+  CONS_P.forEach(r=>{if(!byCons[r.c])byCons[r.c]={};byCons[r.c][r.per]=r;});
+  const mainEsp={
+    '1':'Ortopedia · Gastroenterologia · Clínica Geral','2':'Ginecologia · Urologia',
+    '3':'Clínica Geral · Dermatologia · Geriatria','4':'Oftalmologia (só tarde/Segunda)',
+    '5':'Psicologia · Psicanalista · Pediatria','6':'Psicologia · Psiquiatria · Nutrição',
+    '7':'Endocrinologia · Psiquiatria','8':'Psicologia (overflow)',
+  };
+  let html='';
+  Object.entries(byCons).forEach(([c,pers])=>{
+    const m=pers['Manhã'],t=pers['Tarde'];
+    const tot=(m?.turnos||0)+(t?.turnos||0);
+    const oc=Math.round(tot/168*100*10)/10;
+    html+=`<div class="cons-block">
+      <div class="cons-hdr">
+        <div class="cons-num">#${c}</div>
+        <div class="cons-title"><div style="font-size:13px;font-weight:600">Consultório ${c}</div><div class="cons-esp-sm">${mainEsp[c]||''}</div></div>
+        <div class="cons-kpis">
+          <div class="ck"><div class="v">${oc}%</div><div class="l">Ocup. geral</div></div>
+          <div class="ck"><div class="v">${tot}<span style="font-size:10px;color:var(--muted)">/168</span></div><div class="l">Turnos</div></div>
+          <div class="ck"><div class="v">${168-tot}</div><div class="l">Livres</div></div>
+        </div>
+      </div>
+      <div class="periods-row">${renderPerCol(m,'Manhã',c)}${renderPerCol(t,'Tarde',c)}</div>
+    </div>`;
+  });
+  document.getElementById('cons-blocks').innerHTML=html;
+
+  // Comparison table
+  const sorted=[...CONS_P].filter(r=>r.turnos>0).sort((a,b)=>a.c!==b.c?a.c.localeCompare(b.c):a.per==='Manhã'?-1:1);
+  document.getElementById('cmp-table').innerHTML=`<thead><tr><th>Cons.</th><th>Período</th><th>Turnos</th><th>Livres</th><th>% Ocup.</th><th>Slots/turno</th><th>Atendidos</th><th>No Show</th><th>% Atend.</th><th>% NS</th><th>Dias mais ativos</th></tr></thead><tbody>
+  ${sorted.map(r=>{
+    const oc=occColor(r.taxaOcup);
+    const topDias=DIAS.filter(d=>r.dias[d]&&r.dias[d].at>0).sort((a,b)=>(r.dias[b]?.at||0)-(r.dias[a]?.at||0)).slice(0,3);
+    const pt=r.per==='Manhã'?'pt-m':'pt-t';
+    return `<tr>
+      <td style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700">#${r.c}</td>
+      <td><span class="per-tag ${pt}">${r.per==='Manhã'?'☀️ Manhã':'🌙 Tarde'}</span></td>
+      <td><strong>${r.turnos}</strong></td>
+      <td style="color:${84-r.turnos>30?'#22c55e':'#f97316'};font-weight:600">${84-r.turnos}</td>
+      <td><div style="display:flex;align-items:center;gap:4px"><div style="width:45px;height:5px;background:var(--border);border-radius:3px;overflow:hidden"><div style="width:${r.taxaOcup}%;height:100%;background:${oc};border-radius:3px"></div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:${oc}">${r.taxaOcup}%</span></div></td>
+      <td style="font-family:'IBM Plex Mono',monospace;font-weight:600">${r.avgSlots}</td>
+      <td><span class="badge bg">${r.atd}</span></td>
+      <td><span class="badge ${r.taxaNS>18?'br':'bo'}">${r.ns}</span></td>
+      <td style="color:${atdColor(r.taxaAtd)};font-weight:600">${r.taxaAtd}%</td>
+      <td style="color:${nsColor(r.taxaNS)};font-weight:600">${r.taxaNS}%</td>
+      <td style="font-size:10px;color:var(--muted)">${topDias.map(d=>`${d.substring(0,3)}(${r.dias[d]?.at})`).join(' · ')}</td>
+    </tr>`;
+  }).join('')}</tbody>`;
+}
+
+function renderPerCol(r,per,c){
+  const isManha=per==='Manhã';
+  const icon=isManha?'☀️':'🌙';
+  const emCls=isManha?'empty':'empty-tarde';
+  if(!r||r.turnos===0){
+    return `<div class="per-col ${emCls}">
+      <div style="font-size:22px">${icon}</div>
+      <div style="font-weight:600;font-size:12px;margin-top:4px">${per}</div>
+      <div style="font-size:11px;margin-top:6px;color:var(--green);font-weight:700">🟢 100% LIVRE</div>
+      <div style="font-size:10px;margin-top:3px">Nenhum agendamento neste período</div>
+      <div style="font-size:10px;margin-top:8px;background:#dcfce7;color:#166534;padding:3px 10px;border-radius:20px;font-weight:600">Disponível para nova operação</div>
+    </div>`;
+  }
+  const badge=r.taxaOcup===0?{cls:'pb-empty',t:'Sem uso'}:r.taxaOcup<20?{cls:'pb-high',t:'Alta disponib.'}:r.taxaOcup<50?{cls:'pb-mid',t:'Disponível'}:r.taxaOcup<75?{cls:'pb-low',t:'Parcial'}:{cls:'pb-low',t:'Saturado'};
+  const nc=nsColor(r.taxaNS),ac=atdColor(r.taxaAtd);
+  const dias=DIAS.map(d=>{
+    const dd=r.dias[d];
+    if(!dd||!dd.at) return `<div class="di-empty"><div class="dn">${d.substring(0,3)}</div><div class="dv">livre</div></div>`;
+    const bg=diaColor(dd.at,isManha);
+    return `<div class="di" style="background:${bg}">
+      <div class="dn">${d.substring(0,3)}</div><div class="dv">${dd.at}</div>
+      <div class="ds">${dd.sl}sl</div><div class="dl">${dd.li}L</div>
+    </div>`;
+  }).join('');
+  const ags=(r.agendas||[]).map(a=>`<span class="ag-tag">${a}</span>`).join('');
+  return `<div class="per-col ${isManha?'manha':'tarde'}">
+    <div class="per-hdr">
+      <div class="per-title-row">
+        <div class="per-icon ${isManha?'m':'t'}">${icon}</div>
+        <span style="color:${isManha?'var(--manha-d)':'var(--tarde-d)'}">${per}</span>
+      </div>
+      <span class="per-badge ${badge.cls}">${badge.t}</span>
+    </div>
+    <div class="per-kpis">
+      <div class="pk"><div class="v" style="color:${occColor(r.taxaOcup)}">${r.taxaOcup}%</div><div class="l">Ocupação</div></div>
+      <div class="pk"><div class="v">${r.turnos}<span style="font-size:9px;color:var(--muted)">/84</span></div><div class="l">Turnos</div></div>
+      <div class="pk"><div class="v" style="color:${ac}">${r.taxaAtd}%</div><div class="l">Atendidos</div></div>
+      <div class="pk"><div class="v" style="color:${nc}">${r.taxaNS}%</div><div class="l">No Show</div></div>
+      <div class="pk"><div class="v">${r.avgSlots}</div><div class="l">Slots/turno</div></div>
+    </div>
+    <div class="dias-g">${dias}</div>
+    <div class="ag-tags">${ags}</div>
+  </div>`;
+}
+
+// ===================== TABS =====================
+function showTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('act'));
+  document.getElementById('pan-'+name).classList.add('act');
+  btn.classList.add('act');
+}
+
+// ===================== INIT =====================
+document.addEventListener('DOMContentLoaded',()=>{
+  renderGeral();
+  renderPeriodo();
+});
+</script>
+</body>
+</html>
