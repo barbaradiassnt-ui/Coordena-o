@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painéis de Gestão — AssisteMed</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --c-ocup-dark:#5C2E00; --c-ocup:#7B4F1E; --c-ocup-light:#F5E6D0;
+  --c-cross-dark:#0D2260; --c-cross:#1A3A8C; --c-cross-light:#E6EEFB;
+  --c-vidas-dark:#072518; --c-vidas:#0E3D2F; --c-vidas-light:#E5F8F2;
+  --gold:#E8A830; --gold2:#F5C842;
+  --green-ok:#27AE72; --green-light:#DFFAEE;
+  --text:#1C2B26; --text-soft:#4A6A5A;
+  --line:rgba(0,0,0,0.07); --white:#FFFFFF;
+  --active-color: var(--c-ocup);
+}
+
+html, body {
+  height:100%; min-height:100vh;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:#0F1A15;
+  overflow:hidden;
+}
+
+/* ============================
+   NAV BAR
+============================ */
+#navbar {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:58px;
+  background:linear-gradient(135deg,#0A0F0A 0%,#141E14 100%);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  display:flex; align-items:center; gap:0;
+  padding:0 24px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.4);
+}
+
+.nav-brand {
+  display:flex; align-items:center; gap:10px;
+  margin-right:32px;
+}
+.nav-logo {
+  width:34px; height:34px;
+  background:linear-gradient(135deg,#1A5E45,#2DB085);
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+}
+.nav-brand-text {
+  font-size:13px; font-weight:800;
+  color:#fff; letter-spacing:0.5px;
+  line-height:1;
+}
+.nav-brand-sub {
+  font-size:9px; color:rgba(255,255,255,0.35);
+  font-weight:400; letter-spacing:0.8px;
+  text-transform:uppercase; margin-top:2px;
+}
+
+.nav-tabs {
+  display:flex; gap:4px; flex:1;
+}
+
+.nav-tab {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition:all 0.25s cubic-bezier(.4,0,.2,1);
+  font-size:12px; font-weight:600;
+  color:rgba(255,255,255,0.45);
+  position:relative;
+  overflow:hidden;
+  user-select:none;
+}
+.nav-tab::before {
+  content:'';
+  position:absolute; bottom:0; left:50%; right:50%;
+  height:2px; border-radius:2px;
+  transition:all 0.3s ease;
+}
+.nav-tab:hover {
+  color:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.06);
+}
+.nav-tab.active {
+  color:#fff;
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(255,255,255,0.1);
+}
+.nav-tab[data-tab="ocup"].active { background:rgba(123,79,30,0.25); border-color:rgba(123,79,30,0.4); }
+.nav-tab[data-tab="ocup"].active::before { background:#E8A830; left:10%; right:10%; }
+.nav-tab[data-tab="cross"].active { background:rgba(26,58,140,0.25); border-color:rgba(26,58,140,0.4); }
+.nav-tab[data-tab="cross"].active::before { background:#5580E8; left:10%; right:10%; }
+.nav-tab[data-tab="vidas"].active { background:rgba(14,61,47,0.35); border-color:rgba(45,176,133,0.3); }
+.nav-tab[data-tab="vidas"].active::before { background:#2DB085; left:10%; right:10%; }
+
+.tab-icon { font-size:14px; }
+.tab-count {
+  margin-left:4px;
+  background:rgba(255,255,255,0.12);
+  border-radius:10px;
+  padding:1px 7px;
+  font-size:10px; font-weight:700;
+  font-family:'JetBrains Mono',monospace;
+}
+.nav-tab.active .tab-count { background:rgba(255,255,255,0.2); }
+
+.nav-right {
+  display:flex; align-items:center; gap:12px;
+  margin-left:auto;
+}
+.nav-date {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:rgba(255,255,255,0.3);
+}
+.print-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:7px 14px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:7px;
+  font-size:11px; font-weight:600;
+  color:rgba(255,255,255,0.65);
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.print-btn:hover { background:rgba(255,255,255,0.14); color:#fff; }
+
+/* ============================
+   PANELS CONTAINER
+============================ */
+#panels-wrap {
+  position:fixed; top:58px; left:0; right:0; bottom:0;
+  overflow-y:auto;
+  scroll-behavior:smooth;
+}
+
+.panel {
+  display:none;
+  width:100%;
+  min-height:calc(100vh - 58px);
+  background:#1A2218;
+  padding:20px 24px 32px;
+  animation:fadeIn 0.3s ease;
+}
+.panel.active { display:block; }
+
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ============================
+   CARD WRAPPER (scrollable table card)
+============================ */
+.panel-card {
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,0.35);
+  width:100%;
+  max-width:1300px;
+  margin:0 auto;
+}
+
+/* ============================
+   SHARED HEADER
+============================ */
+.ph {
+  padding:20px 32px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:relative; overflow:hidden;
+}
+.ph::before, .ph::after { content:''; position:absolute; border-radius:50%; pointer-events:none; }
+
+.ph-left { display:flex; align-items:center; gap:14px; z-index:1; }
+.ph-icon {
+  width:46px; height:46px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:11px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px;
+}
+.ph-title h2 { font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.4px; }
+.ph-title p { font-size:10px; color:rgba(255,255,255,0.45); font-weight:400; margin-top:3px; text-transform:uppercase; letter-spacing:0.8px; }
+
+.ph-stats { display:flex; gap:10px; z-index:1; }
+.pstat {
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:9px;
+  padding:8px 14px; text-align:center;
+}
+.pstat .n { font-family:'JetBrains Mono',monospace; font-size:19px; font-weight:700; color:var(--gold2); }
+.pstat .l { font-size:9px; color:rgba(255,255,255,0.38); text-transform:uppercase; letter-spacing:0.5px; margin-top:1px; }
+
+/* OCUPACAO header */
+.ph-ocup { background:linear-gradient(135deg,#5C2E00 0%,#7B4F1E 45%,#9D6630 100%); }
+.ph-ocup::before { top:-60px; right:60px; width:200px; height:200px; background:rgba(255,255,255,0.04); }
+/* CROSS header */
+.ph-cross { background:linear-gradient(135deg,#0D2260 0%,#1A3A8C 50%,#2255C4 100%); }
+.ph-cross::before { top:-40px; right:100px; width:180px; height:180px; background:rgba(255,255,255,0.05); }
+/* VIDAS header */
+.ph-vidas { background:linear-gradient(135deg,#072518 0%,#0E3D2F 45%,#1A5E45 100%); }
+.ph-vidas::before { top:-50px; right:80px; width:180px; height:180px; background:rgba(45,176,133,0.08); }
+
+/* ============================
+   SUBBAR & LEGEND
+============================ */
+.subbar {
+  padding:8px 32px;
+  display:flex; gap:14px; align-items:center;
+  border-bottom:1px solid rgba(0,0,0,0.08);
+}
+.subbar-ocup { background:#F5E6D0; }
+.subbar-cross { background:#E6EEFB; }
+.subbar-vidas { background:#E5F8F2; }
+
+.subbar .tag { font-size:10px; font-weight:600; color:rgba(0,0,0,0.45); }
+.sbadge { padding:2px 8px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:8.5px; font-weight:700; }
+.b-em { background:#E8A830; color:#3A2200; }
+.b-pl { background:#EBF5F1; color:#1A5E45; border:1px solid rgba(26,94,69,0.2); }
+.b-co { background:#DFFAEE; color:#1A6642; }
+.b-tr { background:#FDEADF; color:#D95A1F; border:1px solid rgba(217,90,31,0.2); }
+
+/* ============================
+   METRICS ROW (Vidas)
+============================ */
+.metrics-row {
+  display:flex;
+  border-bottom:2px solid #E5F8F2;
+  background:#FAFFFE;
+}
+.metric {
+  flex:1; padding:11px 18px;
+  border-right:1px solid #E5F8F2;
+  display:flex; align-items:center; gap:10px;
+}
+.metric:last-child { border-right:none; }
+.metric .ico { font-size:22px; }
+.metric .mv { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700; color:#0E3D2F; }
+.metric .ml { font-size:9px; color:#4A6A5A; font-weight:500; text-transform:uppercase; letter-spacing:0.4px; line-height:1.4; }
+.metric .ml span { color:#27AE72; font-weight:800; }
+
+/* ============================
+   INSIGHT CARDS (Cross)
+============================ */
+.insights {
+  display:flex; gap:10px;
+  padding:12px 24px;
+  background:linear-gradient(90deg,#EFF4FD 0%,#FAFBFF 100%);
+  border-bottom:2px solid rgba(26,58,140,0.1);
+}
+.ins-card {
+  flex:1; background:#fff;
+  border:1px solid rgba(26,58,140,0.1);
+  border-radius:8px;
+  padding:10px 14px;
+  position:relative; overflow:hidden;
+}
+.ins-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:#2255C4; }
+.ins-card.gold::before { background:#E8A830; }
+.ins-card.teal::before { background:#0E7070; }
+.ins-card.purple::before { background:#6644CC; }
+.ins-card h4 { font-size:8.5px; font-weight:700; color:#4A5A7A; text-transform:uppercase; letter-spacing:0.7px; margin-bottom:3px; }
+.ins-card p { font-size:11px; font-weight:700; color:#1A3A8C; line-height:1.3; }
+
+/* ============================
+   TABLE
+============================ */
+table { width:100%; border-collapse:collapse; }
+
+thead tr { background:#F7F8F7; }
+thead th {
+  padding:9px 10px;
+  font-size:8.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:0.8px;
+  border-bottom:2px solid rgba(0,0,0,0.08);
+  text-align:left;
+  position:sticky; top:0; z-index:2;
+}
+.th-ocup { background:#F5EDE0; color:#7B4F1E; border-bottom-color:rgba(123,79,30,0.15); }
+.th-cross { background:#EEF3FC; color:#1A3A8C; border-bottom-color:rgba(26,58,140,0.15); }
+.th-vidas { background:#EBF5F1; color:#0E3D2F; border-bottom-color:rgba(14,61,47,0.12); }
+
+thead th:first-child { padding-left:24px; }
+thead th:last-child { padding-right:24px; }
+
+tbody tr { border-bottom:1px solid var(--line); transition:background 0.15s; }
+tbody tr:hover { background:rgba(0,0,0,0.025) !important; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:nth-child(even) { background:rgba(0,0,0,0.018); }
+
+td { padding:8px 10px; vertical-align:middle; font-size:10px; color:var(--text); }
+td:first-child { padding-left:24px; }
+td:last-child { padding-right:24px; }
+
+.tc { font-weight:700; font-size:10px; min-width:108px; }
+.tc-ocup { color:#5C2E00; }
+.tc-cross { color:#0D2260; }
+.tc-vidas { color:#0E3D2F; }
+
+.td { font-size:9.5px; color:var(--text-soft); line-height:1.4; max-width:225px; }
+.tr { font-size:9.5px; font-weight:600; white-space:nowrap; }
+.tr-ocup { color:#7B4F1E; }
+.tr-cross { color:#2255C4; }
+.tr-vidas { color:#1F8C6A; }
+
+.tdate { font-family:'JetBrains Mono',monospace; font-size:9px; color:#8A9E94; white-space:nowrap; }
+.tnext { font-size:9.5px; color:var(--text-soft); line-height:1.35; max-width:210px; }
+
+/* STATUS BADGES */
+.sb { display:inline-flex; align-items:center; gap:3px; padding:3px 8px; border-radius:5px; font-size:8.5px; font-weight:700; white-space:nowrap; }
+.s-em { background:#E8A830; color:#3A2200; }
+.s-plan-ocup { background:#EBF5F1; color:#1A6642; border:1px solid rgba(26,102,66,0.2); }
+.s-plan-cross { background:#E6EEFB; color:#1A3A8C; border:1px solid rgba(26,58,140,0.15); }
+.s-plan-vidas { background:#E5F8F2; color:#0E3D2F; border:1px solid rgba(14,61,47,0.15); }
+.s-conc { background:#DFFAEE; color:#1A6642; }
+.s-trav { background:#FDEADF; color:#D95A1F; border:1px solid rgba(217,90,31,0.2); }
+
+/* PRIORITY */
+.pa { color:#C42222; font-size:9.5px; font-weight:600; }
+.pa::before { content:'●'; margin-right:3px; font-size:7px; }
+.pm { color:#B07A10; font-size:9.5px; font-weight:600; }
+.pm::before { content:'○'; margin-right:3px; font-size:8px; }
+
+/* SECTION ROWS */
+.sec td {
+  padding:5px 10px 4px 24px;
+  font-size:8.5px; font-weight:800;
+  text-transform:uppercase; letter-spacing:1px;
+  border-bottom:1px solid rgba(0,0,0,0.08) !important;
+}
+.sec-ocup td { background:linear-gradient(90deg,rgba(123,79,30,0.08) 0%,transparent 100%); color:#7B4F1E; }
+.sec-cross td { background:linear-gradient(90deg,rgba(26,58,140,0.08) 0%,transparent 100%); color:#1A3A8C; }
+.sec-vidas td { background:linear-gradient(90deg,rgba(14,61,47,0.08) 0%,transparent 100%); color:#0E3D2F; }
+
+.hl-g { color:#27AE72; font-weight:800; }
+
+/* FOOTER */
+.pf {
+  padding:10px 32px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.pf-ocup { background:linear-gradient(135deg,#5C2E00 0%,#7B4F1E 100%); }
+.pf-cross { background:linear-gradient(135deg,#0D2260 0%,#1A3A8C 100%); }
+.pf-vidas { background:linear-gradient(135deg,#072518 0%,#0E3D2F 100%); }
+.pf .brand { font-size:10px; font-weight:800; color:var(--gold2); letter-spacing:1.5px; }
+.pf .dt { font-family:'JetBrains Mono',monospace; font-size:9px; color:rgba(255,255,255,0.35); }
+
+/* ============================
+   PRINT
+============================ */
+@media print {
+  #navbar { display:none; }
+  #panels-wrap { position:static; overflow:visible; }
+  .panel { display:block !important; page-break-after:always; }
+  body { background:#fff; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">🏥</div>
+    <div>
+      <div class="nav-brand-text">AssisteMed</div>
+      <div class="nav-brand-sub">Grupo Ocupacional</div>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-tab="ocup">
+      <span class="tab-icon">🏥</span>
+      Ocupação
+      <span class="tab-count">19</span>
+    </div>
+    <div class="nav-tab" data-tab="cross">
+      <span class="tab-icon">💡</span>
+      Cross Selling
+      <span class="tab-count">9</span>
+    </div>
+    <div class="nav-tab" data-tab="vidas">
+      <span class="tab-icon">🫀</span>
+      Vidas
+      <span class="tab-count">14</span>
+    </div>
+  </div>
+
+  <div class="nav-right">
+    <div class="nav-date">Maio · Junho 2026</div>
+    <div class="print-btn" onclick="window.print()">🖨️ Imprimir</div>
+  </div>
+</nav>
+
+<!-- PANELS WRAP -->
+<div id="panels-wrap">
+
+  <!-- ================================
+       PAINEL 1 — OCUPAÇÃO
+  ================================ -->
+  <div class="panel active" id="panel-ocup">
+    <div class="panel-card">
+
+      <div class="ph ph-ocup">
+        <div class="ph-left">
+          <div class="ph-icon">🏥</div>
+          <div class="ph-title">
+            <h2>Gestão · Ocupação</h2>
+            <p>AssisteMed · Grupo Ocupacional · Operações Clínicas</p>
+          </div>
+        </div>
+        <div class="ph-stats">
+          <div class="pstat"><div class="n">19</div><div class="l">Iniciativas</div></div>
+          <div class="pstat"><div class="n" style="color:#2DB085;">1</div><div class="l">Concluída</div></div>
+          <div class="pstat"><div class="n">11</div><div class="l">Em Andamento</div></div>
+          <div class="pstat"><div class="n" style="color:rgba(255,255,255,0.5);">6</div><div class="l">Planejadas</div></div>
+          <div class="pstat"><div class="n" style="color:#F07030;">1</div><div class="l">Travado</div></div>
+        </div>
+      </div>
+
+      <div class="subbar subbar-ocup">
+        <span class="tag">Status:</span>
+        <span class="sbadge b-em">⏳ Em andamento</span>
+        <span class="sbadge b-pl">📌 Planejado</span>
+        <span class="sbadge b-co">✅ Concluído</span>
+        <span class="sbadge b-tr">🔴 Travado</span>
+        <div style="flex:1"></div>
+        <span style="font-size:9.5px;color:rgba(92,46,0,0.45);font-style:italic;">Maio · Junho 2026</span>
+      </div>
+
+      <table>
+        <thead><tr class="th-ocup">
+          <th class="th-ocup">Iniciativa</th>
+          <th class="th-ocup">Descrição</th>
+          <th class="th-ocup">Responsável</th>
+          <th class="th-ocup">Prazo</th>
+          <th class="th-ocup">Status</th>
+          <th class="th-ocup">Prioridade</th>
+          <th class="th-ocup">Próximos Passos</th>
+        </tr></thead>
+        <tbody>
+          <tr class="sec sec-ocup"><td colspan="7">📲 Comunicação & Automação</td></tr>
+          <tr><td class="tc tc-ocup">NPS</td><td class="td">Avaliar ferramenta; transformar whatsapp em bussiner</td><td class="tr tr-ocup">Sandra / Bárbara</td><td class="tdate">31/05/2026</td><td><span class="sb s-trav">🔴 Travado</span></td><td class="pm">Média</td><td class="tnext">Avaliar ferramenta; transformar whatsapp em bussiner</td></tr>
+          <tr><td class="tc tc-ocup">Automação / Chatbot</td><td class="td">Criar chatbot próprio via Lovable (agendamento, leitura exames, gestão)</td><td class="tr tr-ocup">Bárbara / Equipe Criação</td><td class="tdate">31/06/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Bárbara enviar listas das dores AssisteMed, criação agendamento automatizado</td></tr>
+          <tr><td class="tc tc-ocup">Parceiros</td><td class="td">Estreitar relacionamento com parceiros existentes</td><td class="tr tr-ocup">Bárbara Almeida</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Listar gestao parceiros, buscar novos para divulgação da marca videos Colab</td></tr>
+
+          <tr class="sec sec-ocup"><td colspan="7">📅 Agenda & Confirmação</td></tr>
+          <tr><td class="tc tc-ocup">Gesão de Agenda</td><td class="td">Entrar em contato com PACTO para agendar</td><td class="tr tr-ocup">Narzi</td><td class="tdate">15/05/2026</td><td><span class="sb s-plan-ocup">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Buscar para agenda ociosa em dias específicos - Clinico</td></tr>
+          <tr><td class="tc tc-ocup">Confirmação 48h</td><td class="td">Confirmar consulta com 48h de antecedência (especialidades estratégicas)</td><td class="tr tr-ocup">Ana / Equipe</td><td class="tdate">A partir de 08/05</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Horário 08h e após 16h; confirmar retorno do paciente - Chekar efetividade</td></tr>
+          <tr><td class="tc tc-ocup">Boas Vindas Marco Zero</td><td class="td">Enviar mensagem de boas-vindas para admitidos</td><td class="tr tr-ocup">Narzi / Ana</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Analisar recentes, criar lista</td></tr>
+          <tr><td class="tc tc-ocup">Lista de Espera Automatizada</td><td class="td">Criar lista de espera automática</td><td class="tr tr-ocup">Ana</td><td class="tdate">31/05/2026</td><td><span class="sb s-plan-ocup">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Cadastrar equipe na Viver de IA</td></tr>
+          <tr><td class="tc tc-ocup">Confirmação Mensagem Padrão</td><td class="td">Mensagem padrão de confirmação (POP criado)</td><td class="tr tr-ocup">Ana/Sara</td><td class="tdate">Recorrente</td><td><span class="sb s-conc">✅ Concluído</span></td><td class="pm">Média</td><td class="tnext">Conferir atualização</td></tr>
+
+          <tr class="sec sec-ocup"><td colspan="7">🔄 No-Show & Cancelamentos</td></tr>
+          <tr><td class="tc tc-ocup">No-Show Psicologia</td><td class="td">No Show Psicologia: 2 cancelamentos perde reserva</td><td class="tr tr-ocup">Narzi</td><td class="tdate">A partir de 08/05</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Regra a ser relembrada aos pacientes, acompanhar agenda e fomentar horarios livres</td></tr>
+          <tr><td class="tc tc-ocup">Remarcar / No-Show</td><td class="td">Enviar mensagem para quem não compareceu (remarcar)</td><td class="tr tr-ocup">Narzi</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Avaliar possibilidade de remarcar parceiros</td></tr>
+          <tr><td class="tc tc-ocup">Recolocação de Cancelamentos</td><td class="td">Equipe oferece nova data imediatamente ao cancelamento</td><td class="tr tr-ocup">Equipe Recepção</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Busca ativa na fila de espera</td></tr>
+          <tr><td class="tc tc-ocup">Confirmação / No-Show</td><td class="td">Sandra: alterar confirmação na agenda do Unnico 48hs</td><td class="tr tr-ocup">Sandra/Ana</td><td class="tdate">15/05/2026</td><td><span class="sb s-plan-ocup">📌 Planejado</span></td><td class="pm">Média</td><td class="tnext">Ana confirma 5 especialidades - no show</td></tr>
+
+          <tr class="sec sec-ocup"><td colspan="7">💊 Serviços & Expansão</td></tr>
+          <tr><td class="tc tc-ocup">Médico da Família</td><td class="td">Priorizar atendimento ao Clínico Geral — aumentar gama serviços</td><td class="tr tr-ocup">Bárbara / Médicos</td><td class="tdate">Recorrente</td><td><span class="sb s-plan-ocup">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Incluir Pediatria (8 anos) e Ginecologia extendida (preventivo), criar campanha exames preventivos</td></tr>
+          <tr><td class="tc tc-ocup">Telemedicina Consulta</td><td class="td">Expansão e parametrização de telemedicina (menor no-show)</td><td class="tr tr-ocup">Bárbara</td><td class="tdate">30/06/2026</td><td><span class="sb s-plan-ocup">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Analisar integração com MEMED, POP de atendimento Online (TEAMS)</td></tr>
+          <tr><td class="tc tc-ocup">Telemedicina Receituário</td><td class="td">Campanha obrigação receituário e atestados no sistema SOC</td><td class="tr tr-ocup">Médicos / Bárbara</td><td class="tdate">27/05/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pm">Média</td><td class="tnext">Incluir lista de medicamentos no SOC, cadastrar texto padrão de atestado, avaliar receita A/B</td></tr>
+          <tr><td class="tc tc-ocup">Campanhas Especialidades</td><td class="td">Campanhas por datas comemorativas: Outubro Rosa, Novembro Azul, Setembro Amarelo…</td><td class="tr tr-ocup">Bárbara</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pm">Média</td><td class="tnext">Endocrino, Dermato, Nutrição, Pneumo, Mastologia, Urologia, Gineco</td></tr>
+          <tr><td class="tc tc-ocup">GestãoMed</td><td class="td">Levantar faturamento por especialista para nortear campanhas</td><td class="tr tr-ocup">Bárbara</td><td class="tdate">31/05/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Criando app de GestaoMed</td></tr>
+          <tr><td class="tc tc-ocup">Reuniões Diárias para Agenda</td><td class="td">Reuniões diárias para tomada de decisão e remanejamento de Agenda</td><td class="tr tr-ocup">Bárbara / Ana</td><td class="tdate">Diária</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Remanejamento automático pelo histórico de comparecimento</td></tr>
+          <tr><td class="tc tc-ocup">Obra Integração</td><td class="td">Acompanhamento, decisões e antecipar possível não conformidade</td><td class="tr tr-ocup">Bárbara / Carla / Willian</td><td class="tdate">08/06/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Projeto pegou area do consultório 1 — construiu anexo ao banheiro e laboratório — Status: Demolição</td></tr>
+        </tbody>
+      </table>
+
+      <div class="pf pf-ocup">
+        <div class="brand">ASSISTE MED · GRUPO OCUPACIONAL</div>
+        <div class="dt">Painel 1 de 3 · Ocupação · Maio 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================
+       PAINEL 2 — CROSS SELLING
+  ================================ -->
+  <div class="panel" id="panel-cross">
+    <div class="panel-card">
+
+      <div class="ph ph-cross">
+        <div class="ph-left">
+          <div class="ph-icon">💡</div>
+          <div class="ph-title">
+            <h2>Gestão · Cross Selling</h2>
+            <p>AssisteMed · Expansão de Receita e Serviços</p>
+          </div>
+        </div>
+        <div class="ph-stats">
+          <div class="pstat"><div class="n">9</div><div class="l">Iniciativas</div></div>
+          <div class="pstat"><div class="n">5</div><div class="l">Em Andamento</div></div>
+          <div class="pstat"><div class="n" style="color:rgba(255,255,255,0.5);">4</div><div class="l">Planejadas</div></div>
+        </div>
+      </div>
+
+      <div class="subbar subbar-cross">
+        <span class="tag">Status:</span>
+        <span class="sbadge b-em">⏳ Em andamento</span>
+        <span class="sbadge b-pl" style="color:#1A3A8C;border-color:rgba(26,58,140,0.2);">📌 Planejado</span>
+        <div style="flex:1"></div>
+        <span style="font-size:9.5px;color:rgba(13,34,96,0.4);font-style:italic;">Maio · Junho 2026</span>
+      </div>
+
+      <div class="insights">
+        <div class="ins-card"><h4>Foco Principal</h4><p>Exames credenciados, laboratoriais e serviços Ocupacional</p></div>
+        <div class="ins-card gold"><h4>Novo Produto em Fila</h4><p>Linha de Obesidade — plano alimentar + medicamento + bioimpedância</p></div>
+        <div class="ins-card teal"><h4>IA Aplicada</h4><p>ChatGPT de orçamento laboratorial já criado — evoluir e divulgar</p></div>
+        <div class="ins-card purple"><h4>Especialidade Piloto</h4><p>Geriatria particular — manter pacientes antigos, criar regra</p></div>
+      </div>
+
+      <table>
+        <thead><tr>
+          <th class="th-cross">Iniciativa</th>
+          <th class="th-cross">Descrição</th>
+          <th class="th-cross">Responsável</th>
+          <th class="th-cross">Prazo</th>
+          <th class="th-cross">Status</th>
+          <th class="th-cross">Prioridade</th>
+          <th class="th-cross">Próximos Passos</th>
+        </tr></thead>
+        <tbody>
+          <tr class="sec sec-cross"><td colspan="7">🔬 Exames & Laboratório</td></tr>
+          <tr><td class="tc tc-cross">Exames Credenciados</td><td class="td">Faturamento de Exames imagem US e Tomografia, oftalmologia</td><td class="tr tr-cross">Bárbara Almeida</td><td class="tdate">30/06/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Conferir contratos de parcerias ativos, treinar equipe para venda</td></tr>
+          <tr><td class="tc tc-cross">Cross Selling Laboratoriais</td><td class="td">Buscar manualmente nas fichas os exames solicitados pelos médicos para oferecer orçamento e agendamento facilitado</td><td class="tr tr-cross">Equipe / IA</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Criar lista de Leads para exames mensal</td></tr>
+          <tr><td class="tc tc-cross">Cross Selling Laboratoriais</td><td class="td">Exames laboratoriais: orçamento por IA, coleta domiciliar, agendamento</td><td class="tr tr-cross">Bárbara / Gabriel</td><td class="tdate">30/06/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">ChatGPT de orçamento criado; evoluir e divulgar</td></tr>
+
+          <tr class="sec sec-cross"><td colspan="7">🏢 Ocupacional & NR1</td></tr>
+          <tr><td class="tc tc-cross">Cross Selling (Ocupacional)</td><td class="td">Serviços NR1: avaliar espaço de faturamento AssisteMed no piloto Grupo Ocupacional</td><td class="tr tr-cross">Bárbara Almeida</td><td class="tdate">30/06/2026</td><td><span class="sb s-plan-cross">📌 Planejado</span></td><td class="pm">Média</td><td class="tnext">Criar método de divulgação serviço NR1</td></tr>
+
+          <tr class="sec sec-cross"><td colspan="7">🩺 Especialidades & Procedimentos</td></tr>
+          <tr><td class="tc tc-cross">Especialidades</td><td class="td">Procedimentos por especialidades: Dermatologia / Estética (BotoxDay); Ginecologia (Agenda Dra Nathalia)</td><td class="tr tr-cross">Médicos / Bárbara</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pm">Média</td><td class="tnext">Avaliar e colocar em rota divulgação</td></tr>
+          <tr><td class="tc tc-cross">Especialidades Particular</td><td class="td">Limitar especialidades para atendimento PARTICULAR — fazer piloto (Geriatria)</td><td class="tr tr-cross">Bárbara Almeida</td><td class="tdate">31/05/2026</td><td><span class="sb s-plan-cross">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Manter pacientes antigos, criar regra</td></tr>
+
+          <tr class="sec sec-cross"><td colspan="7">🌿 Clínico Geral & Novos Produtos</td></tr>
+          <tr><td class="tc tc-cross">Procedimentos com Clínico Geral</td><td class="td">Criar campanha de Preventivo e integrar a consulta com clínico geral</td><td class="tr tr-cross">Sandra e Narzi</td><td class="tdate">31/05/2026</td><td><span class="sb s-plan-cross">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Retirar lista do SOC, fazer contato pacientes</td></tr>
+          <tr><td class="tc tc-cross">Novo Produto</td><td class="td">Linha de Obesidade (Acompanhamento senal, aplicação medicamento, plano alimentar, bioimpedância, combo com exames)</td><td class="tr tr-cross">Dra Kenia / Bárbara</td><td class="tdate">15/05/2026</td><td><span class="sb s-plan-cross">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Criar plano de divulgação, precificação (Aguardar Obra)</td></tr>
+          <tr><td class="tc tc-cross">Cross Selling Especialidades</td><td class="td">Serviços NR1: avaliar espaço de faturamento AssisteMed no piloto Grupo Ocupacional</td><td class="tr tr-cross">Bárbara Almeida</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pm">Média</td><td class="tnext">Avaliar e colocar em rota divulgação</td></tr>
+        </tbody>
+      </table>
+
+      <div class="pf pf-cross">
+        <div class="brand">ASSISTE MED · GRUPO OCUPACIONAL</div>
+        <div class="dt">Painel 2 de 3 · Cross Selling · Maio 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================
+       PAINEL 3 — VIDAS
+  ================================ -->
+  <div class="panel" id="panel-vidas">
+    <div class="panel-card">
+
+      <div class="ph ph-vidas">
+        <div class="ph-left">
+          <div class="ph-icon">🫀</div>
+          <div class="ph-title">
+            <h2>Gestão · Vidas</h2>
+            <p>AssisteMed · Grupo Ocupacional · Comercial & Captação</p>
+          </div>
+        </div>
+        <div class="ph-stats">
+          <div class="pstat"><div class="n">14</div><div class="l">Iniciativas</div></div>
+          <div class="pstat"><div class="n" style="color:#2DB085;">1</div><div class="l">Concluída</div></div>
+          <div class="pstat"><div class="n">6</div><div class="l">Em Andamento</div></div>
+          <div class="pstat"><div class="n" style="color:rgba(255,255,255,0.45);">7</div><div class="l">Planejadas</div></div>
+        </div>
+      </div>
+
+      <div class="subbar subbar-vidas">
+        <span class="tag">Status:</span>
+        <span class="sbadge b-em">⏳ Em andamento</span>
+        <span class="sbadge b-pl">📌 Planejado</span>
+        <span class="sbadge b-co">✅ Concluído</span>
+        <div style="flex:1"></div>
+        <span style="font-size:9.5px;color:rgba(14,61,47,0.45);font-style:italic;">Maio · Agosto 2026</span>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric"><div class="ico">📧</div><div><div class="mv">1.424</div><div class="ml">E-mails enviados · Planilha A<br><span>569 abertos · 4% conversão</span></div></div></div>
+        <div class="metric"><div class="ico">📬</div><div><div class="mv">409</div><div class="ml">E-mails enviados · Planilha B<br><span>109 abertos · 9% conversão</span></div></div></div>
+        <div class="metric"><div class="ico">🎯</div><div><div class="mv">14</div><div class="ml">Leads gerados (10 + 4)<br><span>40% sem plano na base</span></div></div></div>
+        <div class="metric"><div class="ico">✅</div><div><div class="mv">1</div><div class="ml">Item concluído<br><span>Acomp. Comercial — rito ativo</span></div></div></div>
+      </div>
+
+      <table>
+        <thead><tr>
+          <th class="th-vidas">Iniciativa</th>
+          <th class="th-vidas">Descrição</th>
+          <th class="th-vidas">Responsável</th>
+          <th class="th-vidas">Prazo</th>
+          <th class="th-vidas">Status</th>
+          <th class="th-vidas">Prioridade</th>
+          <th class="th-vidas">Próximos Passos</th>
+        </tr></thead>
+        <tbody>
+          <tr class="sec sec-vidas"><td colspan="7">💳 Cartão Plenitude & NPS</td></tr>
+          <tr><td class="tc tc-vidas">Cartão Plenitude</td><td class="td">Venda do Cartão Plenitude pela recepção no ato do atendimento (Treinamento)</td><td class="tr tr-vidas">Recepção</td><td class="tdate">Recorrente</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">Script de abordagem + lista oportunidades</td></tr>
+          <tr><td class="tc tc-vidas">Cartão Plenitude</td><td class="td">Oferta de 1ª mensalidade grátis conforme padrão plataforma Stripe</td><td class="tr tr-vidas">Bárbara Almeida</td><td class="tdate">31/05/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Validar padrão com financeiro, desenhar escopo testar piloto</td></tr>
+          <tr><td class="tc tc-vidas">NPS</td><td class="td">Pesquisa NPS para pacientes e para RH das empresas clientes</td><td class="tr tr-vidas">Bárbara / Sandra</td><td class="tdate">31/05/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">App criado; programar ao envio RH; Implantar NPS automatizado pós-consulta</td></tr>
+
+          <tr class="sec sec-vidas"><td colspan="7">🎯 Captação & Retenção</td></tr>
+          <tr><td class="tc tc-vidas">Busca Ativa Admitidos</td><td class="td">Buscar na base Ocupacional colaboradores não ativados clientes AssisteMed (SM, CAC, Normandy)</td><td class="tr tr-vidas">Isabela Financeiro</td><td class="tdate">30/05/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Orientar Isabela exportar lista; e-mail / mensagem</td></tr>
+          <tr><td class="tc tc-vidas">Retenção Dependentes</td><td class="td">Campanha Dependentes Recorrência — checar possibilidade de reativar Dependentes CAC</td><td class="tr tr-vidas">Bárbara Almeida</td><td class="tdate">30/05/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Verificar novas empresas, divulgar e migrar</td></tr>
+          <tr><td class="tc tc-vidas">Inadimplentes</td><td class="td">Buscar antigos clientes inativos e tentar reaver inadimplentes (reunião cobrança)</td><td class="tr tr-vidas">Bárbara / Sandra / Isabela</td><td class="tdate">30/06/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pm">Média</td><td class="tnext">Régua de cobrança + proposta de retorno</td></tr>
+          <tr><td class="tc tc-vidas">Acompanhamento Comercial</td><td class="td">Reunião Semanal de acompanhamento comercial com consultores (André)</td><td class="tr tr-vidas">André / Bárbara</td><td class="tdate">Toda segunda</td><td><span class="sb s-conc">✅ Concluído</span></td><td class="pa">Alta</td><td class="tnext">Rito já estabelecido — manter</td></tr>
+          <tr><td class="tc tc-vidas">Palestra e Treinamento</td><td class="td">Palestras como porta de entrada para captação (divulgação AssisteMed)</td><td class="tr tr-vidas">Bárbara</td><td class="tdate">30/06/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pm">Média</td><td class="tnext">Definir temas e empresas alvo, palestrantes e cobranças</td></tr>
+          <tr><td class="tc tc-vidas">Leads & Site</td><td class="td">Melhorar Site: botão 'Solicite Proposta' e divulgar exames e procedimentos realizados</td><td class="tr tr-vidas">UHURU / Bárbara</td><td class="tdate">30/06/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pa">Alta</td><td class="tnext">Avaliar botões do site — Andre Uhuru Sugeriu Novo Site</td></tr>
+
+          <tr class="sec sec-vidas"><td colspan="7">🏢 Leads Base Ocupacional</td></tr>
+          <tr><td class="tc tc-vidas">Leads Base Ocup.</td><td class="td">Filtrar formulários de visita técnica manual</td><td class="tr tr-vidas">Bárbara (Eng.)</td><td class="tdate">10/06/2026</td><td><span class="sb s-plan-vidas">📌 Planejado</span></td><td class="pm">Média</td><td class="tnext">Consultar Manualmente, incluir lista comercial</td></tr>
+          <tr><td class="tc tc-vidas">Leads Base Ocup.</td><td class="td">Filtrar no Plumes novos clientes sem plano</td><td class="tr tr-vidas">Comercial / Bárbara</td><td class="tdate">25/08/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pm">Média</td><td class="tnext">Não foi incluído no formulário - Sthefani solicitou hoje</td></tr>
+          <tr><td class="tc tc-vidas">Leads Base Ocup.</td><td class="td">Pesquisa PlanilhaNr1 — Coordl/Uhuru dispara e-mail marketing (1424 env. - 569 abertos)</td><td class="tr tr-vidas">Uhuru / Bárbara</td><td class="tdate">31/05/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">40% Sem Plano (230) Empresas = <span class="hl-g">4%</span> (10 leads)</td></tr>
+          <tr><td class="tc tc-vidas">Leads Base Ocup.</td><td class="td">Envio e-mail Planilha B — a partir de 51 (409 enviados - 109 abertos)</td><td class="tr tr-vidas">Uhuru / Bárbara</td><td class="tdate">31/05/2026</td><td><span class="sb s-em">⏳ Em andamento</span></td><td class="pa">Alta</td><td class="tnext">40% Sem Plano (45) Empresas = <span class="hl-g">9%</span> (4 leads)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="pf pf-vidas">
+        <div class="brand">ASSISTE MED · GRUPO OCUPACIONAL</div>
+        <div class="dt">Painel 3 de 3 · Vidas · Maio 2026</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end panels-wrap -->
+
+<script>
+  const tabs = document.querySelectorAll('.nav-tab');
+  const panels = document.querySelectorAll('.panel');
+  const wrap = document.getElementById('panels-wrap');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      document.getElementById('panel-' + target).classList.add('active');
+      wrap.scrollTop = 0;
+    });
+  });
+</script>
+</body>
+</html>
