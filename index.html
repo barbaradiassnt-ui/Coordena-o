@@ -3,650 +3,645 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escopo de Projeto · AssisteMed</title>
+<title>AssisteMed — Fechamento Julho 2026</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy: #1A2332; --navy-mid: #243044; --navy-light: #2E3D55;
-    --lime: #B8D432; --white: #FFFFFF; --gray: #8A92A0;
-    --text-muted: rgba(255,255,255,0.75);
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; }
-
-  .hero { background: var(--navy); padding: 72px 40px 56px; max-width: 960px; margin: 0 auto; }
-  .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,212,50,0.15); border: 1px solid rgba(184,212,50,0.35); color: var(--lime); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 28px; }
-  .badge::before { content: ''; width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
-  .hero h1 { font-size: clamp(28px,5vw,46px); font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
-  .hero h1 span { color: var(--lime); }
-  .hero-sub { font-size: 15px; color: var(--gray); line-height: 1.7; max-width: 600px; margin-bottom: 40px; }
-  .hero-meta { display: flex; gap: 32px; flex-wrap: wrap; }
-  .meta-item { display: flex; flex-direction: column; gap: 4px; }
-  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--gray); font-weight: 600; }
-  .meta-val { font-size: 14px; font-weight: 500; }
-  .divider-lime { width: 100%; height: 2px; background: linear-gradient(90deg, var(--lime) 0%, transparent 70%); }
-
-  nav { background: var(--navy-mid); border-bottom: 1px solid rgba(255,255,255,0.07); position: sticky; top: 0; z-index: 100; }
-  .nav-inner { max-width: 960px; margin: 0 auto; padding: 0 40px; display: flex; overflow-x: auto; }
-  .nav-inner a { text-decoration: none; color: var(--gray); font-size: 13px; font-weight: 500; padding: 14px 16px; white-space: nowrap; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
-  .nav-inner a:hover { color: var(--white); border-color: var(--lime); }
-
-  main { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
-  .section { padding: 56px 0 0; }
-  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
-  .section-num { width: 36px; height: 36px; background: rgba(184,212,50,0.12); border: 1px solid rgba(184,212,50,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--lime); flex-shrink: 0; }
-  .section-title { font-size: 20px; font-weight: 600; }
-
-  .card { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; }
-  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-
-  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .bullet-list li { display: flex; gap: 12px; font-size: 14px; color: var(--text-muted); line-height: 1.55; }
-  .bullet-list li::before { content: ''; width: 6px; height: 6px; background: var(--lime); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
-
-  .module { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
-  .module.lovable { border-color: rgba(184,212,50,0.3); }
-  .module-header { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.07); flex-wrap: wrap; }
-  .module.lovable .module-header { background: rgba(184,212,50,0.05); }
-  .module-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--navy); background: var(--lime); padding: 3px 10px; border-radius: 4px; flex-shrink: 0; }
-  .module-tag.novo::after { content: ' ★'; }
-  .module-tag.opcional { background: rgba(184,212,50,0.2); color: var(--lime); border: 1px solid rgba(184,212,50,0.4); }
-  .module-title { font-size: 15px; font-weight: 600; }
-  .module-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
-  .module-body { padding: 20px 24px; }
-
-  .lovable-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(184,212,50,0.12); border: 1px solid rgba(184,212,50,0.3); color: var(--lime); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-left: auto; }
-
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead tr { background: rgba(184,212,50,0.1); }
-  thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--lime); border-bottom: 1px solid rgba(184,212,50,0.25); white-space: nowrap; }
-  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
-  tbody td { padding: 12px 16px; color: var(--text-muted); line-height: 1.5; vertical-align: top; }
-  tbody td:first-child { color: var(--white); font-weight: 500; }
-  .total td { color: var(--lime) !important; font-weight: 700 !important; }
-  .compare .yes { color: #6EE7B7; }
-  .compare .no { color: rgba(255,255,255,0.3); }
-  .compare .partial { color: #FCD34D; }
-
-  .cost-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .cost-box { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 24px; }
-  .cost-box.highlight { border-color: rgba(184,212,50,0.3); background: rgba(184,212,50,0.06); }
-  .cost-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--gray); font-weight: 600; margin-bottom: 8px; }
-  .cost-value { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
-  .cost-value span { font-size: 15px; font-weight: 400; color: var(--gray); }
-  .cost-sub { font-size: 12px; color: var(--gray); }
-
-  .timeline { display: flex; flex-direction: column; }
-  .tl-item { display: grid; grid-template-columns: 72px 1fr; }
-  .tl-left { display: flex; flex-direction: column; align-items: center; padding-top: 18px; }
-  .tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--lime); border: 2px solid var(--lime); flex-shrink: 0; }
-  .tl-dot.opt { background: rgba(184,212,50,0.3); border-color: rgba(184,212,50,0.5); }
-  .tl-line { width: 2px; flex: 1; background: rgba(255,255,255,0.07); margin: 4px 0; }
-  .tl-item:last-child .tl-line { display: none; }
-  .tl-right { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px 20px; margin: 6px 0 6px 16px; }
-  .tl-right.opt { border-color: rgba(184,212,50,0.2); background: rgba(184,212,50,0.04); }
-  .tl-week { font-size: 11px; font-weight: 700; color: var(--lime); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
-  .tl-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .tl-note { font-size: 12px; color: var(--gray); }
-
-  .steps { display: flex; flex-direction: column; gap: 12px; }
-  .step { display: flex; gap: 16px; align-items: flex-start; background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px 20px; }
-  .step-num { width: 28px; height: 28px; background: var(--lime); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--navy); flex-shrink: 0; }
-  .step-text { font-size: 14px; color: var(--text-muted); line-height: 1.55; padding-top: 3px; }
-
-  .out-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .out-list li { display: flex; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.55; }
-  .out-list li::before { content: '—'; color: var(--gray); flex-shrink: 0; }
-
-  .context-box { background: rgba(184,212,50,0.06); border: 1px solid rgba(184,212,50,0.2); border-radius: 12px; padding: 24px 28px; margin-top: 16px; }
-  .context-box p { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 10px; }
-  .context-box p:last-child { margin-bottom: 0; }
-
-  .lovable-box { background: rgba(184,212,50,0.05); border: 1px solid rgba(184,212,50,0.25); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; }
-  .lovable-box h3 { font-size: 15px; font-weight: 600; color: var(--lime); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .lovable-box p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 10px; }
-  .lovable-box p:last-child { margin-bottom: 0; }
-
-  .col-label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: 12px; }
-  .col-label.lime { color: var(--lime); }
-  .col-label.gray { color: var(--gray); }
-
-  .tag-novo { display: inline-block; font-size: 10px; font-weight: 700; background: rgba(184,212,50,0.15); color: var(--lime); border: 1px solid rgba(184,212,50,0.3); padding: 1px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
-  .tag-opt { display: inline-block; font-size: 10px; font-weight: 700; background: rgba(184,212,50,0.08); color: var(--lime); border: 1px solid rgba(184,212,50,0.2); padding: 1px 7px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
-
-  footer { background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 40px; text-align: center; }
-  footer p { font-size: 13px; color: var(--gray); }
-  footer strong { color: rgba(255,255,255,0.6); }
-
-  @media (max-width: 640px) {
-    .hero { padding: 48px 20px 40px; }
-    main { padding: 0 20px 60px; }
-    .card-grid, .cost-hero { grid-template-columns: 1fr; }
-    .nav-inner { padding: 0 20px; }
-    footer { padding: 24px 20px; }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;700;800&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0B3530;--bg2:#082E29;--card:#0F4237;--card2:#134D47;
+  --teal:#1DB899;--lime:#6DC044;--white:#FFFFFF;--off:#C8E8E3;--muted:#7BBFB5;
+  --amber:#F5A623;--red:#E85555;--border:#1A6058;--navy:#061E1B;--purple:#9333EA;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min-height:100vh}
+.topbar{background:var(--bg);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;border-bottom:1px solid var(--border);box-shadow:0 2px 24px rgba(0,0,0,.4)}
+.brand-name{font-family:'Sora',sans-serif;font-size:18px;font-weight:800}.brand-name em{color:var(--teal);font-style:normal}
+.brand-slogan{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.topbar-right{text-align:right;font-size:11px;color:var(--muted);line-height:1.6}
+.topbar-right strong{color:var(--white);display:block;font-size:12px}
+.nav{background:var(--bg);display:flex;padding:0 48px;border-bottom:1px solid var(--border);overflow-x:auto;position:sticky;top:64px;z-index:190}
+.nav::-webkit-scrollbar{display:none}
+.tab{padding:13px 20px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:.18s;white-space:nowrap;user-select:none;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--white)}.tab.on{color:var(--white);border-bottom-color:var(--lime)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.main{padding:32px 48px 80px;max-width:1440px;margin:0 auto}
+.panel{display:none;animation:fadeUp .2s ease}.panel.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* HERO */
+.hero{background:var(--bg);border-radius:16px;padding:48px 56px;margin-bottom:24px;position:relative;overflow:hidden;border:1px solid var(--border)}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:rgba(29,184,153,.05);pointer-events:none}
+.hero-eye{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.hero-slogan{font-family:'Sora',sans-serif;font-size:54px;font-weight:900;line-height:1.0;margin-bottom:10px;letter-spacing:-1.5px}
+.hero-slogan span{color:var(--teal)}
+.hero-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap}
+.hb{padding:6px 16px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.5px}
+.hb.teal{background:rgba(29,184,153,.15);color:var(--teal);border:1px solid rgba(29,184,153,.3)}
+.hb.lime{background:rgba(109,192,68,.15);color:var(--lime);border:1px solid rgba(109,192,68,.3)}
+.hb.amber{background:rgba(245,166,35,.15);color:var(--amber);border:1px solid rgba(245,166,35,.3)}
+.hb.red{background:rgba(232,85,85,.15);color:var(--red);border:1px solid rgba(232,85,85,.3)}
+.hb.purple{background:rgba(147,51,234,.15);color:var(--purple);border:1px solid rgba(147,51,234,.3)}
+/* META */
+.meta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.mc{background:var(--card);border-radius:14px;padding:22px 26px;border:1px solid var(--border);border-top:4px solid}
+.mc.teal{border-top-color:var(--teal)}.mc.lime{border-top-color:var(--lime)}.mc.amber{border-top-color:var(--amber)}
+.mc-icon{font-size:22px;margin-bottom:8px}
+.mc-eye{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.mc-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;line-height:1;margin-bottom:4px}
+.mc.teal .mc-val{color:var(--teal)}.mc.lime .mc-val{color:var(--lime)}.mc.amber .mc-val{color:var(--amber)}
+.mc-desc{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+.brow{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px}
+.bbg{height:5px;background:var(--bg2);border-radius:99px;overflow:hidden}
+.bfill{height:100%;border-radius:99px}
+.mc.teal .bfill{background:var(--teal)}.mc.lime .bfill{background:var(--lime)}.mc.amber .bfill{background:var(--amber)}
+/* STAT */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat{background:var(--card);border-radius:12px;padding:16px 20px;text-align:center;border:1px solid var(--border)}
+.stat-n{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;line-height:1;margin-bottom:4px}
+.stat-l{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.5px}
+.sg .stat-n{color:var(--lime)}.sa .stat-n{color:var(--amber)}.sb .stat-n{color:var(--teal)}.sw .stat-n{color:var(--white)}.sr .stat-n{color:var(--red)}
+/* ALERT */
+.alert{border-radius:10px;padding:14px 18px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;border:1px solid}
+.alert.red{background:rgba(232,85,85,.08);border-color:rgba(232,85,85,.3)}
+.alert.amber{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.3)}
+.alert.green{background:rgba(109,192,68,.08);border-color:rgba(109,192,68,.3)}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert-title{font-size:12px;font-weight:700;margin-bottom:3px}
+.alert.red .alert-title{color:var(--red)}.alert.amber .alert-title{color:var(--amber)}.alert.green .alert-title{color:var(--lime)}
+.alert-text{font-size:11px;color:var(--muted);line-height:1.6}
+/* DIV */
+.div{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:24px 0 14px;display:flex;align-items:center;gap:12px}
+.div::after{content:'';flex:1;height:1px;background:var(--border)}
+/* HL */
+.hl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.hlc{background:var(--card);border-radius:12px;padding:18px 22px;border-left:4px solid;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hlc.done{border-left-color:var(--lime)}.hlc.warn{border-left-color:var(--amber)}.hlc.info{border-left-color:var(--teal)}.hlc.red{border-left-color:var(--red)}
+.hl-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.hlc.done .hl-label{color:var(--lime)}.hlc.warn .hl-label{color:var(--amber)}.hlc.info .hl-label{color:var(--teal)}.hlc.red .hl-label{color:var(--red)}
+.hl-title{font-weight:700;font-size:13px;margin-bottom:5px}
+.hl-text{font-size:12px;color:var(--muted);line-height:1.65}
+/* FH */
+.fh{border-radius:14px;padding:26px 32px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border:1px solid var(--border)}
+.fh.teal{background:linear-gradient(130deg,#0e5c4d,#093d34)}
+.fh.amber{background:linear-gradient(130deg,#5c3a0e,#3d2509)}
+.fh.lime{background:linear-gradient(130deg,#2a5c0e,#1c3d09)}
+.fh.purple{background:linear-gradient(130deg,#3b1a5c,#270940)}
+.fh-icon{font-size:26px;margin-bottom:6px}
+.fh-title{font-family:'Sora',sans-serif;font-size:21px;font-weight:800;margin-bottom:4px}
+.fh-sub{font-size:11px;color:var(--muted)}
+.fh-r{display:flex;gap:10px;flex-shrink:0}
+.fh-stat{background:rgba(0,0,0,.25);border-radius:10px;padding:10px 14px;text-align:center;min-width:70px}
+.fh-stat-n{font-size:18px;font-weight:800;line-height:1}
+.fh-stat-l{font-size:8px;opacity:.7;font-weight:700;letter-spacing:.5px;margin-top:3px}
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.acard{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:transform .15s,box-shadow .15s}
+.acard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.acard-stripe{height:4px}
+.sd{background:var(--lime)}.sg2{background:var(--amber)}.sp{background:var(--teal)}.sps{background:var(--red)}
+.acard-body{padding:16px 18px 12px}
+.acard-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:7px}
+.acard-title{font-weight:700;font-size:12.5px;line-height:1.35;flex:1}
+.pill{font-size:9px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap;flex-shrink:0}
+.pd{background:rgba(109,192,68,.2);color:var(--lime)}.pg{background:rgba(245,166,35,.2);color:var(--amber)}
+.pp{background:rgba(29,184,153,.2);color:var(--teal)}.pps{background:rgba(232,85,85,.2);color:var(--red)}
+.acard-desc{font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:10px}
+.acard-obs{margin:0 18px 12px;padding:8px 12px;background:rgba(245,166,35,.08);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;font-size:10.5px;color:#D4A017;line-height:1.6}
+.acard-obs strong{display:block;font-size:9px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:2px;color:var(--amber)}
+.acard-foot{display:flex;align-items:center;justify-content:space-between;padding:9px 18px;background:var(--bg);border-top:1px solid var(--border);flex-wrap:wrap;gap:6px}
+.cf-resp{font-size:10px;font-weight:600}.cf-resp span{color:var(--muted);font-weight:400}
+.cf-right{display:flex;align-items:center;gap:8px}
+.cf-date{font-size:10px;color:var(--muted)}
+.cf-link{font-size:10px;font-weight:700;color:var(--lime);text-decoration:none}.cf-link:hover{text-decoration:underline}
+/* OCUP */
+.ocup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.ocup-card{background:var(--card);border-radius:12px;padding:18px 20px;border:1px solid var(--border);position:relative}
+.ocup-card.real{border-color:var(--lime);background:var(--card2)}
+.ocup-card.real::after{content:'✓ GestorMed';position:absolute;top:8px;right:10px;font-size:8px;font-weight:700;color:var(--lime)}
+.ocup-mes{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+.ocup-val{font-family:'Sora',sans-serif;font-size:36px;font-weight:900;line-height:1}
+.ocup-sub{font-size:10px;color:var(--muted);margin-top:4px}
+/* VIDAS */
+.vp-bar-bg{height:12px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:14px}
+.vp-bar-fill{height:100%;background:var(--lime);border-radius:99px}
+.vp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.vp-stat{text-align:center;padding:14px;background:var(--bg2);border-radius:10px}
+.vp-stat-n{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;margin-bottom:2px}
+.vp-stat-l{font-size:10px;color:var(--muted);font-weight:600}
+/* CHART */
+.bc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bc-label{font-size:10px;color:var(--muted);width:28px;text-align:right;flex-shrink:0}
+.bc-bar-bg{flex:1;height:26px;background:var(--bg2);border-radius:6px;overflow:hidden}
+.bc-bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:10px;font-weight:700;color:var(--navy);white-space:nowrap;transition:width .8s ease}
+.bc-pct{font-size:11px;font-weight:700;width:38px;text-align:right;flex-shrink:0}
+/* EQ */
+.eq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.eq-card{background:var(--card);border-radius:12px;padding:16px 18px;border:1px solid var(--border)}
+.eq-label{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.eq-val{font-family:'Sora',sans-serif;font-size:18px;font-weight:800}
+.eq-sub{font-size:10px;color:var(--muted);margin-top:4px}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--bg);color:var(--muted);font-weight:700;padding:10px 14px;text-align:left;letter-spacing:.5px;font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--white)}
+.tbl tr:hover td{background:rgba(29,184,153,.04)}
+.tbl tr.alert-row td{background:rgba(232,85,85,.06)}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .meta-row,.stat-row,.ocup-grid,.eq-grid,.hl-grid,.vp-stats{grid-template-columns:1fr 1fr}
+  .fh-r{display:none}
+  .main,.topbar,.nav{padding-left:16px;padding-right:16px}
+}
 </style>
 </head>
 <body>
+<div class="topbar">
+  <div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:22px">❤️</span>
+      <span class="brand-name">Assiste<em>Med</em></span>
+    </div>
+    <div class="brand-slogan">Medicina Para Todos</div>
+  </div>
+  <div class="topbar-right">
+    <strong>Fechamento Julho 2026</strong>
+    Bárbara Almeida · Coordenação AssisteMed
+  </div>
+</div>
 
-<div class="hero">
-  <div class="badge">Escopo de Projeto · v3.0</div>
-  <h1>Sistema de Atendimento<br>Unificado via <span>WhatsApp</span></h1>
-  <p class="hero-sub">Centralização do atendimento com IA, agendamento integrado ao SOC, gestão humana em tempo real e painéis visuais desenvolvidos no Lovable para toda a rede AssisteMed.</p>
-  <div class="hero-meta">
-    <div class="meta-item">
-      <span class="meta-label">Organização</span>
-      <span class="meta-val">AssisteMed / Grupo Ocupacional</span>
+<div class="nav">
+  <div class="tab on" onclick="go('overview',this)">📋 Visão Geral</div>
+  <div class="tab" onclick="go('alertas',this)">🚨 Alertas</div>
+  <div class="tab" onclick="go('equilibrio',this)"><div class="dot" style="background:var(--amber)"></div>Ponto de Equilíbrio</div>
+  <div class="tab" onclick="go('ocupacao',this)"><div class="dot" style="background:var(--lime)"></div>Ocupação</div>
+  <div class="tab" onclick="go('cross',this)"><div class="dot" style="background:var(--teal)"></div>Cross Selling</div>
+  <div class="tab" onclick="go('vidas',this)"><div class="dot" style="background:var(--lime)"></div>Vidas</div>
+</div>
+
+<div class="main">
+
+<!-- VISÃO GERAL -->
+<div class="panel on" id="p-overview">
+  <div class="hero">
+    <div class="hero-eye">Fechamento Julho 2026 · AssisteMed</div>
+    <div class="hero-slogan">Medicina <span>Para Todos</span></div>
+    <div class="hero-sub">Indicadores estratégicos · 3 frentes · Bárbara Almeida · 24/08/2026</div>
+    <div class="hero-badges">
+      <span class="hb lime">Ocupação 78,8% ↑</span>
+      <span class="hb teal">Cross Selling R$ 38.089</span>
+      <span class="hb lime">660 Vidas Sem Pacto +1,7% ↑</span>
+      <span class="hb teal">1.384 Vidas Totais</span>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Responsável</span>
-      <span class="meta-val">Bárbara Almeida — Coordenadora Administrativa</span>
+  </div>
+
+  <div class="meta-row">
+    <div class="mc teal">
+      <div class="mc-icon">🫀</div>
+      <div class="mc-eye">Vidas</div>
+      <div class="mc-val">1.384</div>
+      <div class="mc-desc">660 sem Pacto ↑ · Meta: 2.000 · <strong style="color:var(--lime)">Sem Pacto +1,7% (649→660) — é aqui que movemos o ponteiro</strong></div>
+      <div class="brow"><span>Atingimento meta</span><span style="color:var(--teal)">69,2%</span></div>
+      <div class="bbg"><div class="bfill" style="width:69.2%"></div></div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Versão</span>
-      <span class="meta-val">3.0 · Junho de 2026</span>
+    <div class="mc lime">
+      <div class="mc-icon">📅</div>
+      <div class="mc-eye">Ocupação</div>
+      <div class="mc-val">78,8%</div>
+      <div class="mc-desc">Julho · GestorMed · Meta: &gt;80% · <strong style="color:var(--lime)">+0,5pp vs junho</strong></div>
+      <div class="brow"><span>Atingimento meta</span><span style="color:var(--lime)">98,5%</span></div>
+      <div class="bbg"><div class="bfill" style="width:98.5%"></div></div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Prazo estimado</span>
-      <span class="meta-val">9 semanas (core) + Lovable opcional</span>
+    <div class="mc amber">
+      <div class="mc-icon">🧪</div>
+      <div class="mc-eye">Cross Selling + Consultas</div>
+      <div class="mc-val">R$ 38.089</div>
+      <div class="mc-desc">Julho · Meta: R$ 45.000 · <strong style="color:var(--lime)">+3% vs junho</strong></div>
+      <div class="brow"><span>Atingimento meta</span><span style="color:var(--amber)">84,6%</span></div>
+      <div class="bbg"><div class="bfill" style="width:84.6%"></div></div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat sb"><div class="stat-n">R$ 137.155</div><div class="stat-l">FATURAMENTO JULHO</div></div>
+    <div class="stat sg"><div class="stat-n">320</div><div class="stat-l">CONSULTAS PARCEIROS ↑</div></div>
+    <div class="stat sa"><div class="stat-n">875</div><div class="stat-l">PACIENTES ATENDIDOS</div></div>
+    <div class="stat sg"><div class="stat-n">660</div><div class="stat-l">VIDAS SEM PACTO ↑</div></div>
+  </div>
+
+  <div class="div">Destaques do período</div>
+  <div class="hl-grid">
+    <div class="hlc done">
+      <div class="hl-label">✅ Parceiros crescendo</div>
+      <div class="hl-title">Consultas parceiros: 268 (jun) → 320 (jul) +19,4%</div>
+      <div class="hl-text">Metropax com bom fluxo de agendamentos. Ducash com contrato assinado. Crescimento consistente refletindo no faturamento Particular/Credenciadas (R$ 27.450 em julho).</div>
+    </div>
+    <div class="hlc done">
+      <div class="hl-label">✅ Cross Selling em alta</div>
+      <div class="hl-title">R$ 38.089 em julho — melhor resultado desde março</div>
+      <div class="hl-text">Crescimento de 3% vs junho. Ginecologia lidera (30,9% / R$ 3.286), seguida de Exames Particulares (20,3%) e Ortopedia (12,5%). App de orçamento por IA funcionando bem.</div>
+    </div>
+    <div class="hlc done">
+      <div class="hl-label">✅ Vidas Sem Pacto crescendo</div>
+      <div class="hl-title">Sem Pacto: 649 (jan) → 660 (jul) · <span style="color:var(--lime)">+1,7%</span> — é aqui que movemos o ponteiro</div>
+      <div class="hl-text">Crescimento orgânico consistente das vidas independentes. SDR ativo, parcerias B2B, associações e ação dos Finados com Metropax são as apostas para acelerar esse número.</div>
+    </div>
+    <div class="hlc warn">
+      <div class="hl-label">⚠️ Google — 1 estrela perdida</div>
+      <div class="hl-title">Reclamações são da Ocupacional, não da AssisteMed</div>
+      <div class="hl-text">Demora no atendimento da Ocupacional impactando avaliação geral. AssisteMed continua recebendo elogios. Porém, como a marca é compartilhada, há risco de imagem. Ação de comunicação necessária.</div>
     </div>
   </div>
 </div>
-<div class="divider-lime"></div>
 
-<nav>
-  <div class="nav-inner">
-    <a href="#visao">Visão geral</a>
-    <a href="#lovable">Lovable</a>
-    <a href="#arquitetura">Arquitetura</a>
-    <a href="#modulos">Módulos</a>
-    <a href="#cronograma">Cronograma</a>
-    <a href="#investimento">Investimento</a>
-    <a href="#fora">Fora do escopo</a>
-    <a href="#proximos">Próximos passos</a>
+<!-- ALERTAS -->
+<div class="panel" id="p-alertas">
+  <div class="fh purple">
+    <div>
+      <div class="fh-icon">🚨</div>
+      <div class="fh-title">Alertas Estratégicos — Julho 2026</div>
+      <div class="fh-sub">Sinais que precisam de atenção e decisão da diretoria</div>
+    </div>
+    <div class="fh-r">
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--red)">3</div><div class="fh-stat-l">CRÍTICOS</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--amber)">3</div><div class="fh-stat-l">ATENÇÃO</div></div>
+    </div>
   </div>
-</nav>
 
-<main>
-
-  <!-- 1. VISÃO GERAL -->
-  <section class="section" id="visao">
-    <div class="section-header">
-      <div class="section-num">1</div>
-      <h2 class="section-title">Visão geral do projeto</h2>
+  <div class="div">🔴 Críticos — Ação Imediata</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+    <div class="alert green">
+      <div class="alert-icon">🎯</div>
+      <div>
+        <div class="alert-title">Vidas Sem Pacto +1,7% — aqui está o ponteiro a mover</div>
+        <div class="alert-text">De 649 (jan) para 660 (jul) — crescimento de +1,7% no semestre, orgânico e consistente. SDR ativo com lista de 50 empresas pronta, parcerias B2B com sindicatos, ação dos Finados com Metropax e Ducash com contrato assinado. Esse número precisa acelerar: cada ação de captação agora tem impacto direto e duradouro.</div>
+      </div>
     </div>
-    <div class="card">
-      <p style="font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:24px;">
-        Centralizar toda a comunicação com pacientes em um único número de WhatsApp, com atendimento automático por inteligência artificial treinável, agendamento integrado ao sistema SOC, handoff para equipe humana, automações de confirmação e NPS, e painéis visuais desenvolvidos no Lovable para gestão e acompanhamento de métricas.
-      </p>
-      <div class="card-grid">
-        <div>
-          <p class="col-label gray">Problema atual</p>
-          <ul class="bullet-list">
-            <li>Atendimento descentralizado entre atendentes</li>
-            <li>Pacientes sem resposta imediata — grande fluxo e fora do horário de expediente</li>
-            <li>Agendamento limitado a equipe reduzida</li>
-            <li>Sem histórico centralizado de conversas</li>
-            <li>Confirmações e NPS realizados manualmente pela equipe</li>
-            <li>Sem painel de métricas para gestão do atendimento</li>
-          </ul>
+    <div class="alert red">
+      <div class="alert-icon">🔴</div>
+      <div>
+        <div class="alert-title">BDR sem plano de carreira e comissão definidos</div>
+        <div class="alert-text">Bernardo (SDR Ativo Comercial) está em campo sem estrutura de incentivo formal. Risco de desmotivação e perda do profissional. Definir: será comissão por venda fechada? Por reunião efetiva agendada? Por volume de vidas ativadas? Decisão urgente da Coordenação e Diretoria.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div">🟡 Atenção — Monitorar</div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div class="alert amber">
+      <div class="alert-icon">🟡</div>
+      <div>
+        <div class="alert-title">Ocupação 78,8% — 1,2pp abaixo da meta de 80%</div>
+        <div class="alert-text">Crescendo consistentemente (60% jan → 78,8% jul). Parceiros contribuindo com 320 consultas em julho (+19% vs junho). Lista de espera automatizada em andamento pode ser o fator decisivo para cruzar os 80%.</div>
+      </div>
+    </div>
+    <div class="alert amber">
+      <div class="alert-icon">🟡</div>
+      <div>
+        <div class="alert-title">Google perdeu 1 estrela — reclamações da Ocupacional</div>
+        <div class="alert-text">AssisteMed continua com elogios, mas a marca compartilhada com Ocupacional gera risco de imagem. Sugestão: campanha ativa de coleta de avaliações positivas dos pacientes AssisteMed para compensar e criar separação de percepção.</div>
+      </div>
+    </div>
+    <div class="alert amber">
+      <div class="alert-icon">🟡</div>
+      <div>
+        <div class="alert-title">Vidas Sem Pacto estagnadas (~650–685 há 7 meses)</div>
+        <div class="alert-text">O Sem Pacto oscila mas não cresce. SDR, associações, parceiros B2B e ações de marketing são as apostas. Ação dos Finados com Metropax em 02/11 pode ser um ponto de inflexão. Monitorar de perto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI BDR -->
+  <div class="div">🆕 Novo KPI — Plano de Carreira BDR</div>
+  <div style="background:var(--card);border-radius:12px;padding:22px 24px;border:1px solid var(--purple)">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <span style="font-size:20px">🎯</span>
+      <div>
+        <div style="font-weight:700;font-size:14px">Avaliar Plano de Carreira e Comissão — Função BDR</div>
+        <div style="font-size:11px;color:var(--muted)">Resp: Bárbara / Coordenação · Prazo: A definir · Prioridade: 🔴 Alta</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--off);margin-bottom:16px">Como será estruturado o incentivo do BDR (Bernardo)? Definir o modelo antes que o profissional desmotive.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div style="background:var(--bg2);border-radius:10px;padding:14px;border:1px solid var(--border)">
+        <div style="font-size:10px;font-weight:700;color:var(--purple);letter-spacing:1px;margin-bottom:6px">OPÇÃO A</div>
+        <div style="font-size:12px;font-weight:600;margin-bottom:4px">Comissão por Venda</div>
+        <div style="font-size:11px;color:var(--muted)">% fixo por contrato fechado. Incentiva fechamento mas pode gerar foco apenas em grandes contas.</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:10px;padding:14px;border:1px solid var(--border)">
+        <div style="font-size:10px;font-weight:700;color:var(--amber);letter-spacing:1px;margin-bottom:6px">OPÇÃO B</div>
+        <div style="font-size:12px;font-weight:600;margin-bottom:4px">Comissão por Reunião Efetiva</div>
+        <div style="font-size:11px;color:var(--muted)">Valor fixo por reunião realizada com decisor. Incentiva volume de prospecção e disciplina comercial.</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:10px;padding:14px;border:1px solid var(--border)">
+        <div style="font-size:10px;font-weight:700;color:var(--lime);letter-spacing:1px;margin-bottom:6px">OPÇÃO C</div>
+        <div style="font-size:12px;font-weight:600;margin-bottom:4px">Comissão Mista</div>
+        <div style="font-size:11px;color:var(--muted)">Valor por reunião + bônus por vidas ativadas. Equilibra processo e resultado. Modelo mais completo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EQUILÍBRIO -->
+<div class="panel" id="p-equilibrio">
+  <div class="fh amber">
+    <div>
+      <div class="fh-icon">⚖️</div>
+      <div class="fh-title">Ponto de Equilíbrio Sem Pacto</div>
+      <div class="fh-sub">Dependência do contrato Pacto e caminho para autonomia financeira</div>
+    </div>
+    <div class="fh-r">
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--red)">40%</div><div class="fh-stat-l">DEPENDE PACTO</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--amber)">43%</div><div class="fh-stat-l">PROG. META</div></div>
+    </div>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card"><div class="eq-label">Faturamento Total Julho</div><div class="eq-val">R$ 137.155</div><div class="eq-sub">+R$ 3.073 vs junho</div></div>
+    <div class="eq-card" style="border-color:var(--red)"><div class="eq-label">Faturamento com Pacto</div><div class="eq-val" style="color:var(--red)">R$ 55.267</div><div class="eq-sub">40% do total</div></div>
+    <div class="eq-card" style="border-color:var(--amber)"><div class="eq-label">Faturamento Sem Pacto</div><div class="eq-val" style="color:var(--amber)">R$ 43.800</div><div class="eq-sub">GAP: R$ 58.200 abaixo da meta</div></div>
+    <div class="eq-card" style="border-color:var(--lime)"><div class="eq-label">Ponto de Equilíbrio Meta</div><div class="eq-val" style="color:var(--lime)">R$ 102.000</div><div class="eq-sub">Faturamento mínimo sem Pacto</div></div>
+  </div>
+  <div style="background:var(--card);border-radius:12px;padding:18px 22px;border:1px solid var(--border);margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px"><span>Faturamento Sem Pacto — Progresso para o Ponto de Equilíbrio</span><span style="color:var(--amber)">43%</span></div>
+    <div style="position:relative;height:14px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:4px">
+      <div style="height:100%;width:43%;background:var(--amber);border-radius:99px;display:flex;align-items:center;padding-left:12px;font-size:9px;font-weight:700;color:var(--navy)">R$ 43.800</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:16px"><span>R$ 0</span><span>Meta: R$ 102.000</span></div>
+
+    <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px">
+      <span>Sem Pacto <span style="color:var(--teal)">+ Cross Selling + Consultas</span></span>
+      <span style="color:var(--lime)">77,3%</span>
+    </div>
+    <div style="position:relative;height:14px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:4px">
+      <div style="height:100%;width:77.3%;background:linear-gradient(90deg,var(--amber) 0%,var(--teal) 100%);border-radius:99px;display:flex;align-items:center;padding-left:12px;font-size:9px;font-weight:700;color:var(--navy)">R$ 78.888 · Faltam R$ 23.112</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px"><span>R$ 0</span><span>Meta: R$ 102.000</span></div>
+    <div style="display:flex;gap:16px;margin-top:10px">
+      <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:3px;background:var(--amber)"></div><span style="font-size:10px;color:var(--muted)">Sem Pacto: R$ 43.800</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:3px;background:var(--teal)"></div><span style="font-size:10px;color:var(--muted)">Cross Selling + Consultas: R$ 35.088</span></div>
+    </div>
+  </div>
+
+  <div class="div">🎯 Meta Sem Pacto — Onde está a oportunidade</div>
+  <div style="background:rgba(109,192,68,.06);border-radius:12px;padding:20px 24px;border:1px solid rgba(109,192,68,.2);margin-bottom:16px">
+    <div style="font-size:12px;font-weight:700;color:var(--lime);margin-bottom:16px">Crescimento Sem Pacto: 649 → 660 vidas · <span style="background:rgba(109,192,68,.2);padding:2px 10px;border-radius:99px">+1,7% no semestre</span> · Meta: 1.000 vidas em Dezembro</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:12px">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">SETEMBRO</div>
+        <div style="font-size:22px;font-weight:800;color:var(--teal)">745</div>
+        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
+      </div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:12px">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">OUTUBRO</div>
+        <div style="font-size:22px;font-weight:800;color:var(--teal)">830</div>
+        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
+      </div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:12px">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">NOVEMBRO</div>
+        <div style="font-size:22px;font-weight:800;color:var(--teal)">915</div>
+        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
+      </div>
+      <div style="text-align:center;background:rgba(109,192,68,.12);border-radius:8px;padding:12px;border:1px solid rgba(109,192,68,.3)">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">DEZEMBRO 🎯</div>
+        <div style="font-size:22px;font-weight:800;color:var(--lime)">1.000</div>
+        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border-radius:10px;padding:14px 18px;border:1px solid rgba(29,184,153,.2)">
+      <div style="font-size:10px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:8px">🧮 QUANTO PRECISO DE VIDAS PARA ATINGIR R$ 102.000?</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Ticket médio Sem Pacto</div><div style="font-size:16px;font-weight:800;color:var(--white)">R$ 66,36/vida</div><div style="font-size:10px;color:var(--muted)">R$ 43.800 ÷ 660</div></div>
+        <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Média CS + Consultas</div><div style="font-size:16px;font-weight:800;color:var(--teal)">R$ 38.563/mês</div><div style="font-size:10px;color:var(--muted)">média histórica jan–jul</div></div>
+        <div style="background:rgba(109,192,68,.1);border-radius:8px;padding:10px;border:1px solid rgba(109,192,68,.3)"><div style="font-size:10px;color:var(--muted);margin-bottom:3px">🎯 Vidas necessárias</div><div style="font-size:20px;font-weight:800;color:var(--lime)">~956 vidas</div><div style="font-size:10px;color:var(--muted)">(R$102k − R$38,5k) ÷ R$66,36</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div">Composição do Faturamento — Julho 2026</div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="background:var(--card);border-radius:10px;padding:14px 18px;border-left:4px solid var(--red);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div><div style="font-weight:600;font-size:13px">Pacto</div><div style="font-size:11px;color:var(--muted)">Em queda constante — 724 vidas restantes</div></div>
+      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--red)">40%</div><div style="font-size:12px;color:var(--muted)">R$ 55.267</div></div>
+    </div>
+    <div style="background:var(--card);border-radius:10px;padding:14px 18px;border-left:4px solid var(--teal);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div><div style="font-weight:600;font-size:13px">Cross Selling + Consultas</div><div style="font-size:11px;color:var(--muted)">Principal alavanca — crescendo com parceiros</div></div>
+      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--teal)">27,7%</div><div style="font-size:12px;color:var(--muted)">R$ 38.089</div></div>
+    </div>
+    <div style="background:var(--card);border-radius:10px;padding:14px 18px;border-left:4px solid var(--muted);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div><div style="font-weight:600;font-size:13px">Demais Sem Pacto</div><div style="font-size:11px;color:var(--muted)">Planos, convênios e outros</div></div>
+      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--muted)">32,3%</div><div style="font-size:12px;color:var(--muted)">R$ 43.800</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- OCUPAÇÃO -->
+<div class="panel" id="p-ocupacao">
+  <div class="fh lime">
+    <div>
+      <div class="fh-icon">📅</div>
+      <div class="fh-title">Taxa de Ocupação — Jan a Jul/2026 &nbsp;<a href="https://med-flow-pro-92.lovable.app" target="_blank" style="font-size:12px;color:var(--lime);font-weight:700;text-decoration:none">🔗 GestorMed</a></div>
+      <div class="fh-sub">Meta: &gt;80% · Julho: 78,8% (GestorMed) · Parceiros: 320 consultas (+19% vs jun)</div>
+    </div>
+    <div class="fh-r">
+      <div class="fh-stat"><div class="fh-stat-n">78,8%</div><div class="fh-stat-l">JULHO REAL</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">875</div><div class="fh-stat-l">ATENDIDOS</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">1.111</div><div class="fh-stat-l">CAPACIDADE</div></div>
+    </div>
+  </div>
+
+  <div class="ocup-grid">
+    <div class="ocup-card"><div class="ocup-mes">Janeiro</div><div class="ocup-val" style="color:var(--red)">60%</div><div class="ocup-sub">Of: 1.187 · Real: 717</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Fevereiro</div><div class="ocup-val" style="color:var(--amber)">72%</div><div class="ocup-sub">Of: 995 · Real: 718</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Março</div><div class="ocup-val" style="color:var(--amber)">75%</div><div class="ocup-sub">Of: 1.184 · Real: 884</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Abril</div><div class="ocup-val" style="color:var(--teal)">79%</div><div class="ocup-sub">Of: 1.136 · Real: 895</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Maio</div><div class="ocup-val" style="color:var(--red)">69%</div><div class="ocup-sub">Of: 1.061 · Real: 733</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Junho</div><div class="ocup-val" style="color:var(--teal)">78,3%</div><div class="ocup-sub">Cap: 978 · At: 766 · Parceiros: 268</div></div>
+    <div class="ocup-card real" style="grid-column:span 2"><div class="ocup-mes">Julho</div><div class="ocup-val" style="color:var(--lime)">78,8%</div><div class="ocup-sub">Cap: 1.111 · Atendidos: 875 · Turnos: 131 · Parceiros: 320 (+19%)</div></div>
+  </div>
+
+  <div class="div">Especialidades em Destaque — Julho/2026 (GestorMed)</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:22px">
+    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Psicologia</span><span style="font-size:15px;font-weight:800;color:#A855F7">33 turnos</span></div>
+    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Psiquiatria</span><span style="font-size:15px;font-weight:800;color:#A855F7">22,7 turnos</span></div>
+    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Ginecologia</span><span style="font-size:15px;font-weight:800;color:var(--lime)">13 turnos</span></div>
+    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Clínico Geral</span><span style="font-size:15px;font-weight:800;color:var(--lime)">15,1 turnos</span></div>
+    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Dermatologia</span><span style="font-size:15px;font-weight:800;color:var(--teal)">14,2 turnos</span></div>
+    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Neurologia</span><span style="font-size:15px;font-weight:800;color:var(--teal)">5 turnos</span></div>
+  </div>
+
+  <div class="div">Plano de Ação — Ocupação</div>
+  <div class="cards" id="cards-ocup"></div>
+</div>
+
+<!-- CROSS SELLING -->
+<div class="panel" id="p-cross">
+  <div class="fh teal">
+    <div>
+      <div class="fh-icon">🧪</div>
+      <div class="fh-title">Cross Selling — Histórico e Iniciativas</div>
+      <div class="fh-sub">Meta: R$ 45.000/mês (CS + Particular/Credenciadas) · Julho: R$ 38.089 · Atingimento: 84,6%</div>
+    </div>
+    <div class="fh-r">
+      <div class="fh-stat"><div class="fh-stat-n">R$ 10.639</div><div class="fh-stat-l">CS PURO JUL</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">R$ 27.450</div><div class="fh-stat-l">PART/CRED JUL</div></div>
+    </div>
+  </div>
+
+  <div class="div">Histórico Cross Selling + Particular/Credenciadas</div>
+  <div style="background:var(--card);border-radius:14px;padding:22px 24px;border:1px solid var(--border);margin-bottom:20px">
+    <div id="chart-cross"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Melhor mês (Mar/26)</div><div style="font-size:16px;font-weight:800;color:var(--lime)">R$ 40.654</div></div>
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Julho 2026</div><div style="font-size:16px;font-weight:800;color:var(--amber)">R$ 38.089</div></div>
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Faltam para meta</div><div style="font-size:16px;font-weight:800;color:var(--red)">R$ 6.911</div></div>
+    </div>
+  </div>
+
+  <div class="div">Ranking Cross Selling por Especialidade — Julho/2026</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:20px">
+    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--amber);font-weight:700">🥇 1º</div><div style="font-size:12px;font-weight:600">Ginecologia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--lime)">R$ 3.286</div><div style="font-size:10px;color:var(--muted)">30,9%</div></div></div>
+    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">🥈 2º</div><div style="font-size:12px;font-weight:600">Exames Particulares</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--teal)">R$ 2.156</div><div style="font-size:10px;color:var(--muted)">20,3%</div></div></div>
+    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--amber);font-weight:700">🥉 3º</div><div style="font-size:12px;font-weight:600">Ortopedia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--teal)">R$ 1.326</div><div style="font-size:10px;color:var(--muted)">12,5%</div></div></div>
+    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">4º</div><div style="font-size:12px;font-weight:600">Clínico Geral</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--muted)">R$ 969</div><div style="font-size:10px;color:var(--muted)">9,1%</div></div></div>
+    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">5º</div><div style="font-size:12px;font-weight:600">Dermatologia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--muted)">R$ 839</div><div style="font-size:10px;color:var(--muted)">7,9%</div></div></div>
+    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">6º</div><div style="font-size:12px;font-weight:600">Endocrinologia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--muted)">R$ 692</div><div style="font-size:10px;color:var(--muted)">6,5%</div></div></div>
+  </div>
+
+  <div class="div">Plano de Ação — Cross Selling</div>
+  <div class="cards" id="cards-cross"></div>
+</div>
+
+<!-- VIDAS -->
+<div class="panel" id="p-vidas">
+  <div class="fh lime">
+    <div>
+      <div class="fh-icon">🫀</div>
+      <div class="fh-title">Vidas — Histórico e Iniciativas</div>
+      <div class="fh-sub">Meta: 2.000 · Sem Pacto: 649 (jan) → 660 (jul) · <strong style="color:var(--lime)">+1,7% de crescimento</strong> · É aqui que movemos o ponteiro</div>
+    </div>
+    <div class="fh-r">
+      <div class="fh-stat"><div class="fh-stat-n">1.384</div><div class="fh-stat-l">TOTAL JUL</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">660</div><div class="fh-stat-l">SEM PACTO</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">724</div><div class="fh-stat-l">COM PACTO</div></div>
+    </div>
+  </div>
+
+  <div style="background:var(--card);border-radius:12px;padding:18px 22px;border:1px solid var(--border);margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:8px">
+      <span>Progresso para meta de 2.000 vidas</span>
+      <span style="color:var(--lime)">1.384 / 2.000 — 69,2%</span>
+    </div>
+    <div class="vp-bar-bg"><div class="vp-bar-fill" style="width:69.2%"></div></div>
+    <div class="vp-stats">
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--lime)">1.384</div><div class="vp-stat-l">TOTAL VIDAS</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--lime)">660</div><div class="vp-stat-l">SEM PACTO ↑ FOCO AQUI</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--teal)">724</div><div class="vp-stat-l">COM PACTO</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--amber)">616</div><div class="vp-stat-l">FALTAM PARA META</div></div>
+    </div>
+  </div>
+
+  <div class="div">Evolução Histórica 2026 — Vidas</div>
+  <div style="overflow-x:auto;margin-bottom:20px">
+    <table class="tbl">
+      <thead><tr><th>Período</th><th>Total</th><th>Com Pacto</th><th style="color:var(--lime)">⭐ Sem Pacto</th><th>Var. Total</th><th style="color:var(--lime)">⭐ Var. Sem Pacto</th></tr></thead>
+      <tbody>
+        <tr><td>Jan/26</td><td style="font-weight:700">2.463</td><td style="color:var(--muted)">1.814</td><td style="color:var(--teal);font-weight:600">649</td><td>—</td><td style="color:var(--lime)">Base</td></tr>
+        <tr><td>Fev/26</td><td style="font-weight:700">2.035</td><td style="color:var(--muted)">1.376</td><td style="color:var(--teal);font-weight:600">659</td><td style="color:var(--muted)">—</td><td style="color:var(--lime)">+10 ↑</td></tr>
+        <tr><td>Mar/26</td><td style="font-weight:700">1.685</td><td style="color:var(--muted)">1.035</td><td style="color:var(--teal);font-weight:600">650</td><td style="color:var(--muted)">—</td><td style="color:var(--muted)">-9</td></tr>
+        <tr><td>Abr/26</td><td style="font-weight:700">1.476</td><td style="color:var(--muted)">791</td><td style="color:var(--lime);font-weight:600">685</td><td style="color:var(--muted)">—</td><td style="color:var(--lime)">+35 ↑</td></tr>
+        <tr><td>Mai/26</td><td style="font-weight:700">1.410</td><td style="color:var(--muted)">762</td><td style="color:var(--teal);font-weight:600">648</td><td style="color:var(--muted)">—</td><td style="color:var(--muted)">-37</td></tr>
+        <tr><td>Jun/26</td><td style="font-weight:700">1.394</td><td style="color:var(--muted)">740</td><td style="color:var(--teal);font-weight:600">654</td><td style="color:var(--muted)">—</td><td style="color:var(--lime)">+6 ↑</td></tr>
+        <tr style="background:rgba(109,192,68,.06)"><td><strong>Jul/26</strong></td><td style="font-weight:800;color:var(--white)">1.384</td><td style="color:var(--muted);font-weight:600">724</td><td style="color:var(--lime);font-weight:800;font-size:14px">660</td><td style="color:var(--muted)">—</td><td style="color:var(--lime);font-weight:700">+6 ↑</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="div">Plano de Ação — Vidas</div>
+  <div class="cards" id="cards-vidas"></div>
+</div>
+
+</div>
+
+<script>
+const CROSS_HIST=[
+  {m:"Jan",cs:6447,pc:21649,tot:28096},
+  {m:"Fev",cs:10593,pc:15475,tot:26068},
+  {m:"Mar",cs:11741,pc:28913,tot:40654},
+  {m:"Abr",cs:11186,pc:25506,tot:36692},
+  {m:"Mai",cs:10327,pc:20010,tot:30337},
+  {m:"Jun",cs:11613,pc:25368,tot:36981},
+  {m:"Jul",cs:10639,pc:27450,tot:38089},
+];
+const maxCS=Math.max(...CROSS_HIST.map(d=>d.tot));
+document.getElementById('chart-cross').innerHTML=CROSS_HIST.map(d=>{
+  const w=Math.round(d.tot/maxCS*100);
+  const c=d.tot>=40000?'#6DC044':d.tot>=35000?'#F5A623':'#1DB899';
+  const meta=Math.round(45000/maxCS*100);
+  return`<div class="bc-row">
+    <div class="bc-label">${d.m}</div>
+    <div class="bc-bar-bg" style="position:relative">
+      <div class="bc-bar-fill" style="width:${w}%;background:${c}">R$ ${d.tot.toLocaleString('pt-BR')}</div>
+      <div style="position:absolute;top:0;left:${meta}%;width:2px;height:100%;background:rgba(232,85,85,.6)"></div>
+    </div>
+    <div class="bc-pct" style="color:${c}">${Math.round(d.tot/450)}%</div>
+  </div>`;
+}).join('');
+
+const OCUP_ACOES=[
+  {titulo:"Atendimento Equipe AssisteMed x Ocupacional",desc:"Atendimento da recepção como Grupo Ocupacional.",resp:"Bárbara / Equipe",prazo:"15/08/2026",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Deixei uma pessoa dedicada ao telefone e WhatsApp, ajuda no fechamento e substitui na hora do almoço a recepção. Equipe da Ocupacional com a team lead de férias, tivemos vários atestados nos últimos dias, o que trouxe grande impacto na operação.",link:null},
+  {titulo:"Confirmação Agenda - Secretária Virtual",desc:"Criar um app (Nina API — não oficial) para confirmação de consulta e controle de atendimento, além de agendamento online por IA.",resp:"Bárbara / Inovações",prazo:"30/ago",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Retorno dele em 28/07; estou levantando todo o material, inclusive as 30 perguntas para treinamento da IA, envio até o final do mês.",link:null},
+  {titulo:"GestãoMed",desc:"Levantar faturamento por especialista para nortear campanhas.",resp:"Bárbara",prazo:"14/jul",pct:"90%",st:"doing",label:"🔄 Em andamento",obs:"App funcionando para especificidades, inclusive pagamentos dos médicos incluindo procedimentos, além de controle de pedido de exames. Segundo mês de refinamento.",link:"https://med-flow-pro-92.lovable.app"},
+  {titulo:"Obra - Unidade Centro",desc:"Acompanhamento, decisões e antecipação de possível não conformidade.",resp:"Bárbara / Carla / Willian",prazo:"03/08/2026",pct:"80%",st:"doing",label:"🔄 Em andamento",obs:"Eu e Carla fizemos uma lista de manutenção com todos os pontos que ainda precisam ser feitos; ainda não temos previsão — aguardando Willian enviar à equipe para finalização, instalação do ar e outros.",link:null},
+  {titulo:"Lista de Espera Automatizada",desc:"Lista de espera em tempo real.",resp:"Bárbara / Equipe",prazo:"Atualização Recorrente",pct:"80%",st:"doing",label:"🔄 Em andamento",obs:"Criei uma lista de espera para gestão ativa dos horários livres, de todas as especialidades, por ordem, para métrica mais justa.",link:"https://listaesperassistemed.lovable.app/"},
+];
+
+const CROSS_ACOES=[
+  {titulo:"Exames Credenciados",desc:"Faturamento de exames de imagem: US e Tomografia, Oftalmologia.",resp:"Bárbara Almeida",prazo:"15/jul",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Contrato refeito com a CEDUS para Ultrassom Transvaginal, Mamas e Mamografia. Concluído.",link:null},
+  {titulo:"Orçamento Laboratoriais IA",desc:"Exames laboratoriais: orçamento por IA, coleta domiciliar, agendamento de exames.",resp:"Bárbara / Gabriel",prazo:"18/jul",pct:"90%",st:"doing",label:"🔄 Em andamento",obs:"App funcionando muito bem. Equipe conseguindo fazer inclusive pelo celular; aprendeu a disposição para orçamentos e abordagem aos clientes.",link:"https://orcamentosassistemed.lovable.app"},
+  {titulo:"Tabela de Preço Exames",desc:"Identificada a necessidade de criar tabela de exames para associados.",resp:"Bárbara / Patrícia",prazo:"17/07/2026",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Feito levantamento dos custos; tabela concluída, assim como avaliação do preço de consultas a ser alterado em setembro. Concluído.",link:null},
+  {titulo:"Novo Produto - Linha de Obesidade",desc:"Acompanhamento semanal + aplicação de medicamento + plano alimentar + bioimpedância + combo com exames.",resp:"Dra. Kenia / Bárbara",prazo:"31/10/2026",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Nosso endocrinologista vai sair; a nova que encontramos não quis ficar pelo conflito gerado. Em busca de novo profissional para outubro — por enquanto avaliando/fomentando a realização de exames.",link:null},
+  {titulo:"Espirometria com Bronquiodilatador",desc:"Incluir o exame na unidade Centro; valor de mercado entre R$ 150 e R$ 200.",resp:"Bárbara / Claudia",prazo:"15/08/2026",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Resolveram arrumar o espirômetro — valor do custo alto.",link:null},
+  {titulo:"Divulgar Exames Sites",desc:"Divulgar todos os exames que fazemos no site: Laboratórios, Raio-X, Audiometria Tonal e Vocal, Avaliação de Fluência da Fala, ECG, EEG, Espirometria, Fibronasolaringoscopia, Videolaringoscopia.",resp:"Equipe Marketing",prazo:"30/08/2026",pct:"10%",st:"pause",label:"⏸️ Pausado",obs:"Criar plano de divulgação e precificação (aguardar novo mktg).",link:null},
+];
+
+const VIDAS_ACOES=[
+  {titulo:"BDR Ativo - Comercial (Leads Base Ocupacional)",desc:"Incluir o SDR ativo da Ocupacional para vendas da AssisteMed.",resp:"Bernardo (Comercial)",prazo:"15/set",pct:"10%",st:"doing",label:"🔄 Em andamento",obs:"Reunião 13/07: será entregue lista com 50 empresas sem plano de saúde. Autorizada a contratação; falta autorização formal do formulário para aumento de quadro. Avaliar plano de carreira de comissão da nova função — como será feito? Acréscimo por agendamento de reuniões efetivas?",link:null},
+  {titulo:"Expansão Contrato (Urgência e Emergência)",desc:"Expansão dos contratos aumentando o ticket médio com clientes da base, incluindo um valor para ter acesso ao nosso hospital parceiro com desconto em consultas urgentes 24h.",resp:"Bárbara",prazo:"15/09/2026",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Reunião agendada para 27/08 com MaterMed. Em busca de novos: Semper, Santa Rita.",link:null},
+  {titulo:"Ação Marketing - Dia dos Finados",desc:"Dia dos Finados junto à Metropax em 02/11. Captar contatos para oferecer planos com cadastro inicial, panfletar e ofertar o plano.",resp:"Bárbara",prazo:"02/11/2026",pct:"10%",st:"plan",label:"📌 Planejado",obs:"Programar evento com acadêmico ou enfermeiro da equipe, aferir pressão, controle de glicose. Talvez incluir primeira mensalidade grátis para quem fechar no dia. Deixar claro as vantagens de ser AssisteMed (50% exames, Clube de Benefícios, especialidades).",link:null},
+  {titulo:"Associações Maiores - Parcerias B2B",desc:"Parcerias para oferecer planos AssisteMed a associados: SENAI, SENAR, IFMG, FIEMG, PUC, Associação de Bares e Restaurantes, Associação Médica.",resp:"Bárbara",prazo:"A definir",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Levantamento de novas possibilidades realizado e algumas reuniões realizadas com sindicatos clientes da Ocupacional.",link:null},
+  {titulo:"Rever Contrato Permuta Uhuru",desc:"Avaliar número de vidas e dependentes.",resp:"Bárbara / Financeiro / Diretoria",prazo:"30/ago",pct:"10%",st:"plan",label:"📌 Planejado",obs:"Valor está alto; conseguimos uma pessoa dedicada para posts no Instagram — talvez até diário pelo valor. Contrato: 16/01/2025 a 15/01/2026, 24 vidas (18 titulares e 6 dependentes).",link:null},
+  {titulo:"Parceiros - White Label, Cartão de Benefícios",desc:"Busca de novos parceiros: cartão de benefícios, clínicas compartilhadas (White Label), consultor de venda de consulta avulsa (10% de comissão).",resp:"Bárbara Almeida",prazo:"Recorrente",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Metropax funcionando com bom fluxo de agendamentos. Nova parceria Ducash, contrato assinado.",link:null},
+];
+
+function sc(s){return{doing:'sg2',plan:'sp',pause:'sps',done:'sd'}[s]||'sp'}
+function pc(s){return{doing:'pg',plan:'pp',pause:'pps',done:'pd'}[s]||'pp'}
+function renderCards(id,data){
+  document.getElementById(id).innerHTML=data.map(d=>`
+    <div class="acard">
+      <div class="acard-stripe ${sc(d.st)}"></div>
+      <div class="acard-body">
+        <div class="acard-head"><div class="acard-title">${d.titulo}</div><span class="pill ${pc(d.st)}">${d.label}</span></div>
+        <div class="acard-desc">${d.desc}</div>
+      </div>
+      ${d.obs?`<div class="acard-obs"><strong>💬 Obs / Próx. Passo</strong>${d.obs}</div>`:''}
+      <div class="acard-foot">
+        <div class="cf-resp"><span>Resp: </span>${d.resp}</div>
+        <div class="cf-right">
+          ${d.link?`<a class="cf-link" href="${d.link}" target="_blank">🔗 Abrir app</a>`:''}
+          <span class="cf-date">📅 ${d.prazo} · ${d.pct}</span>
         </div>
-        <div>
-          <p class="col-label lime">Solução proposta</p>
-          <ul class="bullet-list">
-            <li>Um único número de WhatsApp para toda a rede AssisteMed</li>
-            <li>IA treinável responde automaticamente perguntas frequentes</li>
-            <li>Paciente agenda, reagenda e cancela pelo WhatsApp, com dados gravados no SOC em tempo real</li>
-            <li>Confirmação automática D-1 integrada ao SOC — sem exportação manual</li>
-            <li>Equipe de 4+ atendentes vê e assume conversas em tempo real</li>
-            <li>NPS disparado automaticamente após cada atendimento</li>
-            <li>Painel de gestão e dashboard de métricas desenvolvidos no Lovable</li>
-          </ul>
-        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 2. LOVABLE -->
-  <section class="section" id="lovable">
-    <div class="section-header">
-      <div class="section-num">2</div>
-      <h2 class="section-title">Onde o Lovable entra no projeto</h2>
-    </div>
-
-    <div class="lovable-box">
-      <h3>🛠 O que é o Lovable</h3>
-      <p>O Lovable é uma plataforma de desenvolvimento de interfaces visuais com IA — gera aplicações web completas a partir de descrições em linguagem natural, integradas ao Supabase. No contexto deste projeto, o Lovable é usado para construir as telas que a equipe da AssisteMed utiliza no dia a dia, com a identidade visual da empresa e conectadas diretamente ao banco de dados.</p>
-    </div>
-
-    <div class="card-grid" style="margin-bottom:16px;">
-      <div class="lovable-box" style="margin-bottom:0;">
-        <h3>📋 Momento 1 — Painel de gestão da equipe</h3>
-        <p>Substitui ou complementa o Chatwoot com uma interface customizada para as atendentes da AssisteMed, exibindo apenas o que a equipe precisa:</p>
-        <ul class="bullet-list" style="margin-top:10px;">
-          <li>Lista de conversas ativas por unidade (Lourdes, Centro-BH, Eldorado)</li>
-          <li>Indicador visual: IA respondendo ou aguardando humano</li>
-          <li>Botão de assumir conversa com 1 clique</li>
-          <li>Histórico completo do paciente puxado do Supabase</li>
-          <li>Fila de pendências e alertas de tempo de espera</li>
-        </ul>
-      </div>
-      <div class="lovable-box" style="margin-bottom:0;">
-        <h3>📊 Momento 2 — Dashboard de NPS e métricas</h3>
-        <p>Após as automações rodarem e os dados chegarem ao Supabase, o Lovable constrói o painel de acompanhamento para a gestão:</p>
-        <ul class="bullet-list" style="margin-top:10px;">
-          <li>NPS por unidade e por período</li>
-          <li>Volume de atendimentos: IA vs humano</li>
-          <li>Taxa de agendamentos realizados via WhatsApp</li>
-          <li>Tempo médio de resposta por agente</li>
-          <li>Agendamentos, cancelamentos e reagendamentos por dia</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <p class="col-label gray" style="margin-bottom:10px;">O que o Lovable NÃO substitui neste projeto</p>
-      <ul class="bullet-list">
-        <li><strong style="color:var(--white)">n8n</strong> — motor de automação que conecta WhatsApp, IA e SOC. Roda em background, sem interface visual</li>
-        <li><strong style="color:var(--white)">Integração WhatsApp API</strong> — configuração técnica de webhook entre Meta e o sistema</li>
-        <li><strong style="color:var(--white)">Integração SOC</strong> — chamadas diretas à API do SOC para consulta e gravação de agendamentos</li>
-      </ul>
-      <p style="font-size:13px;color:var(--gray);margin-top:14px;">O Lovable constrói as <strong style="color:rgba(255,255,255,0.6)">interfaces visuais</strong> em cima do Supabase que estará alimentado por esses sistemas. É a camada de visualização e gestão, não a camada de automação.</p>
-    </div>
-  </section>
-
-  <!-- 3. ARQUITETURA -->
-  <section class="section" id="arquitetura">
-    <div class="section-header">
-      <div class="section-num">3</div>
-      <h2 class="section-title">Arquitetura técnica</h2>
-    </div>
-    <div class="card table-wrap" style="padding:0;overflow:hidden;">
-      <table>
-        <thead>
-          <tr><th>Camada</th><th>Ferramenta</th><th>Função</th><th>Observação</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Canal de entrada</td><td>WhatsApp Business API (Meta Cloud)</td><td>Número único oficial</td><td>Sem risco de ban</td></tr>
-          <tr><td>Roteamento</td><td>n8n (self-hosted)</td><td>Decide IA, agendamento ou humano</td><td>Open source</td></tr>
-          <tr><td>IA de atendimento</td><td>Claude API (Sonnet)</td><td>Respostas e fluxo de agendamento</td><td>Treinável por prompt</td></tr>
-          <tr><td>Agendamento</td><td>API do SOC</td><td>Consulta, cria e cancela agendas</td><td>API já disponível</td></tr>
-          <tr><td>Painel da equipe</td><td>Lovable + Chatwoot</td><td>Gestão de conversas customizada</td><td>Interface com identidade AssisteMed</td></tr>
-          <tr><td>Dashboard métricas</td><td>Lovable</td><td>NPS, volume, tempo de resposta</td><td>Conectado ao Supabase</td></tr>
-          <tr><td>Automações</td><td>n8n agendado</td><td>Confirmações D-1 e NPS</td><td>Integrado ao SOC</td></tr>
-          <tr><td>Banco de dados</td><td>Supabase (já existente)</td><td>Histórico, NPS e métricas</td><td>Reaproveitado do GestorMed</td></tr>
-          <tr><td>Hospedagem</td><td>Railway</td><td>Servidor 24h</td><td>~R$ 100/mês</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card" style="margin-top:16px;">
-      <p class="col-label lime" style="margin-bottom:14px;">Fluxo de agendamento via WhatsApp</p>
-      <ul class="bullet-list">
-        <li>Paciente envia mensagem solicitando consulta</li>
-        <li>IA solicita CPF e valida o cadastro via API do SOC</li>
-        <li>IA consulta horários disponíveis em tempo real no SOC e apresenta as opções</li>
-        <li>Paciente escolhe o horário — IA confirma e grava o agendamento no SOC</li>
-        <li>Para reagendamento: IA localiza o agendamento ativo, cancela o anterior e cria o novo</li>
-        <li>Para cancelamento: IA confirma a intenção e cancela diretamente no SOC</li>
-        <li>Toda operação reflete em tempo real na agenda da unidade, sem intervenção manual</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 4. MÓDULOS -->
-  <section class="section" id="modulos">
-    <div class="section-header">
-      <div class="section-num">4</div>
-      <h2 class="section-title">Escopo de desenvolvimento</h2>
-    </div>
-
-    <div class="module">
-      <div class="module-header">
-        <span class="module-tag">Módulo 1</span>
-        <span class="module-title">Infraestrutura e integração (WhatsApp + Chatwoot)</span>
-      </div>
-      <div class="module-body">
-        <ul class="bullet-list">
-          <li>Solicitação e aprovação do acesso à Meta Cloud API</li>
-          <li>Configuração do número oficial de WhatsApp Business</li>
-          <li>Instalação e configuração do Chatwoot no Railway</li>
-          <li>Instalação e configuração do n8n no Railway</li>
-          <li>Integração webhook: WhatsApp ↔ n8n ↔ Chatwoot</li>
-          <li>Teste de fluxo completo de mensagem entrada → painel</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-header">
-        <span class="module-tag">Módulo 2</span>
-        <span class="module-title">IA de atendimento</span>
-      </div>
-      <div class="module-body">
-        <ul class="bullet-list">
-          <li>Configuração da Claude API com prompt base da AssisteMed</li>
-          <li>Construção da base de conhecimento: horários, unidades, especialidades, dúvidas frequentes</li>
-          <li>Regras de ativação: quando a IA responde, quando aciona agendamento, quando encaminha para humano</li>
-          <li>Interface simples para a equipe atualizar a base de conhecimento sem código</li>
-          <li>Testes com cenários reais de atendimento</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-header">
-        <span class="module-tag novo">Módulo 3</span>
-        <span class="module-title">Agendamento integrado ao SOC</span>
-      </div>
-      <div class="module-body">
-        <ul class="bullet-list">
-          <li>Mapeamento dos endpoints da API do SOC: consulta de agenda, criação, edição e cancelamento</li>
-          <li>Fluxo conversacional de agendamento: IA guia o paciente passo a passo pelo WhatsApp</li>
-          <li>Validação de CPF e dados do paciente antes de qualquer operação na agenda</li>
-          <li>Consulta de horários disponíveis por unidade e especialidade em tempo real</li>
-          <li>Gravação do agendamento diretamente no SOC ao fim do fluxo</li>
-          <li>Fluxo de reagendamento: cancelamento do horário anterior + criação do novo em sequência</li>
-          <li>Fluxo de cancelamento com confirmação explícita do paciente antes de executar</li>
-          <li>Tratamento de erros: agenda lotada, paciente não encontrado, horário indisponível</li>
-          <li>Confirmação automática D-1 consultando agenda do SOC — sem exportação manual</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-header">
-        <span class="module-tag">Módulo 4</span>
-        <span class="module-title">Painel de gestão da equipe</span>
-      </div>
-      <div class="module-body">
-        <ul class="bullet-list">
-          <li>Configuração de 4+ agentes no Chatwoot</li>
-          <li>Organização por filas: unidade Lourdes, Centro-BH, Eldorado</li>
-          <li>Regras de handoff: agente assume conversa com 1 clique</li>
-          <li>Histórico completo visível: o que a IA disse e operações de agendamento realizadas</li>
-          <li>Notificações para a equipe quando paciente está aguardando</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-header">
-        <span class="module-tag">Módulo 5</span>
-        <span class="module-title">Automações</span>
-      </div>
-      <div class="module-body">
-        <ul class="bullet-list">
-          <li>Confirmação D-1: consulta agenda do SOC e dispara mensagem ao paciente</li>
-          <li>Pesquisa NPS: disparo automático 2h após atendimento realizado</li>
-          <li>Registro das respostas NPS no Supabase</li>
-          <li>Dashboard simples de NPS por unidade e período</li>
-          <li>Estrutura para campanhas comerciais segmentadas (templates aprovados pelo Meta)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module lovable">
-      <div class="module-header">
-        <span class="module-tag opcional">Módulo 6 — Opcional</span>
-        <span class="module-title">Painel de gestão customizado (Lovable)</span>
-        <span class="lovable-badge">⚡ Lovable</span>
-      </div>
-      <div class="module-body">
-        <p style="font-size:13px;color:var(--gray);margin-bottom:14px;">Interface visual customizada para as atendentes, com identidade AssisteMed, desenvolvida no Lovable e conectada ao Supabase.</p>
-        <ul class="bullet-list">
-          <li>Tela de conversas ativas com filtro por unidade (Lourdes, Centro-BH, Eldorado)</li>
-          <li>Indicador em tempo real: IA respondendo / aguardando humano / em atendimento</li>
-          <li>Botão de assumir conversa com registro de agente responsável</li>
-          <li>Card do paciente: histórico de consultas, agendamentos e interações anteriores</li>
-          <li>Fila de pendências com alerta de tempo de espera excedido</li>
-          <li>Identidade visual AssisteMed (navy #1A2332 + lime #B8D432)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module lovable">
-      <div class="module-header">
-        <span class="module-tag opcional">Módulo 7 — Opcional</span>
-        <span class="module-title">Dashboard de NPS e métricas (Lovable)</span>
-        <span class="lovable-badge">⚡ Lovable</span>
-      </div>
-      <div class="module-body">
-        <p style="font-size:13px;color:var(--gray);margin-bottom:14px;">Painel gerencial para acompanhamento de resultados do atendimento, desenvolvido no Lovable com dados do Supabase.</p>
-        <ul class="bullet-list">
-          <li>NPS geral e por unidade com evolução temporal</li>
-          <li>Volume de atendimentos: IA vs humano por dia e por unidade</li>
-          <li>Taxa de agendamentos realizados via WhatsApp vs canal tradicional</li>
-          <li>Tempo médio de resposta por agente e por turno</li>
-          <li>Agendamentos, cancelamentos e reagendamentos por período</li>
-          <li>Exportação de relatórios em PDF ou Excel</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-header">
-        <span class="module-tag">Módulo 8</span>
-        <span class="module-title">Treinamento e entrega</span>
-      </div>
-      <div class="module-body">
-        <ul class="bullet-list">
-          <li>Manual de uso para a equipe (PDF)</li>
-          <li>Treinamento prático com as atendentes — 1 sessão online (~2h)</li>
-          <li>30 dias de suporte pós-entrega para ajustes</li>
-          <li>Documentação técnica para manutenção futura</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. CRONOGRAMA -->
-  <section class="section" id="cronograma">
-    <div class="section-header">
-      <div class="section-num">5</div>
-      <h2 class="section-title">Cronograma estimado</h2>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semana 1</div>
-          <div class="tl-title">Infraestrutura + integração WhatsApp/Chatwoot</div>
-          <div class="tl-note">Depende aprovação Meta (~3 dias)</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semana 2</div>
-          <div class="tl-title">IA configurada + base de conhecimento inicial</div>
-          <div class="tl-note">AssisteMed fornece conteúdo</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semanas 3–4</div>
-          <div class="tl-title">Agendamento integrado ao SOC (Módulo 3)</div>
-          <div class="tl-note">Módulo mais complexo do projeto</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semana 5</div>
-          <div class="tl-title">Painel da equipe + agentes + automações</div>
-          <div class="tl-note">Revisão com Bárbara</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semana 6</div>
-          <div class="tl-title">Confirmação D-1 via SOC + NPS automático</div>
-          <div class="tl-note">Integração com agenda real</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semana 7</div>
-          <div class="tl-title">Testes integrados + ajustes + treinamento</div>
-          <div class="tl-note">Go-live do sistema core ao final da semana</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot opt"></div><div class="tl-line"></div></div>
-        <div class="tl-right opt">
-          <div class="tl-week">Semana 8 · Opcional</div>
-          <div class="tl-title">Painel de gestão customizado no Lovable (Módulo 6)</div>
-          <div class="tl-note">Inicia após go-live — dados reais já disponíveis no Supabase</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot opt"></div><div class="tl-line"></div></div>
-        <div class="tl-right opt">
-          <div class="tl-week">Semana 9 · Opcional</div>
-          <div class="tl-title">Dashboard de NPS e métricas no Lovable (Módulo 7)</div>
-          <div class="tl-note">Primeira semana de dados reais para validar os painéis</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-right">
-          <div class="tl-week">Semanas 8–11</div>
-          <div class="tl-title">Suporte pós-entrega e ajustes finos</div>
-          <div class="tl-note">30 dias de suporte incluso</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. INVESTIMENTO -->
-  <section class="section" id="investimento">
-    <div class="section-header">
-      <div class="section-num">6</div>
-      <h2 class="section-title">Investimento</h2>
-    </div>
-
-    <div class="cost-hero">
-      <div class="cost-box highlight">
-        <div class="cost-label">Core do projeto (Módulos 1–5 + 8)</div>
-        <div class="cost-value">R$ 5.100 <span>– 8.100</span></div>
-        <div class="cost-sub">Negociável por pacote · 7 semanas</div>
-      </div>
-      <div class="cost-box">
-        <div class="cost-label">+ Módulos Lovable (opcionais)</div>
-        <div class="cost-value">R$ 1.500 <span>– 2.500</span></div>
-        <div class="cost-sub">Painel equipe + dashboard NPS</div>
-      </div>
-    </div>
-
-    <p class="col-label gray" style="margin-bottom:12px;">Desenvolvimento — detalhamento por módulo</p>
-    <div class="card table-wrap" style="padding:0;overflow:hidden;margin-bottom:24px;">
-      <table>
-        <thead><tr><th>Item</th><th>Faixa de mercado</th><th>Observação</th></tr></thead>
-        <tbody>
-          <tr><td>Módulo 1 — Infraestrutura e integração</td><td>R$ 800–1.200</td><td></td></tr>
-          <tr><td>Módulo 2 — IA de atendimento</td><td>R$ 900–1.500</td><td>Inclui base de conhecimento</td></tr>
-          <tr><td>Módulo 3 — Agendamento integrado SOC <span class="tag-novo">★</span></td><td>R$ 1.800–2.800</td><td>Módulo mais complexo</td></tr>
-          <tr><td>Módulo 4 — Painel da equipe (Chatwoot)</td><td>R$ 600–900</td><td></td></tr>
-          <tr><td>Módulo 5 — Automações</td><td>R$ 700–1.200</td><td>Confirmação SOC + NPS</td></tr>
-          <tr><td>Módulo 6 — Painel Lovable (equipe) <span class="tag-opt">opcional</span></td><td>R$ 800–1.200</td><td>Desenvolvido no Lovable</td></tr>
-          <tr><td>Módulo 7 — Dashboard Lovable (métricas) <span class="tag-opt">opcional</span></td><td>R$ 700–1.300</td><td>NPS + volume + tempo resposta</td></tr>
-          <tr><td>Módulo 8 — Treinamento e documentação</td><td>R$ 300–500</td><td></td></tr>
-          <tr class="total"><td>TOTAL SEM LOVABLE (Mód. 1–5+8)</td><td>R$ 5.100–8.100</td><td>Core do projeto</td></tr>
-          <tr class="total"><td>TOTAL COM LOVABLE (Mód. 1–8)</td><td>R$ 6.600–10.600</td><td>Pacote completo</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="col-label gray" style="margin-bottom:12px;">Custos mensais recorrentes (operação)</p>
-    <div class="card table-wrap" style="padding:0;overflow:hidden;margin-bottom:16px;">
-      <table>
-        <thead><tr><th>Item</th><th>Mínimo</th><th>Máximo</th><th>Observação</th></tr></thead>
-        <tbody>
-          <tr><td>WhatsApp Business API (Meta)</td><td>R$ 100</td><td>R$ 300</td><td>Por volume de mensagens ativas</td></tr>
-          <tr><td>Servidor Railway</td><td>R$ 90</td><td>R$ 120</td><td>Chatwoot + n8n</td></tr>
-          <tr><td>IA — Claude API</td><td>R$ 50</td><td>R$ 150</td><td>Por volume de mensagens</td></tr>
-          <tr><td>Supabase</td><td>R$ 0</td><td>R$ 0</td><td>Já existente no GestorMed</td></tr>
-          <tr><td>Chatwoot + n8n</td><td>R$ 0</td><td>R$ 0</td><td>Open source</td></tr>
-          <tr><td>API do SOC</td><td>R$ 0</td><td>R$ 0</td><td>Incluso no contrato existente</td></tr>
-          <tr><td>Lovable (se contratado)</td><td>R$ 0</td><td>R$ 0</td><td>App publicado, sem mensalidade adicional</td></tr>
-          <tr class="total"><td>TOTAL RECORRENTE</td><td>R$ 240</td><td>R$ 570</td><td>Estimativa mensal</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="context-box">
-      <p>Uma atendente CLT em Belo Horizonte custa entre R$ 2.500 e R$ 3.500/mês em salário, mais encargos trabalhistas de aproximadamente 70%, totalizando entre R$ 4.250 e R$ 5.950/mês por colaboradora — sem contar ausências, férias e rotatividade.</p>
-      <p>O sistema proposto opera 24 horas por dia, 7 dias por semana, agenda consultas de forma autônoma e integrada ao SOC, com custo recorrente de <strong style="color:var(--lime)">R$ 240–570/mês</strong>. O investimento de desenvolvimento se paga em menos de 2 meses de operação.</p>
-    </div>
-  </section>
-
-  <!-- 7. FORA DO ESCOPO -->
-  <section class="section" id="fora">
-    <div class="section-header">
-      <div class="section-num">7</div>
-      <h2 class="section-title">O que está fora deste escopo</h2>
-    </div>
-    <div class="card">
-      <ul class="out-list">
-        <li>Desenvolvimento de aplicativo mobile</li>
-        <li>Integração com sistemas além do SOC (prontuário eletrônico, faturamento etc.) — pode ser módulo futuro</li>
-        <li>Criação dos templates de mensagem junto ao Meta (responsabilidade da AssisteMed após orientação)</li>
-        <li>Gestão contínua da base de conhecimento da IA após entrega — responsabilidade da equipe interna</li>
-        <li>Atendimento multicanal além do WhatsApp (e-mail, Instagram etc.) — pode ser escopo futuro</li>
-        <li>Modificações na API do SOC ou em seu banco de dados</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 8. PREMISSAS -->
-  <section class="section">
-    <div class="section-header">
-      <div class="section-num">8</div>
-      <h2 class="section-title">Premissas e dependências</h2>
-    </div>
-    <div class="card">
-      <ul class="bullet-list">
-        <li>AssisteMed confirma a disponibilidade da API do SOC e fornece credenciais ao desenvolvedor</li>
-        <li>Documentação da API do SOC (endpoints, autenticação, formato) disponibilizada na semana 1</li>
-        <li>AssisteMed fornece conteúdo para base de conhecimento da IA nas primeiras duas semanas</li>
-        <li>Acesso ao Supabase existente (GestorMed) disponibilizado ao desenvolvedor</li>
-        <li>Aprovação da Meta Cloud API pode levar 3–7 dias úteis — recomenda-se solicitar imediatamente</li>
-        <li>Equipe disponível para treinamento na semana 7</li>
-        <li>Decisão sobre módulos Lovable (6 e 7) pode ser tomada após go-live do sistema core</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 9. PRÓXIMOS PASSOS -->
-  <section class="section" id="proximos">
-    <div class="section-header">
-      <div class="section-num">9</div>
-      <h2 class="section-title">Próximos passos</h2>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-text">Verificar com o SOC a documentação completa da API (endpoints de agenda disponíveis)</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">Compartilhar este documento com o desenvolvedor para receber proposta formal</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">Solicitar acesso à Meta Cloud API — pode ser iniciado imediatamente em paralelo</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text">Definir responsável interno pela curadoria da base de conhecimento da IA</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-text">Decidir se os módulos Lovable (6 e 7) entram no escopo inicial ou são contratados após go-live</div></div>
-      <div class="step"><div class="step-num">6</div><div class="step-text">Alinhar com a diretoria o orçamento aprovado para desenvolvimento</div></div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <p>Elaborado por <strong>Bárbara Almeida — Coordenadora Administrativa</strong> · AssisteMed / Grupo Ocupacional · Junho de 2026 · v3.0</p>
-  <p style="margin-top:8px;">Documento confidencial · Uso interno</p>
-</footer>
-
+    </div>`).join('');
+}
+renderCards('cards-ocup',OCUP_ACOES);
+renderCards('cards-cross',CROSS_ACOES);
+renderCards('cards-vidas',VIDAS_ACOES);
+function go(id,tab){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('p-'+id).classList.add('on');
+  tab.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
 </body>
 </html>
