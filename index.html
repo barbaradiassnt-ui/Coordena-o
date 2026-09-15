@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AssisteMed — Fechamento Julho 2026</title>
+<title>AssisteMed — Fechamento Agosto 2026</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;700;800&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -41,33 +41,35 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 .hb.amber{background:rgba(245,166,35,.15);color:var(--amber);border:1px solid rgba(245,166,35,.3)}
 .hb.red{background:rgba(232,85,85,.15);color:var(--red);border:1px solid rgba(232,85,85,.3)}
 .hb.purple{background:rgba(147,51,234,.15);color:var(--purple);border:1px solid rgba(147,51,234,.3)}
+.hb.gold{background:rgba(255,215,0,.15);color:#FFD700;border:1px solid rgba(255,215,0,.3)}
 /* META */
 .meta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
 .mc{background:var(--card);border-radius:14px;padding:22px 26px;border:1px solid var(--border);border-top:4px solid}
-.mc.teal{border-top-color:var(--teal)}.mc.lime{border-top-color:var(--lime)}.mc.amber{border-top-color:var(--amber)}
+.mc.teal{border-top-color:var(--teal)}.mc.lime{border-top-color:var(--lime)}.mc.amber{border-top-color:var(--amber)}.mc.gold{border-top-color:#FFD700}
 .mc-icon{font-size:22px;margin-bottom:8px}
 .mc-eye{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
 .mc-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;line-height:1;margin-bottom:4px}
-.mc.teal .mc-val{color:var(--teal)}.mc.lime .mc-val{color:var(--lime)}.mc.amber .mc-val{color:var(--amber)}
+.mc.teal .mc-val{color:var(--teal)}.mc.lime .mc-val{color:var(--lime)}.mc.amber .mc-val{color:var(--amber)}.mc.gold .mc-val{color:#FFD700}
 .mc-desc{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
 .brow{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px}
 .bbg{height:5px;background:var(--bg2);border-radius:99px;overflow:hidden}
 .bfill{height:100%;border-radius:99px}
-.mc.teal .bfill{background:var(--teal)}.mc.lime .bfill{background:var(--lime)}.mc.amber .bfill{background:var(--amber)}
+.mc.teal .bfill{background:var(--teal)}.mc.lime .bfill{background:var(--lime)}.mc.amber .bfill{background:var(--amber)}.mc.gold .bfill{background:#FFD700}
 /* STAT */
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .stat{background:var(--card);border-radius:12px;padding:16px 20px;text-align:center;border:1px solid var(--border)}
 .stat-n{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;line-height:1;margin-bottom:4px}
 .stat-l{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.5px}
-.sg .stat-n{color:var(--lime)}.sa .stat-n{color:var(--amber)}.sb .stat-n{color:var(--teal)}.sw .stat-n{color:var(--white)}.sr .stat-n{color:var(--red)}
+.sg .stat-n{color:var(--lime)}.sa .stat-n{color:var(--amber)}.sb .stat-n{color:var(--teal)}.sw .stat-n{color:var(--white)}.sr .stat-n{color:var(--red)}.sgold .stat-n{color:#FFD700}
 /* ALERT */
 .alert{border-radius:10px;padding:14px 18px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;border:1px solid}
 .alert.red{background:rgba(232,85,85,.08);border-color:rgba(232,85,85,.3)}
 .alert.amber{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.3)}
 .alert.green{background:rgba(109,192,68,.08);border-color:rgba(109,192,68,.3)}
+.alert.gold{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.3)}
 .alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
 .alert-title{font-size:12px;font-weight:700;margin-bottom:3px}
-.alert.red .alert-title{color:var(--red)}.alert.amber .alert-title{color:var(--amber)}.alert.green .alert-title{color:var(--lime)}
+.alert.red .alert-title{color:var(--red)}.alert.amber .alert-title{color:var(--amber)}.alert.green .alert-title{color:var(--lime)}.alert.gold .alert-title{color:#FFD700}
 .alert-text{font-size:11px;color:var(--muted);line-height:1.6}
 /* DIV */
 .div{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:24px 0 14px;display:flex;align-items:center;gap:12px}
@@ -75,9 +77,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 /* HL */
 .hl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .hlc{background:var(--card);border-radius:12px;padding:18px 22px;border-left:4px solid;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
-.hlc.done{border-left-color:var(--lime)}.hlc.warn{border-left-color:var(--amber)}.hlc.info{border-left-color:var(--teal)}.hlc.red{border-left-color:var(--red)}
+.hlc.done{border-left-color:var(--lime)}.hlc.warn{border-left-color:var(--amber)}.hlc.info{border-left-color:var(--teal)}.hlc.red{border-left-color:var(--red)}.hlc.gold{border-left-color:#FFD700}
 .hl-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.hlc.done .hl-label{color:var(--lime)}.hlc.warn .hl-label{color:var(--amber)}.hlc.info .hl-label{color:var(--teal)}.hlc.red .hl-label{color:var(--red)}
+.hlc.done .hl-label{color:var(--lime)}.hlc.warn .hl-label{color:var(--amber)}.hlc.info .hl-label{color:var(--teal)}.hlc.red .hl-label{color:var(--red)}.hlc.gold .hl-label{color:#FFD700}
 .hl-title{font-weight:700;font-size:13px;margin-bottom:5px}
 .hl-text{font-size:12px;color:var(--muted);line-height:1.65}
 /* FH */
@@ -86,6 +88,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 .fh.amber{background:linear-gradient(130deg,#5c3a0e,#3d2509)}
 .fh.lime{background:linear-gradient(130deg,#2a5c0e,#1c3d09)}
 .fh.purple{background:linear-gradient(130deg,#3b1a5c,#270940)}
+.fh.gold{background:linear-gradient(130deg,#5c4a0e,#3d3009)}
 .fh-icon{font-size:26px;margin-bottom:6px}
 .fh-title{font-family:'Sora',sans-serif;font-size:21px;font-weight:800;margin-bottom:4px}
 .fh-sub{font-size:11px;color:var(--muted)}
@@ -94,7 +97,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 .fh-stat-n{font-size:18px;font-weight:800;line-height:1}
 .fh-stat-l{font-size:8px;opacity:.7;font-weight:700;letter-spacing:.5px;margin-top:3px}
 /* CARDS */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .acard{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:transform .15s,box-shadow .15s}
 .acard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 .acard-stripe{height:4px}
@@ -131,24 +134,36 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 /* CHART */
 .bc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .bc-label{font-size:10px;color:var(--muted);width:28px;text-align:right;flex-shrink:0}
-.bc-bar-bg{flex:1;height:26px;background:var(--bg2);border-radius:6px;overflow:hidden}
-.bc-bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:10px;font-weight:700;color:var(--navy);white-space:nowrap;transition:width .8s ease}
+.bc-bar-bg{flex:1;height:26px;background:var(--bg2);border-radius:6px;overflow:hidden;position:relative}
+.bc-bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:10px;font-weight:700;color:var(--navy);white-space:nowrap}
 .bc-pct{font-size:11px;font-weight:700;width:38px;text-align:right;flex-shrink:0}
+/* CENARIO */
+.cen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:20px}
+.cen-card{border-radius:14px;padding:24px 26px;border:1px solid}
+.cen-card.c1{background:rgba(29,184,153,.06);border-color:rgba(29,184,153,.25)}
+.cen-card.c3{background:rgba(109,192,68,.06);border-color:rgba(109,192,68,.25)}
+.cen-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:800;margin-bottom:14px}
+.cen-card.c1 .cen-title{color:var(--teal)}.cen-card.c3 .cen-title{color:var(--lime)}
+.cen-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px}
+.cen-row:last-child{border:none;padding-top:12px;margin-top:4px}
+.cen-label{color:var(--muted)}
+.cen-val{font-weight:700}
+.cen-total{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.cen-card.c1 .cen-total{color:var(--teal)}.cen-card.c3 .cen-total{color:var(--lime)}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{background:var(--bg);color:var(--muted);font-weight:700;padding:10px 14px;text-align:left;letter-spacing:.5px;font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--white)}
+.tbl tr:hover td{background:rgba(29,184,153,.04)}
+.tbl tr.hl-row td{background:rgba(109,192,68,.06)}
 /* EQ */
 .eq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
 .eq-card{background:var(--card);border-radius:12px;padding:16px 18px;border:1px solid var(--border)}
 .eq-label{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
 .eq-val{font-family:'Sora',sans-serif;font-size:18px;font-weight:800}
 .eq-sub{font-size:10px;color:var(--muted);margin-top:4px}
-/* TABLE */
-.tbl{width:100%;border-collapse:collapse;font-size:11px}
-.tbl th{background:var(--bg);color:var(--muted);font-weight:700;padding:10px 14px;text-align:left;letter-spacing:.5px;font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--border)}
-.tbl td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--white)}
-.tbl tr:hover td{background:rgba(29,184,153,.04)}
-.tbl tr.alert-row td{background:rgba(232,85,85,.06)}
-/* RESPONSIVE */
 @media(max-width:900px){
-  .meta-row,.stat-row,.ocup-grid,.eq-grid,.hl-grid,.vp-stats{grid-template-columns:1fr 1fr}
+  .meta-row,.stat-row,.ocup-grid,.eq-grid,.hl-grid,.vp-stats,.cen-grid{grid-template-columns:1fr}
   .fh-r{display:none}
   .main,.topbar,.nav{padding-left:16px;padding-right:16px}
 }
@@ -164,18 +179,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
     <div class="brand-slogan">Medicina Para Todos</div>
   </div>
   <div class="topbar-right">
-    <strong>Fechamento Julho 2026</strong>
+    <strong>Fechamento Agosto 2026</strong>
     Bárbara Almeida · Coordenação AssisteMed
   </div>
 </div>
 
 <div class="nav">
   <div class="tab on" onclick="go('overview',this)">📋 Visão Geral</div>
-  <div class="tab" onclick="go('alertas',this)">🚨 Alertas</div>
-  <div class="tab" onclick="go('equilibrio',this)"><div class="dot" style="background:var(--amber)"></div>Ponto de Equilíbrio</div>
   <div class="tab" onclick="go('ocupacao',this)"><div class="dot" style="background:var(--lime)"></div>Ocupação</div>
   <div class="tab" onclick="go('cross',this)"><div class="dot" style="background:var(--teal)"></div>Cross Selling</div>
   <div class="tab" onclick="go('vidas',this)"><div class="dot" style="background:var(--lime)"></div>Vidas</div>
+  <div class="tab" onclick="go('equilibrio',this)"><div class="dot" style="background:var(--amber)"></div>Ponto de Equilíbrio</div>
+  <div class="tab" onclick="go('alertas',this)">🚨 Alertas</div>
 </div>
 
 <div class="main">
@@ -183,72 +198,72 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 <!-- VISÃO GERAL -->
 <div class="panel on" id="p-overview">
   <div class="hero">
-    <div class="hero-eye">Fechamento Julho 2026 · AssisteMed</div>
+    <div class="hero-eye">Fechamento Agosto 2026 · AssisteMed</div>
     <div class="hero-slogan">Medicina <span>Para Todos</span></div>
-    <div class="hero-sub">Indicadores estratégicos · 3 frentes · Bárbara Almeida · 24/08/2026</div>
+    <div class="hero-sub">Indicadores estratégicos · 3 frentes · Bárbara Almeida · 14/09/2026</div>
     <div class="hero-badges">
-      <span class="hb lime">Ocupação 78,8% ↑</span>
-      <span class="hb teal">Cross Selling R$ 38.089</span>
-      <span class="hb lime">660 Vidas Sem Pacto +1,7% ↑</span>
-      <span class="hb teal">1.384 Vidas Totais</span>
+      <span class="hb gold">📈 Maior faturamento dos últimos 5 meses!</span>
+      <span class="hb lime">Ocupação 87% ✅ Meta batida!</span>
+      <span class="hb teal">Cross Selling R$ 45.745 ✅ Meta batida!</span>
+      <span class="hb amber">671 Vidas Sem Pacto +3,4% ↑</span>
     </div>
   </div>
 
   <div class="meta-row">
     <div class="mc teal">
       <div class="mc-icon">🫀</div>
-      <div class="mc-eye">Vidas</div>
-      <div class="mc-val">1.384</div>
-      <div class="mc-desc">660 sem Pacto ↑ · Meta: 2.000 · <strong style="color:var(--lime)">Sem Pacto +1,7% (649→660) — é aqui que movemos o ponteiro</strong></div>
-      <div class="brow"><span>Atingimento meta</span><span style="color:var(--teal)">69,2%</span></div>
-      <div class="bbg"><div class="bfill" style="width:69.2%"></div></div>
+      <div class="mc-eye">Vidas Sem Pacto</div>
+      <div class="mc-val">671</div>
+      <div class="mc-desc">649 (jan) → 671 (ago) · <strong style="color:var(--lime)">+3,4% · É aqui que movemos o ponteiro</strong></div>
+      <div class="brow"><span>Vendas reais média</span><span style="color:var(--teal)">+12/mês · SDR dobro +24/mês</span></div>
+      <div class="bbg"><div class="bfill" style="width:67.1%"></div></div>
     </div>
     <div class="mc lime">
       <div class="mc-icon">📅</div>
       <div class="mc-eye">Ocupação</div>
-      <div class="mc-val">78,8%</div>
-      <div class="mc-desc">Julho · GestorMed · Meta: &gt;80% · <strong style="color:var(--lime)">+0,5pp vs junho</strong></div>
-      <div class="brow"><span>Atingimento meta</span><span style="color:var(--lime)">98,5%</span></div>
-      <div class="bbg"><div class="bfill" style="width:98.5%"></div></div>
+      <div class="mc-val">87%</div>
+      <div class="mc-desc">832 atendidos · 954 possíveis · <strong style="color:var(--lime)">✅ Meta 80% superada!</strong></div>
+      <div class="brow"><span>Atingimento meta</span><span style="color:var(--lime)">109%</span></div>
+      <div class="bbg"><div class="bfill" style="width:100%"></div></div>
     </div>
-    <div class="mc amber">
+    <div class="mc gold">
       <div class="mc-icon">🧪</div>
       <div class="mc-eye">Cross Selling + Consultas</div>
-      <div class="mc-val">R$ 38.089</div>
-      <div class="mc-desc">Julho · Meta: R$ 45.000 · <strong style="color:var(--lime)">+3% vs junho</strong></div>
-      <div class="brow"><span>Atingimento meta</span><span style="color:var(--amber)">84,6%</span></div>
-      <div class="bbg"><div class="bfill" style="width:84.6%"></div></div>
+      <div class="mc-val">R$ 45.745</div>
+      <div class="mc-desc">CS: R$ 16.115 · Consultas: R$ 29.630 · <strong style="color:#FFD700">✅ 1ª vez acima da meta!</strong></div>
+      <div class="brow"><span>Atingimento meta R$ 45.000</span><span style="color:#FFD700">102%</span></div>
+      <div class="bbg"><div class="bfill" style="width:100%"></div></div>
     </div>
   </div>
 
   <div class="stat-row">
-    <div class="stat sb"><div class="stat-n">R$ 137.155</div><div class="stat-l">FATURAMENTO JULHO</div></div>
-    <div class="stat sg"><div class="stat-n">320</div><div class="stat-l">CONSULTAS PARCEIROS ↑</div></div>
-    <div class="stat sa"><div class="stat-n">875</div><div class="stat-l">PACIENTES ATENDIDOS</div></div>
-    <div class="stat sg"><div class="stat-n">660</div><div class="stat-l">VIDAS SEM PACTO ↑</div></div>
+    <div class="stat sgold"><div class="stat-n">R$ 143.341</div><div class="stat-l">FATURAMENTO AGOSTO 🏆</div></div>
+    <div class="stat sg"><div class="stat-n">832</div><div class="stat-l">ATENDIDOS · 317 PARCEIROS</div></div>
+    <div class="stat sb"><div class="stat-n">R$ 16.115</div><div class="stat-l">CROSS SELLING PURO RECORD</div></div>
+    <div class="stat sa"><div class="stat-n">1.353</div><div class="stat-l">TOTAL VIDAS · 682 PACTO</div></div>
   </div>
 
   <div class="div">Destaques do período</div>
   <div class="hl-grid">
-    <div class="hlc done">
-      <div class="hl-label">✅ Parceiros crescendo</div>
-      <div class="hl-title">Consultas parceiros: 268 (jun) → 320 (jul) +19,4%</div>
-      <div class="hl-text">Metropax com bom fluxo de agendamentos. Ducash com contrato assinado. Crescimento consistente refletindo no faturamento Particular/Credenciadas (R$ 27.450 em julho).</div>
+    <div class="hlc gold">
+      <div class="hl-label">🏆 Triplo destaque em agosto</div>
+      <div class="hl-title">Maior faturamento, maior Cross Selling e maior ocupação do ano</div>
+      <div class="hl-text">Maior faturamento dos últimos 5 meses: R$ 143.341. Cross Selling R$ 16.115 (recorde histórico — quase dobro da média). Ocupação 87% (meta de 80% superada pela primeira vez).</div>
     </div>
     <div class="hlc done">
-      <div class="hl-label">✅ Cross Selling em alta</div>
-      <div class="hl-title">R$ 38.089 em julho — melhor resultado desde março</div>
-      <div class="hl-text">Crescimento de 3% vs junho. Ginecologia lidera (30,9% / R$ 3.286), seguida de Exames Particulares (20,3%) e Ortopedia (12,5%). App de orçamento por IA funcionando bem.</div>
+      <div class="hl-label">✅ Meta Cross Selling batida pela 1ª vez</div>
+      <div class="hl-title">R$ 45.745 — CS + Consultas acima de R$ 45.000</div>
+      <div class="hl-text">Parceria com Metropax e Grupo Zelo tem sido interessante para a clínica. Parceiros: 317 consultas. Ginecologia lidera CS com R$ 5.938 (36,8%). Clínico Geral em 2º com R$ 3.634.</div>
     </div>
     <div class="hlc done">
-      <div class="hl-label">✅ Vidas Sem Pacto crescendo</div>
-      <div class="hl-title">Sem Pacto: 649 (jan) → 660 (jul) · <span style="color:var(--lime)">+1,7%</span> — é aqui que movemos o ponteiro</div>
-      <div class="hl-text">Crescimento orgânico consistente das vidas independentes. SDR ativo, parcerias B2B, associações e ação dos Finados com Metropax são as apostas para acelerar esse número.</div>
+      <div class="hl-label">✅ Vidas Sem Pacto crescendo +3,4%</div>
+      <div class="hl-title">649 (jan) → 671 (ago) · Média real de vendas: +12/mês</div>
+      <div class="hl-text">Crescimento consistente. SDR ativo com dobro da meta seria +24/mês. Credenciamento e Associação (FUMP, escolas, faculdades) ganha tração. Ação Finados com Metropax em 02/11.</div>
     </div>
     <div class="hlc warn">
-      <div class="hl-label">⚠️ Google — 1 estrela perdida</div>
-      <div class="hl-title">Reclamações são da Ocupacional, não da AssisteMed</div>
-      <div class="hl-text">Demora no atendimento da Ocupacional impactando avaliação geral. AssisteMed continua recebendo elogios. Porém, como a marca é compartilhada, há risco de imagem. Ação de comunicação necessária.</div>
+      <div class="hl-label">⚠️ Neurologia, Pneumologia e Nutrição</div>
+      <div class="hl-title">Especialidades abaixo de 60% de ocupação</div>
+      <div class="hl-text">Neurologia 59,4% · Pneumologia 45,8% · Nutrição 45,8%. Oportunidade de campanhas direcionadas ou revisão de agenda para estas especialidades.</div>
     </div>
   </div>
 </div>
@@ -258,59 +273,50 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
   <div class="fh purple">
     <div>
       <div class="fh-icon">🚨</div>
-      <div class="fh-title">Alertas Estratégicos — Julho 2026</div>
+      <div class="fh-title">Alertas Estratégicos — Agosto 2026</div>
       <div class="fh-sub">Sinais que precisam de atenção e decisão da diretoria</div>
     </div>
     <div class="fh-r">
-      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--red)">3</div><div class="fh-stat-l">CRÍTICOS</div></div>
-      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--amber)">3</div><div class="fh-stat-l">ATENÇÃO</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--red)">1</div><div class="fh-stat-l">CRÍTICOS</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--amber)">2</div><div class="fh-stat-l">ATENÇÃO</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--lime)">1</div><div class="fh-stat-l">CONQUISTAS</div></div>
     </div>
   </div>
 
   <div class="div">🔴 Críticos — Ação Imediata</div>
   <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
-    <div class="alert green">
-      <div class="alert-icon">🎯</div>
-      <div>
-        <div class="alert-title">Vidas Sem Pacto +1,7% — aqui está o ponteiro a mover</div>
-        <div class="alert-text">De 649 (jan) para 660 (jul) — crescimento de +1,7% no semestre, orgânico e consistente. SDR ativo com lista de 50 empresas pronta, parcerias B2B com sindicatos, ação dos Finados com Metropax e Ducash com contrato assinado. Esse número precisa acelerar: cada ação de captação agora tem impacto direto e duradouro.</div>
-      </div>
-    </div>
     <div class="alert red">
       <div class="alert-icon">🔴</div>
       <div>
-        <div class="alert-title">BDR sem plano de carreira e comissão definidos</div>
-        <div class="alert-text">Bernardo (SDR Ativo Comercial) está em campo sem estrutura de incentivo formal. Risco de desmotivação e perda do profissional. Definir: será comissão por venda fechada? Por reunião efetiva agendada? Por volume de vidas ativadas? Decisão urgente da Coordenação e Diretoria.</div>
+        <div class="alert-title">Especialidades com ocupação crítica — abaixo de 60%</div>
+        <div class="alert-text">Neurologia 59,4% · Pneumologia 45,8% · Nutrição 45,8%. São especialidades com agenda ociosa que representam perda de receita. Campanhas específicas ou revisão de escala são necessárias.</div>
       </div>
     </div>
   </div>
 
   <div class="div">🟡 Atenção — Monitorar</div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="alert amber">
-      <div class="alert-icon">🟡</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+    <div class="alert green">
+      <div class="alert-icon">✅</div>
       <div>
-        <div class="alert-title">Ocupação 78,8% — 1,2pp abaixo da meta de 80%</div>
-        <div class="alert-text">Crescendo consistentemente (60% jan → 78,8% jul). Parceiros contribuindo com 320 consultas em julho (+19% vs junho). Lista de espera automatizada em andamento pode ser o fator decisivo para cruzar os 80%.</div>
+        <div class="alert-title">BDR estruturado — onboarding, fluxo de vendas e scripts em criação</div>
+        <div class="alert-text">Bernardo continua prospectando com luziA. Plano de carreira avaliado junto com o onboarding. Fluxo de vendas, scripts e primeiros testes em andamento.<br><br>
+        <strong style="color:var(--white)">📊 KPIs definidos no onboarding (progressão):</strong><br>
+        Leads qualificados/semana → Reuniões agendadas/semana → Propostas enviadas/semana<br><br>
+        <strong style="color:var(--white)">💰 Remuneração:</strong> Salário base + ajuda de custo por proposta enviada + <strong style="color:var(--lime)">0,5% de comissão por venda fechada por indicação do BDR</strong><br><br>
+        <strong style="color:var(--white)">🎯 Fontes de prospecção:</strong> Base AssisteMed · Base Grupo Ocupacional · MEIs e autônomos BH · Parcerias estratégicas (sindicatos, associações, condomínios, cooperativas)
+        </div>
       </div>
     </div>
     <div class="alert amber">
       <div class="alert-icon">🟡</div>
       <div>
-        <div class="alert-title">Google perdeu 1 estrela — reclamações da Ocupacional</div>
-        <div class="alert-text">AssisteMed continua com elogios, mas a marca compartilhada com Ocupacional gera risco de imagem. Sugestão: campanha ativa de coleta de avaliações positivas dos pacientes AssisteMed para compensar e criar separação de percepção.</div>
-      </div>
-    </div>
-    <div class="alert amber">
-      <div class="alert-icon">🟡</div>
-      <div>
-        <div class="alert-title">Vidas Sem Pacto estagnadas (~650–685 há 7 meses)</div>
-        <div class="alert-text">O Sem Pacto oscila mas não cresce. SDR, associações, parceiros B2B e ações de marketing são as apostas. Ação dos Finados com Metropax em 02/11 pode ser um ponto de inflexão. Monitorar de perto.</div>
+        <div class="alert-title">Tabela de Preço — redução de particulares e conversão para planos</div>
+        <div class="alert-text">Avaliar particular x planos: redução de exames particulares e conversão para planos. Exames particulares representam 8,6% do Cross Selling — tendência a monitorar.</div>
       </div>
     </div>
   </div>
 
-  <!-- KPI BDR -->
   <div class="div">🆕 Novo KPI — Plano de Carreira BDR</div>
   <div style="background:var(--card);border-radius:12px;padding:22px 24px;border:1px solid var(--purple)">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
@@ -320,7 +326,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
         <div style="font-size:11px;color:var(--muted)">Resp: Bárbara / Coordenação · Prazo: A definir · Prioridade: 🔴 Alta</div>
       </div>
     </div>
-    <div style="font-size:12px;color:var(--off);margin-bottom:16px">Como será estruturado o incentivo do BDR (Bernardo)? Definir o modelo antes que o profissional desmotive.</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
       <div style="background:var(--bg2);border-radius:10px;padding:14px;border:1px solid var(--border)">
         <div style="font-size:10px;font-weight:700;color:var(--purple);letter-spacing:1px;margin-bottom:6px">OPÇÃO A</div>
@@ -350,86 +355,141 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
       <div class="fh-sub">Dependência do contrato Pacto e caminho para autonomia financeira</div>
     </div>
     <div class="fh-r">
-      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--red)">40%</div><div class="fh-stat-l">DEPENDE PACTO</div></div>
-      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--amber)">43%</div><div class="fh-stat-l">PROG. META</div></div>
+      <div class="fh-stat">
+        <div class="fh-stat-n" style="color:var(--red)">37%</div>
+        <div class="fh-stat-l">PACTO/FAT. TOTAL</div>
+        <div style="font-size:8px;color:var(--muted);margin-top:2px">R$ 52.492 de R$ 143.341</div>
+      </div>
+      <div class="fh-stat">
+        <div class="fh-stat-n" style="color:var(--amber)">44%</div>
+        <div class="fh-stat-l">SEM PACTO/META</div>
+        <div style="font-size:8px;color:var(--muted);margin-top:2px">R$ 45.104 de R$ 102.000</div>
+      </div>
     </div>
   </div>
+
   <div class="eq-grid">
-    <div class="eq-card"><div class="eq-label">Faturamento Total Julho</div><div class="eq-val">R$ 137.155</div><div class="eq-sub">+R$ 3.073 vs junho</div></div>
-    <div class="eq-card" style="border-color:var(--red)"><div class="eq-label">Faturamento com Pacto</div><div class="eq-val" style="color:var(--red)">R$ 55.267</div><div class="eq-sub">40% do total</div></div>
-    <div class="eq-card" style="border-color:var(--amber)"><div class="eq-label">Faturamento Sem Pacto</div><div class="eq-val" style="color:var(--amber)">R$ 43.800</div><div class="eq-sub">GAP: R$ 58.200 abaixo da meta</div></div>
+    <div class="eq-card"><div class="eq-label">Faturamento Total Agosto</div><div class="eq-val">R$ 143.341</div><div class="eq-sub">Maior faturamento dos últimos 5 meses 📈</div></div>
+    <div class="eq-card" style="border-color:var(--red)"><div class="eq-label">Faturamento com Pacto</div><div class="eq-val" style="color:var(--red)">R$ 52.492</div><div class="eq-sub">37% do faturamento total</div></div>
+    <div class="eq-card" style="border-color:var(--amber)"><div class="eq-label">Faturamento Sem Pacto</div><div class="eq-val" style="color:var(--amber)">R$ 45.104</div><div class="eq-sub">GAP: R$ 56.896 abaixo da meta</div></div>
     <div class="eq-card" style="border-color:var(--lime)"><div class="eq-label">Ponto de Equilíbrio Meta</div><div class="eq-val" style="color:var(--lime)">R$ 102.000</div><div class="eq-sub">Faturamento mínimo sem Pacto</div></div>
   </div>
+
   <div style="background:var(--card);border-radius:12px;padding:18px 22px;border:1px solid var(--border);margin-bottom:18px">
-    <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px"><span>Faturamento Sem Pacto — Progresso para o Ponto de Equilíbrio</span><span style="color:var(--amber)">43%</span></div>
-    <div style="position:relative;height:14px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:4px">
-      <div style="height:100%;width:43%;background:var(--amber);border-radius:99px;display:flex;align-items:center;padding-left:12px;font-size:9px;font-weight:700;color:var(--navy)">R$ 43.800</div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px">
+      <span>Faturamento Sem Pacto — Progresso para o Ponto de Equilíbrio</span><span style="color:var(--amber)">44%</span>
     </div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:16px"><span>R$ 0</span><span>Meta: R$ 102.000</span></div>
+    <div style="height:14px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:6px">
+      <div style="height:100%;width:44%;background:var(--amber);border-radius:99px;display:flex;align-items:center;padding-left:12px;font-size:9px;font-weight:700;color:var(--navy)">R$ 45.104</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:18px"><span>R$ 0</span><span>Meta: R$ 102.000</span></div>
 
     <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px">
-      <span>Sem Pacto <span style="color:var(--teal)">+ Cross Selling + Consultas</span></span>
-      <span style="color:var(--lime)">77,3%</span>
+      <span>Sem Pacto <span style="color:var(--teal)">+ Cross Selling + Consultas</span> · Agosto</span><span style="color:var(--lime)">89%</span>
     </div>
-    <div style="position:relative;height:14px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:4px">
-      <div style="height:100%;width:77.3%;background:linear-gradient(90deg,var(--amber) 0%,var(--teal) 100%);border-radius:99px;display:flex;align-items:center;padding-left:12px;font-size:9px;font-weight:700;color:var(--navy)">R$ 78.888 · Faltam R$ 23.112</div>
+    <div style="height:14px;background:var(--bg2);border-radius:99px;overflow:hidden;margin-bottom:6px">
+      <div style="height:100%;width:89%;background:linear-gradient(90deg,var(--amber) 0%,var(--teal) 100%);border-radius:99px;display:flex;align-items:center;padding-left:12px;font-size:9px;font-weight:700;color:var(--navy)">R$ 45.104 + R$ 45.745 = R$ 90.849 · Faltam R$ 11.151</div>
     </div>
     <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px"><span>R$ 0</span><span>Meta: R$ 102.000</span></div>
-    <div style="display:flex;gap:16px;margin-top:10px">
-      <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:3px;background:var(--amber)"></div><span style="font-size:10px;color:var(--muted)">Sem Pacto: R$ 43.800</span></div>
-      <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:3px;background:var(--teal)"></div><span style="font-size:10px;color:var(--muted)">Cross Selling + Consultas: R$ 35.088</span></div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px">
+      <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:3px;background:var(--amber)"></div><span style="font-size:10px;color:var(--muted)">Sem Pacto: R$ 45.104</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:3px;background:var(--teal)"></div><span style="font-size:10px;color:var(--muted)">Cross Selling + Consultas: R$ 45.745</span></div>
     </div>
   </div>
 
-  <div class="div">🎯 Meta Sem Pacto — Onde está a oportunidade</div>
-  <div style="background:rgba(109,192,68,.06);border-radius:12px;padding:20px 24px;border:1px solid rgba(109,192,68,.2);margin-bottom:16px">
-    <div style="font-size:12px;font-weight:700;color:var(--lime);margin-bottom:16px">Crescimento Sem Pacto: 649 → 660 vidas · <span style="background:rgba(109,192,68,.2);padding:2px 10px;border-radius:99px">+1,7% no semestre</span> · Meta: 1.000 vidas em Dezembro</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
-      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:12px">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">SETEMBRO</div>
-        <div style="font-size:22px;font-weight:800;color:var(--teal)">745</div>
-        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
-      </div>
-      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:12px">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">OUTUBRO</div>
-        <div style="font-size:22px;font-weight:800;color:var(--teal)">830</div>
-        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
-      </div>
-      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:12px">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">NOVEMBRO</div>
-        <div style="font-size:22px;font-weight:800;color:var(--teal)">915</div>
-        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
-      </div>
-      <div style="text-align:center;background:rgba(109,192,68,.12);border-radius:8px;padding:12px;border:1px solid rgba(109,192,68,.3)">
-        <div style="font-size:9px;color:var(--muted);margin-bottom:4px">DEZEMBRO 🎯</div>
-        <div style="font-size:22px;font-weight:800;color:var(--lime)">1.000</div>
-        <div style="font-size:9px;color:var(--lime)">+85 vidas</div>
-      </div>
-    </div>
-    <div style="background:var(--bg2);border-radius:10px;padding:14px 18px;border:1px solid rgba(29,184,153,.2)">
-      <div style="font-size:10px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:8px">🧮 QUANTO PRECISO DE VIDAS PARA ATINGIR R$ 102.000?</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-        <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Ticket médio Sem Pacto</div><div style="font-size:16px;font-weight:800;color:var(--white)">R$ 66,36/vida</div><div style="font-size:10px;color:var(--muted)">R$ 43.800 ÷ 660</div></div>
-        <div><div style="font-size:10px;color:var(--muted);margin-bottom:3px">Média CS + Consultas</div><div style="font-size:16px;font-weight:800;color:var(--teal)">R$ 38.563/mês</div><div style="font-size:10px;color:var(--muted)">média histórica jan–jul</div></div>
-        <div style="background:rgba(109,192,68,.1);border-radius:8px;padding:10px;border:1px solid rgba(109,192,68,.3)"><div style="font-size:10px;color:var(--muted);margin-bottom:3px">🎯 Vidas necessárias</div><div style="font-size:20px;font-weight:800;color:var(--lime)">~956 vidas</div><div style="font-size:10px;color:var(--muted)">(R$102k − R$38,5k) ÷ R$66,36</div></div>
-      </div>
-    </div>
+  <div class="div">Composição do Faturamento — Últimos 3 Meses</div>
+
+  <!-- Cabeçalho -->
+  <div style="display:grid;grid-template-columns:1fr 120px 120px 120px;gap:10px;padding:0 20px 8px;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase">
+    <span></span>
+    <span style="text-align:center">JUNHO</span>
+    <span style="text-align:center">JULHO</span>
+    <span style="text-align:center;color:var(--lime)">AGOSTO</span>
   </div>
 
-  <div class="div">Composição do Faturamento — Julho 2026</div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div style="background:var(--card);border-radius:10px;padding:14px 18px;border-left:4px solid var(--red);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
-      <div><div style="font-weight:600;font-size:13px">Pacto</div><div style="font-size:11px;color:var(--muted)">Em queda constante — 724 vidas restantes</div></div>
-      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--red)">40%</div><div style="font-size:12px;color:var(--muted)">R$ 55.267</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+    <!-- Pacto -->
+    <div style="background:var(--card);border-radius:10px;padding:16px 20px;border-left:4px solid var(--red);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 120px 120px 120px;gap:10px;align-items:center">
+      <div><div style="font-weight:600;font-size:13px">Pacto</div><div style="font-size:11px;color:var(--muted)">Em queda constante</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--red)">43%</div><div style="font-size:11px;color:var(--muted)">R$ 57.555</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--red)">40%</div><div style="font-size:11px;color:var(--muted)">R$ 55.267</div></div>
+      <div style="text-align:center;background:rgba(232,85,85,.08);border-radius:8px;padding:6px"><div style="font-size:16px;font-weight:800;color:var(--red)">37%</div><div style="font-size:11px;color:var(--muted)">R$ 52.492</div></div>
     </div>
-    <div style="background:var(--card);border-radius:10px;padding:14px 18px;border-left:4px solid var(--teal);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
-      <div><div style="font-weight:600;font-size:13px">Cross Selling + Consultas</div><div style="font-size:11px;color:var(--muted)">Principal alavanca — crescendo com parceiros</div></div>
-      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--teal)">27,7%</div><div style="font-size:12px;color:var(--muted)">R$ 38.089</div></div>
+    <!-- CS + Consultas -->
+    <div style="background:var(--card);border-radius:10px;padding:16px 20px;border-left:4px solid var(--teal);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 120px 120px 120px;gap:10px;align-items:center">
+      <div><div style="font-weight:600;font-size:13px">Cross Selling + Consultas</div><div style="font-size:11px;color:var(--muted)">Alavanca principal — 1ª vez acima da meta R$ 45.000 🏆</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--teal)">27,6%</div><div style="font-size:11px;color:var(--muted)">R$ 36.981</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--teal)">27,7%</div><div style="font-size:11px;color:var(--muted)">R$ 38.089</div></div>
+      <div style="text-align:center;background:rgba(29,184,153,.08);border-radius:8px;padding:6px"><div style="font-size:16px;font-weight:800;color:var(--lime)">32%</div><div style="font-size:11px;color:var(--muted)">R$ 45.745</div></div>
     </div>
-    <div style="background:var(--card);border-radius:10px;padding:14px 18px;border-left:4px solid var(--muted);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <!-- Demais Sem Pacto -->
+    <div style="background:var(--card);border-radius:10px;padding:16px 20px;border-left:4px solid var(--muted);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 120px 120px 120px;gap:10px;align-items:center">
       <div><div style="font-weight:600;font-size:13px">Demais Sem Pacto</div><div style="font-size:11px;color:var(--muted)">Planos, convênios e outros</div></div>
-      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--muted)">32,3%</div><div style="font-size:12px;color:var(--muted)">R$ 43.800</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--muted)">29,4%</div><div style="font-size:11px;color:var(--muted)">R$ 39.546</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:700;color:var(--muted)">32,3%</div><div style="font-size:11px;color:var(--muted)">R$ 43.800</div></div>
+      <div style="text-align:center;background:rgba(255,255,255,.04);border-radius:8px;padding:6px"><div style="font-size:16px;font-weight:800;color:var(--muted)">31%</div><div style="font-size:11px;color:var(--muted)">R$ 45.104</div></div>
     </div>
+    <!-- Total -->
+    <div style="background:var(--bg);border-radius:10px;padding:14px 20px;border:1px solid var(--border);display:grid;grid-template-columns:1fr 120px 120px 120px;gap:10px;align-items:center">
+      <div style="font-weight:700;font-size:13px;color:var(--white)">Faturamento Total</div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:800;color:var(--white)">R$ 134.082</div></div>
+      <div style="text-align:center"><div style="font-size:14px;font-weight:800;color:var(--white)">R$ 137.155</div></div>
+      <div style="text-align:center;background:rgba(255,215,0,.08);border-radius:8px;padding:6px"><div style="font-size:16px;font-weight:800;color:#FFD700">R$ 143.341 📈</div></div>
+    </div>
+  </div>
+
+  <div class="div">📊 Projeção Dezembro 2026 — 2 Cenários</div>
+  <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:12px 18px;margin-bottom:16px;font-size:11px;color:var(--muted);border:1px solid var(--border)">
+    📌 <strong style="color:var(--white)">Base:</strong> Pacto projetado em dezembro: <strong style="color:var(--amber)">574 vidas</strong> (-27/mês, média mai→ago) &nbsp;·&nbsp; Ticket: <strong style="color:var(--white)">R$ 77/vida</strong> &nbsp;·&nbsp; CS médio histórico: <strong style="color:var(--white)">R$ 38.083</strong>
+  </div>
+
+  <div class="cen-grid">
+    <div class="cen-card c1">
+      <div class="cen-title">📈 Cenário 1 — Histórico (+12/mês)</div>
+      <div style="background:rgba(29,184,153,.1);border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:11px;font-weight:700;color:var(--teal)">Vendas Sem Pacto/mês</span>
+        <span style="font-size:18px;font-weight:800;color:var(--teal)">+12 vidas</span>
+      </div>
+      <div class="cen-row" style="padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.1)">
+        <span class="cen-label"></span>
+        <span style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px">VIDAS &nbsp;·&nbsp; FATURAMENTO</span>
+      </div>
+      <div class="cen-row"><span class="cen-label">Sem Pacto dezembro</span><span class="cen-val"><strong style="color:var(--teal)">719</strong> · R$ 55.363 <span style="color:var(--muted);font-size:10px">(40%)</span></span></div>
+      <div class="cen-row"><span class="cen-label">Pacto dezembro</span><span class="cen-val"><strong style="color:var(--muted)">574</strong> · R$ 44.198 <span style="color:var(--muted);font-size:10px">(32%)</span></span></div>
+      <div class="cen-row"><span class="cen-label">CS médio histórico</span><span class="cen-val"><strong style="color:var(--muted)">—</strong> · R$ 38.083 <span style="color:var(--muted);font-size:10px">(28%)</span></span></div>
+      <div class="cen-row"><span class="cen-label" style="font-weight:700;color:var(--white)">Total vidas dez</span><span class="cen-val" style="color:var(--teal);font-weight:800">1.293 vidas</span></div>
+      <div class="cen-row"><span class="cen-label" style="font-weight:700;color:var(--white)">Faturamento Dezembro</span><span class="cen-total">R$ 137.644 ✅</span></div>
+    </div>
+    <div class="cen-card c3">
+      <div class="cen-title">🚀 Cenário 2 — SDR dobro (+24/mês)</div>
+      <div style="background:rgba(109,192,68,.1);border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:11px;font-weight:700;color:var(--lime)">Vendas Sem Pacto/mês</span>
+        <span style="font-size:18px;font-weight:800;color:var(--lime)">+24 vidas</span>
+      </div>
+      <div class="cen-row" style="padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.1)">
+        <span class="cen-label"></span>
+        <span style="font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px">VIDAS &nbsp;·&nbsp; FATURAMENTO</span>
+      </div>
+      <div class="cen-row"><span class="cen-label">Sem Pacto dezembro</span><span class="cen-val"><strong style="color:var(--lime)">767</strong> · R$ 59.059 <span style="color:var(--muted);font-size:10px">(42%)</span></span></div>
+      <div class="cen-row"><span class="cen-label">Pacto dezembro</span><span class="cen-val"><strong style="color:var(--muted)">574</strong> · R$ 44.198 <span style="color:var(--muted);font-size:10px">(31%)</span></span></div>
+      <div class="cen-row"><span class="cen-label">CS médio histórico</span><span class="cen-val"><strong style="color:var(--muted)">—</strong> · R$ 38.083 <span style="color:var(--muted);font-size:10px">(27%)</span></span></div>
+      <div class="cen-row"><span class="cen-label" style="font-weight:700;color:var(--white)">Total vidas dez</span><span class="cen-val" style="color:var(--lime);font-weight:800">1.341 vidas</span></div>
+      <div class="cen-row"><span class="cen-label" style="font-weight:700;color:var(--white)">Faturamento Dezembro</span><span class="cen-total">R$ 141.340 ✅</span></div>
+    </div>
+  </div>
+
+  <div class="div">Projeção Mês a Mês — Sem Pacto e Pacto</div>
+  <div style="overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>Mês</th><th>Pacto (-27/mês)</th><th>C1 Sem Pacto (+12)</th><th>C2 Sem Pacto (+24)</th><th>C1 Fat. estimado</th><th>C2 Fat. estimado</th></tr></thead>
+      <tbody>
+        <tr><td>Agosto (atual)</td><td style="color:var(--muted)">682</td><td style="color:var(--teal)">671</td><td style="color:var(--lime)">671</td><td>R$ 143.341 (real)</td><td>R$ 143.341 (real)</td></tr>
+        <tr><td>Setembro</td><td style="color:var(--muted)">655</td><td style="color:var(--teal)">683</td><td style="color:var(--lime)">695</td><td>~R$ 141.813</td><td>~R$ 142.505</td></tr>
+        <tr><td>Outubro</td><td style="color:var(--muted)">628</td><td style="color:var(--teal)">695</td><td style="color:var(--lime)">719</td><td>~R$ 142.505</td><td>~R$ 143.197</td></tr>
+        <tr><td>Novembro</td><td style="color:var(--muted)">601</td><td style="color:var(--teal)">707</td><td style="color:var(--lime)">743</td><td>~R$ 143.197</td><td>~R$ 145.273</td></tr>
+        <tr class="hl-row"><td><strong>Dezembro</strong></td><td style="color:var(--muted)"><strong>574</strong></td><td style="color:var(--teal);font-weight:800">719</td><td style="color:var(--lime);font-weight:800">767</td><td style="color:var(--teal);font-weight:700">R$ 137.644 ✅</td><td style="color:var(--lime);font-weight:700">R$ 141.340 ✅</td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -438,13 +498,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
   <div class="fh lime">
     <div>
       <div class="fh-icon">📅</div>
-      <div class="fh-title">Taxa de Ocupação — Jan a Jul/2026 &nbsp;<a href="https://med-flow-pro-92.lovable.app" target="_blank" style="font-size:12px;color:var(--lime);font-weight:700;text-decoration:none">🔗 GestorMed</a></div>
-      <div class="fh-sub">Meta: &gt;80% · Julho: 78,8% (GestorMed) · Parceiros: 320 consultas (+19% vs jun)</div>
+      <div class="fh-title">Taxa de Ocupação — Jan a Ago/2026 &nbsp;<a href="https://gestormed.lovable.app/relatorio-publico/5ae59edca49cf3249af68bebdc7ed6bf88ce0e6f6a885091" target="_blank" style="font-size:12px;color:var(--lime);font-weight:700;text-decoration:none">🔗 GestorMed</a></div>
+      <div class="fh-sub">Meta: &gt;80% · Agosto: 87% ✅ Meta superada! · Parceiros Metropax e Grupo Zelo crescendo</div>
     </div>
     <div class="fh-r">
-      <div class="fh-stat"><div class="fh-stat-n">78,8%</div><div class="fh-stat-l">JULHO REAL</div></div>
-      <div class="fh-stat"><div class="fh-stat-n">875</div><div class="fh-stat-l">ATENDIDOS</div></div>
-      <div class="fh-stat"><div class="fh-stat-n">1.111</div><div class="fh-stat-l">CAPACIDADE</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--lime)">87%</div><div class="fh-stat-l">AGOSTO ✅</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">832</div><div class="fh-stat-l">ATENDIDOS</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">317</div><div class="fh-stat-l">PARCEIROS</div></div>
     </div>
   </div>
 
@@ -454,18 +514,40 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
     <div class="ocup-card"><div class="ocup-mes">Março</div><div class="ocup-val" style="color:var(--amber)">75%</div><div class="ocup-sub">Of: 1.184 · Real: 884</div></div>
     <div class="ocup-card"><div class="ocup-mes">Abril</div><div class="ocup-val" style="color:var(--teal)">79%</div><div class="ocup-sub">Of: 1.136 · Real: 895</div></div>
     <div class="ocup-card"><div class="ocup-mes">Maio</div><div class="ocup-val" style="color:var(--red)">69%</div><div class="ocup-sub">Of: 1.061 · Real: 733</div></div>
-    <div class="ocup-card"><div class="ocup-mes">Junho</div><div class="ocup-val" style="color:var(--teal)">78,3%</div><div class="ocup-sub">Cap: 978 · At: 766 · Parceiros: 268</div></div>
-    <div class="ocup-card real" style="grid-column:span 2"><div class="ocup-mes">Julho</div><div class="ocup-val" style="color:var(--lime)">78,8%</div><div class="ocup-sub">Cap: 1.111 · Atendidos: 875 · Turnos: 131 · Parceiros: 320 (+19%)</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Junho</div><div class="ocup-val" style="color:var(--teal)">78%</div><div class="ocup-sub">Cap: 978 · At: 766 · Parc: 268</div></div>
+    <div class="ocup-card"><div class="ocup-mes">Julho</div><div class="ocup-val" style="color:var(--teal)">79%</div><div class="ocup-sub">Cap: 1.111 · At: 875 · Parc: 317</div></div>
+    <div class="ocup-card real"><div class="ocup-mes">Agosto 🏆</div><div class="ocup-val" style="color:var(--lime)">87%</div><div class="ocup-sub">Cap: 954 · At: 832 · Parc: 317 · Part: 96</div></div>
   </div>
 
-  <div class="div">Especialidades em Destaque — Julho/2026 (GestorMed)</div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:22px">
-    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Psicologia</span><span style="font-size:15px;font-weight:800;color:#A855F7">33 turnos</span></div>
-    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Psiquiatria</span><span style="font-size:15px;font-weight:800;color:#A855F7">22,7 turnos</span></div>
-    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Ginecologia</span><span style="font-size:15px;font-weight:800;color:var(--lime)">13 turnos</span></div>
-    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Clínico Geral</span><span style="font-size:15px;font-weight:800;color:var(--lime)">15,1 turnos</span></div>
-    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Dermatologia</span><span style="font-size:15px;font-weight:800;color:var(--teal)">14,2 turnos</span></div>
-    <div style="background:var(--card);border-radius:10px;padding:12px 14px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;font-weight:600">Neurologia</span><span style="font-size:15px;font-weight:800;color:var(--teal)">5 turnos</span></div>
+  <div class="div">Especialidades Agosto — 🔴 Atenção e 🟢 Destaque</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:22px">
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--lime);letter-spacing:1px;margin-bottom:10px">🟢 ACIMA DE 100%</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Urologia</span><span style="font-weight:800;color:#A855F7">166,7%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Ortopedia</span><span style="font-weight:800;color:#A855F7">133,3%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Endocrinologia</span><span style="font-weight:800;color:#A855F7">132,8%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Gastroenterologia</span><span style="font-weight:800;color:#A855F7">125,0%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Oftalmologia</span><span style="font-weight:800;color:var(--lime)">123,7%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Angiologia</span><span style="font-weight:800;color:var(--lime)">112,5%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Ginecologia</span><span style="font-weight:800;color:var(--lime)">100,8%</span></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:700;color:var(--red);letter-spacing:1px;margin-bottom:10px">🔴 ABAIXO DE 70% — ATENÇÃO</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="background:rgba(232,85,85,.08);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid rgba(232,85,85,.3)"><span style="font-size:12px">Neurologia</span><span style="font-weight:800;color:var(--red)">59,4%</span></div>
+        <div style="background:rgba(232,85,85,.08);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid rgba(232,85,85,.3)"><span style="font-size:12px">Pneumologia</span><span style="font-weight:800;color:var(--red)">45,8%</span></div>
+        <div style="background:rgba(232,85,85,.08);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid rgba(232,85,85,.3)"><span style="font-size:12px">Nutrição</span><span style="font-weight:800;color:var(--red)">45,8%</span></div>
+      </div>
+      <div style="font-size:10px;font-weight:700;color:var(--amber);letter-spacing:1px;margin:14px 0 10px">🟡 ATENÇÃO (70-84%)</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Psiquiatria</span><span style="font-weight:800;color:var(--amber)">83,3%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Otorrinolaringologia</span><span style="font-weight:800;color:var(--amber)">83,3%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Dermatologia</span><span style="font-weight:800;color:var(--amber)">76,5%</span></div>
+        <div style="background:var(--card);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;border:1px solid var(--border)"><span style="font-size:12px">Psicologia</span><span style="font-weight:800;color:var(--amber)">66,1%</span></div>
+      </div>
+    </div>
   </div>
 
   <div class="div">Plano de Ação — Ocupação</div>
@@ -474,36 +556,66 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 
 <!-- CROSS SELLING -->
 <div class="panel" id="p-cross">
-  <div class="fh teal">
+  <div class="fh gold">
     <div>
       <div class="fh-icon">🧪</div>
-      <div class="fh-title">Cross Selling — Histórico e Iniciativas</div>
-      <div class="fh-sub">Meta: R$ 45.000/mês (CS + Particular/Credenciadas) · Julho: R$ 38.089 · Atingimento: 84,6%</div>
+      <div class="fh-title">Cross Selling — Recorde Histórico em Agosto</div>
+      <div class="fh-sub">Meta: R$ 45.000/mês · Agosto: R$ 45.745 ✅ Primeira vez acima da meta!</div>
     </div>
     <div class="fh-r">
-      <div class="fh-stat"><div class="fh-stat-n">R$ 10.639</div><div class="fh-stat-l">CS PURO JUL</div></div>
-      <div class="fh-stat"><div class="fh-stat-n">R$ 27.450</div><div class="fh-stat-l">PART/CRED JUL</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:#FFD700">R$ 16.115</div><div class="fh-stat-l">CS PURO 🏆</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:#FFD700">R$ 29.630</div><div class="fh-stat-l">CONSULTAS</div></div>
     </div>
   </div>
 
-  <div class="div">Histórico Cross Selling + Particular/Credenciadas</div>
+  <div class="div">Histórico Cross Selling + Consultas</div>
   <div style="background:var(--card);border-radius:14px;padding:22px 24px;border:1px solid var(--border);margin-bottom:20px">
     <div id="chart-cross"></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
-      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Melhor mês (Mar/26)</div><div style="font-size:16px;font-weight:800;color:var(--lime)">R$ 40.654</div></div>
-      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Julho 2026</div><div style="font-size:16px;font-weight:800;color:var(--amber)">R$ 38.089</div></div>
-      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Faltam para meta</div><div style="font-size:16px;font-weight:800;color:var(--red)">R$ 6.911</div></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Média histórica</div><div style="font-size:16px;font-weight:800;color:var(--teal)">R$ 38.083</div></div>
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">Melhor mês anterior</div><div style="font-size:16px;font-weight:800;color:var(--teal)">R$ 40.654</div><div style="font-size:9px;color:var(--muted)">março</div></div>
+      <div style="background:rgba(255,215,0,.1);border-radius:8px;padding:12px;text-align:center;border:1px solid rgba(255,215,0,.3)"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">🏆 Agosto 2026</div><div style="font-size:16px;font-weight:800;color:#FFD700">R$ 45.745</div></div>
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;text-align:center"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">vs meta R$ 45.000</div><div style="font-size:16px;font-weight:800;color:var(--lime)">+R$ 745 ✅</div></div>
     </div>
   </div>
 
-  <div class="div">Ranking Cross Selling por Especialidade — Julho/2026</div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:20px">
-    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--amber);font-weight:700">🥇 1º</div><div style="font-size:12px;font-weight:600">Ginecologia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--lime)">R$ 3.286</div><div style="font-size:10px;color:var(--muted)">30,9%</div></div></div>
-    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">🥈 2º</div><div style="font-size:12px;font-weight:600">Exames Particulares</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--teal)">R$ 2.156</div><div style="font-size:10px;color:var(--muted)">20,3%</div></div></div>
-    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--amber);font-weight:700">🥉 3º</div><div style="font-size:12px;font-weight:600">Ortopedia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--teal)">R$ 1.326</div><div style="font-size:10px;color:var(--muted)">12,5%</div></div></div>
-    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">4º</div><div style="font-size:12px;font-weight:600">Clínico Geral</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--muted)">R$ 969</div><div style="font-size:10px;color:var(--muted)">9,1%</div></div></div>
-    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">5º</div><div style="font-size:12px;font-weight:600">Dermatologia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--muted)">R$ 839</div><div style="font-size:10px;color:var(--muted)">7,9%</div></div></div>
-    <div style="background:var(--card);border-radius:10px;padding:13px 16px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;color:var(--muted);font-weight:700">6º</div><div style="font-size:12px;font-weight:600">Endocrinologia</div></div><div style="text-align:right"><div style="font-size:15px;font-weight:800;color:var(--muted)">R$ 692</div><div style="font-size:10px;color:var(--muted)">6,5%</div></div></div>
+  <div class="div">Detalhamento Cross Selling Agosto — GestorMed</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:20px">
+    <div style="background:var(--card);border-radius:12px;padding:20px 24px;border:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-bottom:14px">COMPOSIÇÃO CS PURO R$ 16.115</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">Procedimentos</span><span style="font-weight:700;color:var(--white)">R$ 7.674</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">Exames laboratoriais (por médico)</span><span style="font-weight:700;color:var(--white)">R$ 7.058</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">Exames particulares</span><span style="font-weight:700;color:var(--white)">R$ 1.384</span></div>
+        <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border)"><span style="font-size:12px;font-weight:700">Total CS puro</span><span style="font-weight:800;color:#FFD700">R$ 16.115</span></div>
+      </div>
+    </div>
+    <div style="background:var(--card);border-radius:12px;padding:20px 24px;border:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-bottom:14px">🏆 RANKING ESPECIALIDADES</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">🥇 Ginecologia</span><div><span style="font-weight:700;color:var(--lime)">R$ 5.938</span><span style="font-size:10px;color:var(--muted);margin-left:6px">36,8%</span></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">🥈 Clínico Geral</span><div><span style="font-weight:700;color:var(--teal)">R$ 3.634</span><span style="font-size:10px;color:var(--muted);margin-left:6px">22,5%</span></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">🥉 Exames Particulares</span><div><span style="font-weight:700;color:var(--teal)">R$ 1.384</span><span style="font-size:10px;color:var(--muted);margin-left:6px">8,6%</span></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">4º Otorrinolaringologia</span><div><span style="font-weight:700;color:var(--muted)">R$ 1.354</span><span style="font-size:10px;color:var(--muted);margin-left:6px">8,4%</span></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px">5º Ortopedia</span><div><span style="font-weight:700;color:var(--muted)">R$ 1.169</span><span style="font-size:10px;color:var(--muted);margin-left:6px">7,3%</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div">🏆 Top Médicos — Cross Selling Agosto</div>
+  <div style="overflow-x:auto;margin-bottom:20px">
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Médico</th><th>Especialidade</th><th>Atendimentos</th><th>Cross Selling</th><th>Ticket Médio</th></tr></thead>
+      <tbody>
+        <tr class="hl-row"><td>🥇</td><td style="font-weight:700">Ana Claudia</td><td style="color:var(--muted)">Ginecologia</td><td>23</td><td style="color:var(--lime);font-weight:700">R$ 2.352,95</td><td style="color:var(--lime)">R$ 102,30</td></tr>
+        <tr><td>🥈</td><td style="font-weight:700">Julia Tolentino</td><td style="color:var(--muted)">Otorrinolaringologia</td><td>20</td><td style="color:var(--teal);font-weight:700">R$ 1.354,00</td><td style="color:var(--teal)">R$ 67,70</td></tr>
+        <tr><td>🥉</td><td style="font-weight:700">Maria de Lourdes</td><td style="color:var(--muted)">Ginecologia</td><td>40</td><td style="color:var(--teal);font-weight:700">R$ 1.795,92</td><td style="color:var(--teal)">R$ 44,90</td></tr>
+        <tr><td>4º</td><td style="font-weight:700">Mariana Lelis</td><td style="color:var(--muted)">Clínico Geral</td><td>49</td><td style="font-weight:700">R$ 1.944,50</td><td>R$ 39,68</td></tr>
+        <tr><td>5º</td><td style="font-weight:700">Nathalia Eller</td><td style="color:var(--muted)">Ginecologia</td><td>27</td><td style="font-weight:700">R$ 885,00</td><td>R$ 32,78</td></tr>
+        <tr><td>6º</td><td style="font-weight:700">Daniela Ribeiro</td><td style="color:var(--muted)">Clínico Geral</td><td>54</td><td style="font-weight:700">R$ 1.211,68</td><td>R$ 22,44</td></tr>
+        <tr><td>7º</td><td style="font-weight:700">Mateus Cavaline</td><td style="color:var(--muted)">Ortopedia</td><td>64</td><td style="font-weight:700">R$ 1.169,00</td><td>R$ 18,27</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="div">Plano de Ação — Cross Selling</div>
@@ -515,42 +627,68 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
   <div class="fh lime">
     <div>
       <div class="fh-icon">🫀</div>
-      <div class="fh-title">Vidas — Histórico e Iniciativas</div>
-      <div class="fh-sub">Meta: 2.000 · Sem Pacto: 649 (jan) → 660 (jul) · <strong style="color:var(--lime)">+1,7% de crescimento</strong> · É aqui que movemos o ponteiro</div>
+      <div class="fh-title">Vidas — Histórico e Projeções</div>
+      <div class="fh-sub">Sem Pacto +3,4% (649→671) · Média vendas reais: +12/mês · SDR dobro: +24/mês · É aqui que movemos o ponteiro</div>
     </div>
     <div class="fh-r">
-      <div class="fh-stat"><div class="fh-stat-n">1.384</div><div class="fh-stat-l">TOTAL JUL</div></div>
-      <div class="fh-stat"><div class="fh-stat-n">660</div><div class="fh-stat-l">SEM PACTO</div></div>
-      <div class="fh-stat"><div class="fh-stat-n">724</div><div class="fh-stat-l">COM PACTO</div></div>
+      <div class="fh-stat"><div class="fh-stat-n">1.353</div><div class="fh-stat-l">TOTAL AGO</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--lime)">671</div><div class="fh-stat-l">SEM PACTO ↑</div></div>
+      <div class="fh-stat"><div class="fh-stat-n" style="color:var(--muted)">682</div><div class="fh-stat-l">COM PACTO</div></div>
     </div>
   </div>
 
   <div style="background:var(--card);border-radius:12px;padding:18px 22px;border:1px solid var(--border);margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:8px">
-      <span>Progresso para meta de 2.000 vidas</span>
-      <span style="color:var(--lime)">1.384 / 2.000 — 69,2%</span>
+      <span>⭐ Vidas Sem Pacto — Crescimento +3,4% no ano</span>
+      <span style="color:var(--lime)">649 → 671 · +22 vidas</span>
     </div>
-    <div class="vp-bar-bg"><div class="vp-bar-fill" style="width:69.2%"></div></div>
+    <div class="vp-bar-bg"><div class="vp-bar-fill" style="width:67.1%"></div></div>
     <div class="vp-stats">
-      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--lime)">1.384</div><div class="vp-stat-l">TOTAL VIDAS</div></div>
-      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--lime)">660</div><div class="vp-stat-l">SEM PACTO ↑ FOCO AQUI</div></div>
-      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--teal)">724</div><div class="vp-stat-l">COM PACTO</div></div>
-      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--amber)">616</div><div class="vp-stat-l">FALTAM PARA META</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--white)">1.353</div><div class="vp-stat-l">TOTAL VIDAS</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--lime)">671</div><div class="vp-stat-l">⭐ SEM PACTO</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--muted)">682</div><div class="vp-stat-l">COM PACTO</div></div>
+      <div class="vp-stat"><div class="vp-stat-n" style="color:var(--amber)">647</div><div class="vp-stat-l">FALTAM P/ 2.000</div></div>
     </div>
   </div>
 
-  <div class="div">Evolução Histórica 2026 — Vidas</div>
+  <!-- Vendas reais -->
+  <div style="background:var(--card);border-radius:12px;padding:18px 22px;border:1px solid rgba(29,184,153,.3);margin-bottom:16px">
+    <div style="font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:12px">📊 VENDAS REAIS SEM PACTO — JAN A AGO/2026</div>
+    <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:12px">
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Jan</div><div style="font-size:18px;font-weight:800;color:var(--teal)">7</div></div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Fev</div><div style="font-size:18px;font-weight:800;color:var(--teal)">13</div></div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Mar</div><div style="font-size:18px;font-weight:800;color:var(--lime)">16</div></div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Abr</div><div style="font-size:18px;font-weight:800;color:var(--red)">4</div></div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Mai</div><div style="font-size:18px;font-weight:800;color:var(--lime)">21</div></div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Jun</div><div style="font-size:18px;font-weight:800;color:var(--teal)">14</div></div>
+      <div style="text-align:center;background:var(--bg2);border-radius:8px;padding:10px 6px"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Jul</div><div style="font-size:18px;font-weight:800;color:var(--teal)">12</div></div>
+      <div style="text-align:center;background:rgba(109,192,68,.1);border-radius:8px;padding:10px 6px;border:1px solid rgba(109,192,68,.3)"><div style="font-size:9px;color:var(--muted);margin-bottom:4px">Ago</div><div style="font-size:18px;font-weight:800;color:var(--lime)">11</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+      <div style="background:var(--bg2);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:11px;color:var(--muted)">📈 Média histórica real</span>
+        <span style="font-size:16px;font-weight:800;color:var(--teal)">+12/mês</span>
+      </div>
+      <div style="background:rgba(109,192,68,.08);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(109,192,68,.2)">
+        <span style="font-size:11px;color:var(--muted)">🚀 Meta SDR (dobro)</span>
+        <span style="font-size:16px;font-weight:800;color:var(--lime)">+24/mês</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="div">Evolução Histórica — Vidas 2026</div>
   <div style="overflow-x:auto;margin-bottom:20px">
     <table class="tbl">
-      <thead><tr><th>Período</th><th>Total</th><th>Com Pacto</th><th style="color:var(--lime)">⭐ Sem Pacto</th><th>Var. Total</th><th style="color:var(--lime)">⭐ Var. Sem Pacto</th></tr></thead>
+      <thead><tr><th>Período</th><th>Total</th><th>Com Pacto</th><th style="color:var(--lime)">⭐ Sem Pacto</th><th>Var. Pacto</th><th style="color:var(--lime)">⭐ Var. Sem Pacto</th></tr></thead>
       <tbody>
-        <tr><td>Jan/26</td><td style="font-weight:700">2.463</td><td style="color:var(--muted)">1.814</td><td style="color:var(--teal);font-weight:600">649</td><td>—</td><td style="color:var(--lime)">Base</td></tr>
-        <tr><td>Fev/26</td><td style="font-weight:700">2.035</td><td style="color:var(--muted)">1.376</td><td style="color:var(--teal);font-weight:600">659</td><td style="color:var(--muted)">—</td><td style="color:var(--lime)">+10 ↑</td></tr>
-        <tr><td>Mar/26</td><td style="font-weight:700">1.685</td><td style="color:var(--muted)">1.035</td><td style="color:var(--teal);font-weight:600">650</td><td style="color:var(--muted)">—</td><td style="color:var(--muted)">-9</td></tr>
-        <tr><td>Abr/26</td><td style="font-weight:700">1.476</td><td style="color:var(--muted)">791</td><td style="color:var(--lime);font-weight:600">685</td><td style="color:var(--muted)">—</td><td style="color:var(--lime)">+35 ↑</td></tr>
-        <tr><td>Mai/26</td><td style="font-weight:700">1.410</td><td style="color:var(--muted)">762</td><td style="color:var(--teal);font-weight:600">648</td><td style="color:var(--muted)">—</td><td style="color:var(--muted)">-37</td></tr>
-        <tr><td>Jun/26</td><td style="font-weight:700">1.394</td><td style="color:var(--muted)">740</td><td style="color:var(--teal);font-weight:600">654</td><td style="color:var(--muted)">—</td><td style="color:var(--lime)">+6 ↑</td></tr>
-        <tr style="background:rgba(109,192,68,.06)"><td><strong>Jul/26</strong></td><td style="font-weight:800;color:var(--white)">1.384</td><td style="color:var(--muted);font-weight:600">724</td><td style="color:var(--lime);font-weight:800;font-size:14px">660</td><td style="color:var(--muted)">—</td><td style="color:var(--lime);font-weight:700">+6 ↑</td></tr>
+        <tr><td>Jan/26</td><td>2.463</td><td style="color:var(--muted)">1.814</td><td style="color:var(--teal);font-weight:600">649</td><td>—</td><td style="color:var(--lime)">Base</td></tr>
+        <tr><td>Fev/26</td><td>2.035</td><td style="color:var(--muted)">1.376</td><td style="color:var(--teal);font-weight:600">659</td><td style="color:var(--muted)">-438</td><td style="color:var(--lime)">+10 ↑</td></tr>
+        <tr><td>Mar/26</td><td>1.685</td><td style="color:var(--muted)">1.035</td><td style="color:var(--teal);font-weight:600">650</td><td style="color:var(--muted)">-341</td><td style="color:var(--muted)">-9</td></tr>
+        <tr><td>Abr/26</td><td>1.476</td><td style="color:var(--muted)">791</td><td style="color:var(--lime);font-weight:600">685</td><td style="color:var(--muted)">-244</td><td style="color:var(--lime)">+35 ↑</td></tr>
+        <tr><td>Mai/26</td><td>1.410</td><td style="color:var(--muted)">762</td><td style="color:var(--teal);font-weight:600">648</td><td style="color:var(--muted)">-29</td><td style="color:var(--muted)">-37</td></tr>
+        <tr><td>Jun/26</td><td>1.394</td><td style="color:var(--muted)">740</td><td style="color:var(--teal);font-weight:600">654</td><td style="color:var(--muted)">-22</td><td style="color:var(--lime)">+6 ↑</td></tr>
+        <tr><td>Jul/26</td><td>1.384</td><td style="color:var(--muted)">724</td><td style="color:var(--teal);font-weight:600">660</td><td style="color:var(--muted)">-16</td><td style="color:var(--lime)">+6 ↑</td></tr>
+        <tr class="hl-row"><td><strong>Ago/26</strong></td><td style="font-weight:800">1.353</td><td style="color:var(--muted);font-weight:600">682</td><td style="color:var(--lime);font-weight:800;font-size:13px">671</td><td style="color:var(--muted)">-42</td><td style="color:var(--lime);font-weight:700">+11 ↑</td></tr>
       </tbody>
     </table>
   </div>
@@ -562,54 +700,50 @@ body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--white);min
 </div>
 
 <script>
+// CHART CROSS SELLING
 const CROSS_HIST=[
-  {m:"Jan",cs:6447,pc:21649,tot:28096},
-  {m:"Fev",cs:10593,pc:15475,tot:26068},
-  {m:"Mar",cs:11741,pc:28913,tot:40654},
-  {m:"Abr",cs:11186,pc:25506,tot:36692},
-  {m:"Mai",cs:10327,pc:20010,tot:30337},
-  {m:"Jun",cs:11613,pc:25368,tot:36981},
-  {m:"Jul",cs:10639,pc:27450,tot:38089},
+  {m:"Jan",tot:28096},{m:"Fev",tot:26068},{m:"Mar",tot:40654},
+  {m:"Abr",tot:36692},{m:"Mai",tot:30337},{m:"Jun",tot:36981},
+  {m:"Jul",tot:38089},{m:"Ago",tot:45745},
 ];
 const maxCS=Math.max(...CROSS_HIST.map(d=>d.tot));
+const metaPct=Math.round(45000/maxCS*100);
 document.getElementById('chart-cross').innerHTML=CROSS_HIST.map(d=>{
   const w=Math.round(d.tot/maxCS*100);
-  const c=d.tot>=40000?'#6DC044':d.tot>=35000?'#F5A623':'#1DB899';
-  const meta=Math.round(45000/maxCS*100);
+  const c=d.tot>=45000?'#FFD700':d.tot>=38000?'#6DC044':d.tot>=35000?'#F5A623':'#1DB899';
   return`<div class="bc-row">
     <div class="bc-label">${d.m}</div>
-    <div class="bc-bar-bg" style="position:relative">
+    <div class="bc-bar-bg">
       <div class="bc-bar-fill" style="width:${w}%;background:${c}">R$ ${d.tot.toLocaleString('pt-BR')}</div>
-      <div style="position:absolute;top:0;left:${meta}%;width:2px;height:100%;background:rgba(232,85,85,.6)"></div>
+      <div style="position:absolute;top:0;left:${metaPct}%;width:2px;height:100%;background:rgba(232,85,85,.7)"></div>
     </div>
     <div class="bc-pct" style="color:${c}">${Math.round(d.tot/450)}%</div>
   </div>`;
 }).join('');
 
+// KPI DATA
 const OCUP_ACOES=[
-  {titulo:"Atendimento Equipe AssisteMed x Ocupacional",desc:"Atendimento da recepção como Grupo Ocupacional.",resp:"Bárbara / Equipe",prazo:"15/08/2026",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Deixei uma pessoa dedicada ao telefone e WhatsApp, ajuda no fechamento e substitui na hora do almoço a recepção. Equipe da Ocupacional com a team lead de férias, tivemos vários atestados nos últimos dias, o que trouxe grande impacto na operação.",link:null},
-  {titulo:"Confirmação Agenda - Secretária Virtual",desc:"Criar um app (Nina API — não oficial) para confirmação de consulta e controle de atendimento, além de agendamento online por IA.",resp:"Bárbara / Inovações",prazo:"30/ago",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Retorno dele em 28/07; estou levantando todo o material, inclusive as 30 perguntas para treinamento da IA, envio até o final do mês.",link:null},
-  {titulo:"GestãoMed",desc:"Levantar faturamento por especialista para nortear campanhas.",resp:"Bárbara",prazo:"14/jul",pct:"90%",st:"doing",label:"🔄 Em andamento",obs:"App funcionando para especificidades, inclusive pagamentos dos médicos incluindo procedimentos, além de controle de pedido de exames. Segundo mês de refinamento.",link:"https://med-flow-pro-92.lovable.app"},
-  {titulo:"Obra - Unidade Centro",desc:"Acompanhamento, decisões e antecipação de possível não conformidade.",resp:"Bárbara / Carla / Willian",prazo:"03/08/2026",pct:"80%",st:"doing",label:"🔄 Em andamento",obs:"Eu e Carla fizemos uma lista de manutenção com todos os pontos que ainda precisam ser feitos; ainda não temos previsão — aguardando Willian enviar à equipe para finalização, instalação do ar e outros.",link:null},
-  {titulo:"Lista de Espera Automatizada",desc:"Lista de espera em tempo real.",resp:"Bárbara / Equipe",prazo:"Atualização Recorrente",pct:"80%",st:"doing",label:"🔄 Em andamento",obs:"Criei uma lista de espera para gestão ativa dos horários livres, de todas as especialidades, por ordem, para métrica mais justa.",link:"https://listaesperassistemed.lovable.app/"},
+  {titulo:"Lista de Espera Automatizada",desc:"Lista de espera em tempo real.",resp:"Bárbara / Equipe",prazo:"Recorrente",pct:"100%",st:"doing",label:"🔄 Em andamento",obs:"Lista de espera já está funcionando, na base da Ocupacional pelo setor de inovação. Porém falta validar sobre atualizações e melhorias da ferramenta como será feita.",link:"https://listaesperassistemed.lovable.app/"},
+  {titulo:"Confirmação Agenda - Secretária Virtual",desc:"Criar um app (Nina API — não oficial) para confirmação de consulta e controle de atendimento, além de agendamento online por IA.",resp:"Bárbara / Inovações",prazo:"30/set",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Prorrogado; em processo final do levantamento dos dados para prompt.",link:null},
+  {titulo:"GestãoMed",desc:"Levantar faturamento por especialista para nortear campanhas.",resp:"Bárbara",prazo:"14/out",pct:"100%",st:"doing",label:"🔄 Em andamento",obs:"App funcionando com atualizações a cada vez que se utiliza. Dados concretos: taxa de ocupação e Cross Selling diretamente ligados ao pagamento dos médicos. Segundo mês de refinamento.",link:"https://gestormed.lovable.app/relatorio-publico/5ae59edca49cf3249af68bebdc7ed6bf88ce0e6f6a885091"},
+  {titulo:"Obra - Unidade Centro",desc:"Acompanhamento, decisões e antecipação de possível não conformidade.",resp:"Bárbara / Carla / Willian",prazo:"03/10/2026",pct:"80%",st:"doing",label:"🔄 Em andamento",obs:"Aguardando Willian enviar à equipe a MANUTENÇÃO para finalização e novos pontos.",link:null},
 ];
 
 const CROSS_ACOES=[
-  {titulo:"Exames Credenciados",desc:"Faturamento de exames de imagem: US e Tomografia, Oftalmologia.",resp:"Bárbara Almeida",prazo:"15/jul",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Contrato refeito com a CEDUS para Ultrassom Transvaginal, Mamas e Mamografia. Concluído.",link:null},
-  {titulo:"Orçamento Laboratoriais IA",desc:"Exames laboratoriais: orçamento por IA, coleta domiciliar, agendamento de exames.",resp:"Bárbara / Gabriel",prazo:"18/jul",pct:"90%",st:"doing",label:"🔄 Em andamento",obs:"App funcionando muito bem. Equipe conseguindo fazer inclusive pelo celular; aprendeu a disposição para orçamentos e abordagem aos clientes.",link:"https://orcamentosassistemed.lovable.app"},
-  {titulo:"Tabela de Preço Exames",desc:"Identificada a necessidade de criar tabela de exames para associados.",resp:"Bárbara / Patrícia",prazo:"17/07/2026",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Feito levantamento dos custos; tabela concluída, assim como avaliação do preço de consultas a ser alterado em setembro. Concluído.",link:null},
-  {titulo:"Novo Produto - Linha de Obesidade",desc:"Acompanhamento semanal + aplicação de medicamento + plano alimentar + bioimpedância + combo com exames.",resp:"Dra. Kenia / Bárbara",prazo:"31/10/2026",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Nosso endocrinologista vai sair; a nova que encontramos não quis ficar pelo conflito gerado. Em busca de novo profissional para outubro — por enquanto avaliando/fomentando a realização de exames.",link:null},
-  {titulo:"Espirometria com Bronquiodilatador",desc:"Incluir o exame na unidade Centro; valor de mercado entre R$ 150 e R$ 200.",resp:"Bárbara / Claudia",prazo:"15/08/2026",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Resolveram arrumar o espirômetro — valor do custo alto.",link:null},
-  {titulo:"Divulgar Exames Sites",desc:"Divulgar todos os exames que fazemos no site: Laboratórios, Raio-X, Audiometria Tonal e Vocal, Avaliação de Fluência da Fala, ECG, EEG, Espirometria, Fibronasolaringoscopia, Videolaringoscopia.",resp:"Equipe Marketing",prazo:"30/08/2026",pct:"10%",st:"pause",label:"⏸️ Pausado",obs:"Criar plano de divulgação e precificação (aguardar novo mktg).",link:null},
+  {titulo:"Parceiros - White Label, Cartão de Benefícios",desc:"Busca de novos parceiros: cartão de benefícios e clínicas compartilhadas (White Label).",resp:"Bárbara Almeida",prazo:"Recorrente",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Metropax e Ducash com contratos ativos. A parceria tem sido cada vez mais interessante também na geração de Cross Selling — foram 317 consultas em agosto, representando R$ 6.355 em Cross Selling (39,4% do total de CS do mês).",link:null},
+  {titulo:"Exames Credenciados",desc:"Faturamento de exames de imagem: US e Tomografia, Oftalmologia.",resp:"Bárbara Almeida",prazo:"15/out",pct:"50%",st:"doing",label:"🔄 Em andamento",obs:"Estamos aumentando o número de exames de Ultrassom, feito na clínica CEDUS, o que também servirá para estudo de inclusão do serviço. Em busca de médico com equipamento portátil/aluguel.",link:null},
+  {titulo:"Orçamento Laboratoriais IA",desc:"Exames laboratoriais: orçamento por IA, coleta domiciliar, agendamento de exames.",resp:"Bárbara / Gabriel",prazo:"18/out",pct:"90%",st:"doing",label:"🔄 Em andamento",obs:"Orçamento está sendo feito pelo computador e celular. App tem funcionado muito bem. Apresentar.",link:"https://orcamentosassistemed.lovable.app/demo"},
+  {titulo:"Tabela de Preço Exames",desc:"Identificada a necessidade de criar tabela de exames para associados.",resp:"Bárbara / Patrícia",prazo:"30/10/2026",pct:"80%",st:"doing",label:"🔄 Em andamento",obs:"Avaliar particular x planos: redução de exames particulares e conversão para planos.",link:null},
+  {titulo:"Novo Produto - Linha de Obesidade",desc:"Acompanhamento semanal + aplicação de medicamento + plano alimentar + bioimpedância + combo com exames.",resp:"Médico Novo / Bárbara",prazo:"31/10/2026",pct:"40%",st:"doing",label:"🔄 Em andamento",obs:"Em outubro entra novo endocrinologista. Criar plano de divulgação, precificação e enviar para financeiro, avaliar possibilidade de parcelamento com parceiros.",link:null},
+  {titulo:"Divulgar Exames Sites",desc:"Divulgar todos os exames que fazemos no site: Laboratórios, Raio-X, Audiometria Tonal e Vocal, Avaliação de Fluência da Fala, ECG, EEG, Espirometria, Fibronasolaringoscopia, Videolaringoscopia.",resp:"Equipe Marketing",prazo:"30/09/2026",pct:"10%",st:"pause",label:"⏸️ Pausado",obs:"Feita a inclusão nos arquivos de vendas do novo BDR.",link:null},
 ];
 
 const VIDAS_ACOES=[
-  {titulo:"BDR Ativo - Comercial (Leads Base Ocupacional)",desc:"Incluir o SDR ativo da Ocupacional para vendas da AssisteMed.",resp:"Bernardo (Comercial)",prazo:"15/set",pct:"10%",st:"doing",label:"🔄 Em andamento",obs:"Reunião 13/07: será entregue lista com 50 empresas sem plano de saúde. Autorizada a contratação; falta autorização formal do formulário para aumento de quadro. Avaliar plano de carreira de comissão da nova função — como será feito? Acréscimo por agendamento de reuniões efetivas?",link:null},
-  {titulo:"Expansão Contrato (Urgência e Emergência)",desc:"Expansão dos contratos aumentando o ticket médio com clientes da base, incluindo um valor para ter acesso ao nosso hospital parceiro com desconto em consultas urgentes 24h.",resp:"Bárbara",prazo:"15/09/2026",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Reunião agendada para 27/08 com MaterMed. Em busca de novos: Semper, Santa Rita.",link:null},
-  {titulo:"Ação Marketing - Dia dos Finados",desc:"Dia dos Finados junto à Metropax em 02/11. Captar contatos para oferecer planos com cadastro inicial, panfletar e ofertar o plano.",resp:"Bárbara",prazo:"02/11/2026",pct:"10%",st:"plan",label:"📌 Planejado",obs:"Programar evento com acadêmico ou enfermeiro da equipe, aferir pressão, controle de glicose. Talvez incluir primeira mensalidade grátis para quem fechar no dia. Deixar claro as vantagens de ser AssisteMed (50% exames, Clube de Benefícios, especialidades).",link:null},
-  {titulo:"Associações Maiores - Parcerias B2B",desc:"Parcerias para oferecer planos AssisteMed a associados: SENAI, SENAR, IFMG, FIEMG, PUC, Associação de Bares e Restaurantes, Associação Médica.",resp:"Bárbara",prazo:"A definir",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Levantamento de novas possibilidades realizado e algumas reuniões realizadas com sindicatos clientes da Ocupacional.",link:null},
-  {titulo:"Rever Contrato Permuta Uhuru",desc:"Avaliar número de vidas e dependentes.",resp:"Bárbara / Financeiro / Diretoria",prazo:"30/ago",pct:"10%",st:"plan",label:"📌 Planejado",obs:"Valor está alto; conseguimos uma pessoa dedicada para posts no Instagram — talvez até diário pelo valor. Contrato: 16/01/2025 a 15/01/2026, 24 vidas (18 titulares e 6 dependentes).",link:null},
-  {titulo:"Parceiros - White Label, Cartão de Benefícios",desc:"Busca de novos parceiros: cartão de benefícios, clínicas compartilhadas (White Label), consultor de venda de consulta avulsa (10% de comissão).",resp:"Bárbara Almeida",prazo:"Recorrente",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Metropax funcionando com bom fluxo de agendamentos. Nova parceria Ducash, contrato assinado.",link:null},
+  {titulo:"BDR Ativo - Comercial (Leads Base Ocupacional)",desc:"Incluir o SDR ativo da Ocupacional para vendas da AssisteMed.",resp:"Bernardo (Comercial)",prazo:"01/out",pct:"10%",st:"doing",label:"🔄 Em andamento",obs:"Bernardo continua prospectando junto com o luziA. Mais uma entrevistada que declinou (indicada pela Hounter). Foi criado o onboarding e está em processo de criação do fluxo de vendas, cadência e scripts — buscar diferencial da clínica e listar objeções.",link:null},
+  {titulo:"Upgrade Serviços (Urgência e Emergência)",desc:"Expansão dos contratos aumentando o ticket médio com clientes da base, incluindo um valor para ter acesso ao nosso hospital parceiro com desconto em consultas urgentes 24h.",resp:"Bárbara",prazo:"15/09/2026",pct:"30%",st:"doing",label:"🔄 Em andamento",obs:"Hospital MaterMed e Semper — sem atendimento de urgência, apenas com desconto na tabela de cirurgias e especialidades de nicho.",link:null},
+  {titulo:"Credenciamento e Associação",desc:"Sindicatos, associações de classe, condomínios, cooperativas e empresas que querem oferecer saúde como benefício aos seus membros/associados.",resp:"Bárbara",prazo:"Mensal",pct:"60%",st:"doing",label:"🔄 Em andamento",obs:"Piloto FUMP, credenciar clínica em Montes Claros para atender colaboradores com consultas avulsas, e oferecer parceria ao programa de aluno, atendimento especializado. Buscar escolas/faculdades menores.",link:null},
+  {titulo:"Rever Contrato Marketing",desc:"Levantamento e revisão de todos os serviços de marketing em execução pela Uhuru.",resp:"Bárbara / Financeiro / Diretoria",prazo:"30/09/2026",pct:"10%",st:"plan",label:"📌 Planejado",obs:"Está sendo realizado o levantamento de todos os serviços ativos da Uhuru: publicações em andamento, posts impulsionados, desempenho do Google e verificação dos canais de captação de leads. O último registro de lead pelo formulário 'Solicite sua Proposta' foi em 28/07/2026 — desde então, nenhum retorno. É necessário avaliar o que está funcionando e o que precisa ser revisado ou encerrado.",link:null},
+
 ];
 
 function sc(s){return{doing:'sg2',plan:'sp',pause:'sps',done:'sd'}[s]||'sp'}
@@ -635,6 +769,7 @@ function renderCards(id,data){
 renderCards('cards-ocup',OCUP_ACOES);
 renderCards('cards-cross',CROSS_ACOES);
 renderCards('cards-vidas',VIDAS_ACOES);
+
 function go(id,tab){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
